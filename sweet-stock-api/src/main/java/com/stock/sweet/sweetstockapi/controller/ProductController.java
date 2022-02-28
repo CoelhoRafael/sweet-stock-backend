@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/products")
@@ -34,9 +35,25 @@ public class ProductController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<ProductResponse> getAllProviders(){
+    public List<ProductResponse> getAllProducts(){
         return productMapper.convertModelListToResponseList(
                 productService.getAllProducts()
+        );
+    }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public ProductResponse updateProduct(@PathVariable Integer id, @RequestBody ProductRequest body){
+        return productMapper.convertModelToResponse(
+                productService.updateProduct(id, body)
+        );
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public ProductResponse deleteProduct(@PathVariable Integer id){
+        return productMapper.convertModelToResponse(
+                productService.deleteProduct(id)
         );
     }
 }
