@@ -56,5 +56,4 @@ public class Ingredient {
 
     @Column(name = "date_update")
     private LocalDate dateUpdate;
-
 }
