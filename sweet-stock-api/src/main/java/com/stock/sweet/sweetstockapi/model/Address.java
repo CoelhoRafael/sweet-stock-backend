@@ -20,7 +20,7 @@ public class Address {
     private Integer id;
 
     @Column(name = "uuid")
-    private UUID uuid;
+    private String uuid;
 
     @Column(name = "street")
     private String street;

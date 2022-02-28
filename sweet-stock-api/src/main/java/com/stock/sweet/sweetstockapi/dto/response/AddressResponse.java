@@ -7,10 +7,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class ProviderResponse {
+public class AddressResponse {
     private String uuid;
-    private String name;
-    private String cnpj;
-    private Integer averageTimeForDeliveryInDays;
-    private AddressResponse addressResponse;
+    private String street;
+    private String number;
+    private String complement;
+    private String city;
+    private String state;
+    private String neighborhood;
 }

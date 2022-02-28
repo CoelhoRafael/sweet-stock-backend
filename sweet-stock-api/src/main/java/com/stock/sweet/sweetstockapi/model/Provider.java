@@ -31,5 +31,7 @@ public class Provider {
     @Column(name = "average_time_for_delivery_in_days")
     private Integer averageTimeForDeliveryInDays;
 
-    //private Address address;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_address", referencedColumnName = "id")
+    private Address address;
 }
