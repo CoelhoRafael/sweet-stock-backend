@@ -9,7 +9,7 @@ spring:
     username: sweetstock
     password: sweetstock
   jpa:
-#    hibernate.ddl-auto: create-drop
-    hibernate.ddl-auto: update
+    hibernate.ddl-auto: create-drop
+#    hibernate.ddl-auto: update
     generate-ddl: true
     show-sql: false
