@@ -2,7 +2,6 @@ package com.stock.sweet.sweetstockapi.mapper;
 
 import com.stock.sweet.sweetstockapi.dto.request.ProviderRequest;
 import com.stock.sweet.sweetstockapi.dto.response.ProviderResponse;
-import com.stock.sweet.sweetstockapi.model.Address;
 import com.stock.sweet.sweetstockapi.model.Provider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

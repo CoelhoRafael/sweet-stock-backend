@@ -1,13 +1,9 @@
 package com.stock.sweet.sweetstockapi.controller;
 
 import com.stock.sweet.sweetstockapi.dto.request.ConfectionRequest;
-import com.stock.sweet.sweetstockapi.dto.request.IngredientRequest;
 import com.stock.sweet.sweetstockapi.dto.response.ConfectionResponse;
-import com.stock.sweet.sweetstockapi.dto.response.IngredientResponse;
 import com.stock.sweet.sweetstockapi.mapper.ConfectionMapper;
-import com.stock.sweet.sweetstockapi.mapper.IngredientMapper;
 import com.stock.sweet.sweetstockapi.service.ConfectionService;
-import com.stock.sweet.sweetstockapi.service.IngredientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

@@ -1,9 +1,7 @@
 package com.stock.sweet.sweetstockapi.service;
 
 import com.stock.sweet.sweetstockapi.model.Confection;
-import com.stock.sweet.sweetstockapi.model.Ingredient;
 import com.stock.sweet.sweetstockapi.repository.ConfectionRepository;
-import com.stock.sweet.sweetstockapi.repository.IngredientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
