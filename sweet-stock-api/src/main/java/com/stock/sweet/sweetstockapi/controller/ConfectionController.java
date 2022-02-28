@@ -30,7 +30,7 @@ public class ConfectionController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<ConfectionResponse> getAllProviders(){
+    public List<ConfectionResponse> getAllConfections(){
         return confectionMapper.convertModelListToResponseList(
                 confectionService.getAllConfections()
         );
