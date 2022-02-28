@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -36,8 +37,8 @@ public class Category {
     private String unitMeasurement;
 
     @Column(name = "date_insert")
-    private LocalDate dateInsert;
+    private LocalDateTime dateInsert;
 
     @Column(name = "date_update")
-    private LocalDate dateUpdate;
+    private LocalDateTime dateUpdate;
 }

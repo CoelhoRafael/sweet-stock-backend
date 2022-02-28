@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,6 +16,6 @@ public class CategoryResponse {
     private Double storageTemperature;
     private Boolean isRefrigerated;
     private String unitMeasurement;
-    private LocalDate dateInsert;
-    private LocalDate dateUpdate;
+    private LocalDateTime dateInsert;
+    private LocalDateTime dateUpdate;
 }

@@ -5,6 +5,7 @@ import com.stock.sweet.sweetstockapi.dto.response.CategoryResponse;
 import com.stock.sweet.sweetstockapi.model.Category;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -19,8 +20,8 @@ public class CategoryMapper {
                 categoryRequest.getStorageTemperature(),
                 categoryRequest.getIsRefrigerated(),
                 categoryRequest.getUnitMeasurement(),
-                categoryRequest.getDateInsert(),
-                categoryRequest.getDateUpdate()
+                LocalDateTime.now(),
+                null
         );
     }
 
