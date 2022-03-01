@@ -35,4 +35,4 @@ public class ConfectionController {
                 confectionService.getAllConfections()
         );
     }
-}
+} 
