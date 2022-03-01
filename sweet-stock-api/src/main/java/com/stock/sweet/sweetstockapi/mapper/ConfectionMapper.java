@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 @Component
 public class ConfectionMapper {
-    public Confection convertRequestToModel(ConfectionRequest confectionRequest){
+    public Confection convertRequestToModel(ConfectionRequest confectionRequest) {
         return new Confection(
                 null,
                 UUID.randomUUID().toString(),
@@ -22,7 +22,7 @@ public class ConfectionMapper {
         );
     }
 
-    public ConfectionResponse convertModelToResponse(Confection confection){
+    public ConfectionResponse convertModelToResponse(Confection confection) {
         return new ConfectionResponse(
                 confection.getUuid(),
                 confection.getDate(),
@@ -31,8 +31,9 @@ public class ConfectionMapper {
                 confection.getEmployee()
         );
     }
-    public List<ConfectionResponse> convertModelListToResponseList(List<Confection> confections){
-        return confections.stream().map(c ->{
+
+    public List<ConfectionResponse> convertModelListToResponseList(List<Confection> confections) {
+        return confections.stream().map(c -> {
             return new ConfectionResponse(
                     c.getUuid(),
                     c.getDate(),

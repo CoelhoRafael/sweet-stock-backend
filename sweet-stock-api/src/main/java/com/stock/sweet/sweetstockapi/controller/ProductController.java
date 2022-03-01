@@ -3,7 +3,6 @@ package com.stock.sweet.sweetstockapi.controller;
 import com.stock.sweet.sweetstockapi.dto.request.ProductRequest;
 import com.stock.sweet.sweetstockapi.dto.response.ProductResponse;
 import com.stock.sweet.sweetstockapi.mapper.ProductMapper;
-import com.stock.sweet.sweetstockapi.model.Product;
 import com.stock.sweet.sweetstockapi.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,10 +28,20 @@ public class ProductController {
         );
     }
 
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public List<ProductResponse> getAllProviders() {
+        return productMapper.convertModelListToResponseList(
+                productService.getAllProducts()
+        );
+    }
+
     @GetMapping("/{uuid}")
     @ResponseStatus(HttpStatus.OK)
-    public Product getProductByUuid(@PathVariable String uuid) throws Exception {
-        return productService.findProductByUuid(uuid);
+    public ProductResponse getProductByUuid(@PathVariable String uuid) throws Exception {
+        return productMapper.convertModelToResponse(
+                productService.findProductByUuid(uuid)
+        );
     }
 
     @PutMapping("/{uuid}")

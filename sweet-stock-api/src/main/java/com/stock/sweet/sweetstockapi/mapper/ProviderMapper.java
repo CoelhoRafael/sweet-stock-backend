@@ -16,7 +16,7 @@ public class ProviderMapper {
     @Autowired
     private AddressMapper addressMapper;
 
-    public Provider convertRequestToModel(ProviderRequest providerRequest){
+    public Provider convertRequestToModel(ProviderRequest providerRequest) {
         return new Provider(
                 null,
                 UUID.randomUUID().toString(),
@@ -27,7 +27,7 @@ public class ProviderMapper {
         );
     }
 
-    public ProviderResponse convertModelToResponse(Provider provider){
+    public ProviderResponse convertModelToResponse(Provider provider) {
         return new ProviderResponse(
                 provider.getUuid(),
                 provider.getName(),
@@ -37,15 +37,15 @@ public class ProviderMapper {
         );
     }
 
-    public List<ProviderResponse> convertModelListToResponseList(List<Provider> providers){
-        return providers.stream().map(p ->{
-          return new ProviderResponse(
-                  p.getUuid(),
-                  p.getName(),
-                  p.getCnpj(),
-                  p.getAverageTimeForDeliveryInDays(),
-                  addressMapper.convertModelToResponse(p.getAddress())
-          );
+    public List<ProviderResponse> convertModelListToResponseList(List<Provider> providers) {
+        return providers.stream().map(p -> {
+            return new ProviderResponse(
+                    p.getUuid(),
+                    p.getName(),
+                    p.getCnpj(),
+                    p.getAverageTimeForDeliveryInDays(),
+                    addressMapper.convertModelToResponse(p.getAddress())
+            );
         }).collect(Collectors.toList());
     }
 

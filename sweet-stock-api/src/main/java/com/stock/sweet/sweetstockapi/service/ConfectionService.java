@@ -13,11 +13,11 @@ public class ConfectionService {
     @Autowired
     private ConfectionRepository confectionRepository;
 
-    public Confection createConfection(Confection confection){
+    public Confection createConfection(Confection confection) {
         return confectionRepository.save(confection);
     }
 
-    public List<Confection> getAllConfections(){
+    public List<Confection> getAllConfections() {
         return confectionRepository.findAll();
     }
 }

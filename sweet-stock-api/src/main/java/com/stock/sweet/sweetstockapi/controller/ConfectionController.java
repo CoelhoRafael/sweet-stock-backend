@@ -22,7 +22,7 @@ public class ConfectionController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ConfectionResponse createConfection(@RequestBody ConfectionRequest body){
+    public ConfectionResponse createConfection(@RequestBody ConfectionRequest body) {
         return confectionMapper.convertModelToResponse(
                 confectionService.createConfection(confectionMapper.convertRequestToModel(body))
         );
@@ -30,7 +30,7 @@ public class ConfectionController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<ConfectionResponse> getAllConfections(){
+    public List<ConfectionResponse> getAllConfections() {
         return confectionMapper.convertModelListToResponseList(
                 confectionService.getAllConfections()
         );

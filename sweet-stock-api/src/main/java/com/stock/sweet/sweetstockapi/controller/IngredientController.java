@@ -22,7 +22,7 @@ public class IngredientController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public IngredientResponse createIngredient(@RequestBody IngredientRequest body){
+    public IngredientResponse createIngredient(@RequestBody IngredientRequest body) {
         return ingredientMapper.convertModelToResponse(
                 ingredientService.createIngredient(ingredientMapper.convertRequestToModel(body))
         );
@@ -30,7 +30,7 @@ public class IngredientController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<IngredientResponse> getAllIngredients(){
+    public List<IngredientResponse> getAllIngredients() {
         return ingredientMapper.convertModelListToResponseList(
                 ingredientService.getAllIngredients()
         );

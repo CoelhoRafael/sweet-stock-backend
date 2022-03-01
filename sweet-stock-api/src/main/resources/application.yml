@@ -1,7 +1,6 @@
 server:
   servlet:
     context-path: /v1/sweet-stock/
-
 spring:
   mvc:
     pathmatch:
@@ -13,6 +12,6 @@ spring:
     password: sweetstock
   jpa:
     hibernate.ddl-auto: create-drop
-#    hibernate.ddl-auto: update
+    #    hibernate.ddl-auto: update
     generate-ddl: true
     show-sql: false

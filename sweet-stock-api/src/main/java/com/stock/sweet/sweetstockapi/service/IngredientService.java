@@ -13,11 +13,11 @@ public class IngredientService {
     @Autowired
     private IngredientRepository ingredientRepository;
 
-    public Ingredient createIngredient(Ingredient ingredient){
+    public Ingredient createIngredient(Ingredient ingredient) {
         return ingredientRepository.save(ingredient);
     }
 
-    public List<Ingredient> getAllIngredients(){
+    public List<Ingredient> getAllIngredients() {
         return ingredientRepository.findAll();
     }
 }
