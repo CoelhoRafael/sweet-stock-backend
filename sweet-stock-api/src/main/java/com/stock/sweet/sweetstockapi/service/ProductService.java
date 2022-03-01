@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ProductService {
@@ -23,8 +22,12 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public Product updateProduct(Integer id, ProductRequest productRequest) {
-        Product productToUpdate = getProductById(id);
+    public Product findProductByUuid(String uuid) throws Exception {
+        return productRepository.findByUuid(uuid).orElseThrow(() -> new Exception("UUID não encontrado!"));
+    }
+
+    public Product updateProduct(String uuid, ProductRequest productRequest) throws Exception {
+        Product productToUpdate = findProductByUuid(uuid);
 
         if (productToUpdate == null) {
             return null;
@@ -42,24 +45,14 @@ public class ProductService {
         return productToUpdate;
     }
 
-    public Product deleteProduct(Integer id){
-        Product productToDelete = getProductById(id);
+    public Product deleteProduct(String uuid) throws Exception {
+        Product productToDelete = findProductByUuid(uuid);
 
         if (productToDelete == null) {
             return null;
         }
 
-        productRepository.deleteById(productToDelete.getId());
-
+        productRepository.delete(productToDelete);
         return productToDelete;
-    }
-
-    public Product getProductById(Integer id){
-        Optional<Product> product = productRepository.findById(id);
-
-        if (product.isEmpty()){
-            return null;
-        }
-        return product.get();
     }
 }

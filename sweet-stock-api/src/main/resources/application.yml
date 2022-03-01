@@ -3,6 +3,9 @@ server:
     context-path: /v1/sweet-stock/
 
 spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
   datasource:
     driverClassName: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/sweetstock
