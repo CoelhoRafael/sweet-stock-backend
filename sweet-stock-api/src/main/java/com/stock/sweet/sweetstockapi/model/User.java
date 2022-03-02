@@ -21,7 +21,7 @@ public class User {
     private Integer idProvider;
 
     @Column(name = "uuid")
-    private UUID uuid;
+    private String uuid;
 
     @Column(name = "name")
     private String name;
