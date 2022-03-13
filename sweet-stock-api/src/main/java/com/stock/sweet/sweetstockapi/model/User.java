@@ -13,12 +13,12 @@ import java.util.UUID;
 @Data
 @Entity
 @Table(name = "user")
-public class User {
+public abstract class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer idProvider;
+    private Integer id;
 
     @Column(name = "uuid")
     private UUID uuid;
@@ -37,4 +37,6 @@ public class User {
 
     @Column(name = "level_access")
     private LevelAccess levelAccess;
+
+    public abstract String login(String email, String password);
 }
