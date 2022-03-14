@@ -1,6 +1,5 @@
 package com.stock.sweet.sweetstockapi.model;
 
-import com.stock.sweet.sweetstockapi.model.enums.LevelAccess;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -35,6 +34,6 @@ public class User {
     private String telephoneNumber;
 
     @Column(name = "level_access")
-    private LevelAccess levelAccess;
+    private String levelAccess;
 
 }
