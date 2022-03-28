@@ -7,8 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-//public interface CompanyRepository extends JpaRepository<Company, Integer> {
-//     Optional<Company> findByUuid(String uuid) {                                  ERROOOOOO
-//
-//    }
+public interface CompanyRepository extends JpaRepository<Company, Integer> {
+     Optional<Company> findByUuid(String uuid);
 }

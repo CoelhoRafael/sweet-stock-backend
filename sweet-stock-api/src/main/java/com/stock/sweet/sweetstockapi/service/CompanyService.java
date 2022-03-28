@@ -18,15 +18,16 @@ public class CompanyService {
     @Autowired
     private AddressMapper addressMapper;
 
-//    public Company createCompany(Company company) {                   ERROOOOOO
-//        return CompanyRepository.save(company);
-//    }
+    public Company createCompany(Company company) {
+        return companyRepository.save(company);
+    }
 
-//    public List<Company> getAllCompanys() {
-//        return CompanyRepository;
-//    }
-//
-//    public Company findCompanyByUuid(String uuid) throws Exception {
-//        return CompanyRepository.findByUuid(uuid).orElseThrow(() -> new Exception("UUID não encontrado!"));
-//    }
+    public List<Company> getAllCompanys() {
+
+        return companyRepository.findAll();
+    }
+
+    public Company findCompanyByUuid(String uuid) throws Exception {
+        return companyRepository.findByUuid(uuid).orElseThrow(() -> new Exception("UUID não encontrado!"));
+    }
 }
