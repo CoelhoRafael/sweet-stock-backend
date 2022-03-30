@@ -4,7 +4,6 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.stock.sweet.sweetstockapi.dto.request.UserLogin;
-import com.stock.sweet.sweetstockapi.model.User;
 import com.stock.sweet.sweetstockapi.security.data.UserDetailsData;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

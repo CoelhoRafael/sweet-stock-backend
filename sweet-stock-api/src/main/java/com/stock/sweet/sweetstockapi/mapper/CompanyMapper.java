@@ -1,14 +1,11 @@
 package com.stock.sweet.sweetstockapi.mapper;
 
 import com.stock.sweet.sweetstockapi.dto.request.CompanyRequest;
-
-
 import com.stock.sweet.sweetstockapi.dto.response.CompanyResponse;
-import com.stock.sweet.sweetstockapi.dto.response.ProductResponse;
+import com.stock.sweet.sweetstockapi.model.Address;
 import com.stock.sweet.sweetstockapi.model.Company;
-import com.stock.sweet.sweetstockapi.model.Product;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import com.stock.sweet.sweetstockapi.model.User;
+import com.stock.sweet.sweetstockapi.model.enums.LevelAccess;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -17,21 +14,42 @@ import java.util.stream.Collectors;
 
 @Component
 public class CompanyMapper {
-    @Autowired
-    private AddressMapper addressMapper;
 
     public Company convertRequestToModel(CompanyRequest companyRequest) {
-        return new Company(
-                null,
-                UUID.randomUUID().toString(),
-                companyRequest.getName(),
-                companyRequest.getFantasyName(),
-                companyRequest.getCeo(),
-                companyRequest.getCpf(),
-                companyRequest.getCnpj(),
-                companyRequest.getEmail(),
-                companyRequest.getTelephoneNumber()
-        );
+        return Company
+                .builder()
+                .uuid(UUID.randomUUID().toString())
+                .name(companyRequest.getName())
+                .fantansyName(companyRequest.getFantasyName())
+                .ceo(companyRequest.getCeo())
+                .cnpj(companyRequest.getCnpj())
+                .cpf(companyRequest.getCpf())
+                .email(companyRequest.getEmail())
+                .telephoneNumber(companyRequest.getTelephoneNumber())
+                .address(
+                        Address.builder()
+                                .uuid(UUID.randomUUID().toString())
+                                .street(companyRequest.getAddressRequest().getStreet())
+                                .number(companyRequest.getAddressRequest().getNumber())
+                                .city(companyRequest.getAddressRequest().getCity())
+                                .complement(companyRequest.getAddressRequest().getComplement())
+                                .neighborhood(companyRequest.getAddressRequest().getNeighborhood())
+                                .state(companyRequest.getAddressRequest().getState())
+                                .build()
+                )
+                .build();
+    }
+
+    public User convertRequestToUserModel(CompanyRequest companyRequest) {
+        return User
+                .builder()
+                .uuid(UUID.randomUUID().toString())
+                .name(companyRequest.getName())
+                .email(companyRequest.getEmail())
+                .levelAccess(LevelAccess.ADMINISTRATOR.name())
+                .telephoneNumber(companyRequest.getTelephoneNumber())
+                .password(companyRequest.getPassword())
+                .build();
     }
 
     public CompanyResponse convertModelToResponse(Company company) {
@@ -45,7 +63,7 @@ public class CompanyMapper {
                 company.getEmail(),
                 company.getTelephoneNumber()
 
-                );
+        );
     }
 
     public List<CompanyResponse> convertModelListToResponseList(List<Company> company) {

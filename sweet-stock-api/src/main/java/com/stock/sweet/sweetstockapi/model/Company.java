@@ -1,6 +1,7 @@
 package com.stock.sweet.sweetstockapi.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,6 +10,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Builder
 @Entity
 @Table(name = "company")
 public class Company {
@@ -41,8 +43,8 @@ public class Company {
     @Column(name = "telephone_number")
     private String telephoneNumber;
 
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "fk_address", referencedColumnName = "id")
-//    private Address address;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_address", referencedColumnName = "id")
+    private Address address;
 }
 

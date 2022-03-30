@@ -1,19 +1,19 @@
 package com.stock.sweet.sweetstockapi.controller;
 
 import com.stock.sweet.sweetstockapi.dto.request.CompanyRequest;
-import com.stock.sweet.sweetstockapi.dto.request.ProviderRequest;
 import com.stock.sweet.sweetstockapi.dto.response.CompanyResponse;
-import com.stock.sweet.sweetstockapi.dto.response.ProviderResponse;
 import com.stock.sweet.sweetstockapi.mapper.CompanyMapper;
 import com.stock.sweet.sweetstockapi.service.CompanyService;
+import com.stock.sweet.sweetstockapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/companys")
+@RequestMapping("/companies")
 public class CompanyController {
 
     @Autowired
@@ -22,17 +22,19 @@ public class CompanyController {
     @Autowired
     private CompanyService companyService;
 
+    @Autowired
+    private UserService userService;
+
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public CompanyResponse createCompany(@RequestBody CompanyRequest company) {
-        return companyMapper.convertModelToResponse(
-                companyService.createCompany(companyMapper.convertRequestToModel(company))
-        );
+    public ResponseEntity createCompany(@RequestBody CompanyRequest body) {
+        userService.createUser(companyMapper.convertRequestToUserModel(body));
+        companyService.createCompany(companyMapper.convertRequestToModel(body));
+        return ResponseEntity.status(201).build();
     }
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<CompanyResponse> getAllCompanys() {
+    public List<CompanyResponse> getAllCompanies() {
         return companyMapper.convertModelListToResponseList(
                 companyService.getAllCompanys()
         );

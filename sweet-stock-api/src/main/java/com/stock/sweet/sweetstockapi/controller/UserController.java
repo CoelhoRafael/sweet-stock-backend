@@ -7,9 +7,6 @@ import com.stock.sweet.sweetstockapi.model.User;
 import com.stock.sweet.sweetstockapi.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import com.stock.sweet.sweetstockapi.model.User;
-import com.stock.sweet.sweetstockapi.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,15 +24,15 @@ public class UserController {
     @Autowired
     private UserMapper userMapper;
 
-    @PostMapping("/login")
-    public ResponseEntity loginUser(@RequestBody LoginRequest loginRequest) throws UnsupportedEncodingException, NoSuchAlgorithmException {
-        String uuidUser = employeeService.login(loginRequest.getEmail(), userMapper.getEncryptedPassword(loginRequest.getPassword()));
-        boolean isAuthenticated = uuidUser != null;
-        if (isAuthenticated) {
-            return ResponseEntity.status(200).body(uuidUser);
-        }
-        return ResponseEntity.status(401).build();
-    }
+//    @PostMapping("/login")
+//    public ResponseEntity loginUser(@RequestBody LoginRequest loginRequest) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+//        String uuidUser = employeeService.login(loginRequest.getEmail(), userMapper.getEncryptedPassword(loginRequest.getPassword()));
+//        boolean isAuthenticated = uuidUser != null;
+//        if (isAuthenticated) {
+//            return ResponseEntity.status(200).body(uuidUser);
+//        }
+//        return ResponseEntity.status(401).build();
+//    }
 
     @PostMapping("/create")
     public ResponseEntity createUser(@RequestBody UserRequest userRequest) throws UnsupportedEncodingException, NoSuchAlgorithmException {
@@ -47,10 +44,5 @@ public class UserController {
             return ResponseEntity.status(201).build();
         }
         return ResponseEntity.status(500).build();
-    private UserService userService;
-
-    @PostMapping
-    public User createUser(@RequestBody User user) {
-        return userService.createUser(user);
     }
 }
