@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 @Component
 public class IngredientMapper {
-    public Ingredient convertRequestToModel(IngredientRequest ingredientRequest){
+    public Ingredient convertRequestToModel(IngredientRequest ingredientRequest) {
         return new Ingredient(
                 null,
                 UUID.randomUUID().toString(),
@@ -29,7 +29,7 @@ public class IngredientMapper {
         );
     }
 
-    public IngredientResponse convertModelToResponse(Ingredient ingredient){
+    public IngredientResponse convertModelToResponse(Ingredient ingredient) {
         return new IngredientResponse(
                 ingredient.getUuid(),
                 ingredient.getName(),
@@ -45,8 +45,9 @@ public class IngredientMapper {
                 ingredient.getDateUpdate()
         );
     }
-    public List<IngredientResponse> convertModelListToResponseList(List<Ingredient> ingredients){
-        return ingredients.stream().map(i ->{
+
+    public List<IngredientResponse> convertModelListToResponseList(List<Ingredient> ingredients) {
+        return ingredients.stream().map(i -> {
             return new IngredientResponse(
                     i.getUuid(),
                     i.getName(),

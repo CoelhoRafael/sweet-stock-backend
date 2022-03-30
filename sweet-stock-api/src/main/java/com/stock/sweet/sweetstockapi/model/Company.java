@@ -10,9 +10,8 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "user")
-public class User {
-
+@Table(name = "company")
+public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -24,16 +23,26 @@ public class User {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "email", unique = true)
-    private String email;
+    @Column(name = "fantansy_name")
+    private String fantansyName;
 
-    @Column(name = "password")
-    private String password;
+    @Column(name = "ceo")
+    private String ceo;
+
+    @Column(name = "cpf")
+    private String cpf;
+
+    @Column(name = "cnpj")
+    private String cnpj;
+
+    @Column(name = "email")
+    private String email;
 
     @Column(name = "telephone_number")
     private String telephoneNumber;
 
-    @Column(name = "level_access")
-    private String levelAccess;
-
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "fk_address", referencedColumnName = "id")
+//    private Address address;
 }
+

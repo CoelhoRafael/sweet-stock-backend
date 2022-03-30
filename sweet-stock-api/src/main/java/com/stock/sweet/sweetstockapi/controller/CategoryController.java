@@ -35,4 +35,29 @@ public class CategoryController {
                 categoryService.getAllCategories()
         );
     }
+
+    @GetMapping("/{uuid}")
+    @ResponseStatus(HttpStatus.OK)
+    public CategoryResponse getCategoryByUuid(@PathVariable String uuid) throws Exception {
+        return categoryMapper.convertModelToResponse(
+                categoryService.findCategoryByUuid(uuid)
+        );
+    }
+
+    @PutMapping("/{uuid}")
+    @ResponseStatus(HttpStatus.OK)
+    public CategoryResponse updateCategory(@PathVariable String uuid, @RequestBody CategoryRequest body) throws Exception {
+        return categoryMapper.convertModelToResponse(
+                categoryService.updateCategory(uuid, body)
+        );
+    }
+
+    @DeleteMapping("/{uuid}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public CategoryResponse deleteCategory(@PathVariable String uuid) throws Exception {
+        return categoryMapper.convertModelToResponse(
+                categoryService.deleteCategory(uuid)
+        );
+    }
+
 }

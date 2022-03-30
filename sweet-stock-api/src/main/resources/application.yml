@@ -3,13 +3,16 @@ server:
     context-path: /v1/sweet-stock/
 
 spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
   datasource:
     driverClassName: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/sweetstock
     username: sweetstock
     password: sweetstock
   jpa:
-#    hibernate.ddl-auto: create-drop
-    hibernate.ddl-auto: update
+    hibernate.ddl-auto: create-drop
+#    hibernate.ddl-auto: update
     generate-ddl: true
     show-sql: false

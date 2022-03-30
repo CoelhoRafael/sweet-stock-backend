@@ -16,7 +16,7 @@ public class Provider {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer idProvider;
+    private Integer id;
 
     @Column(name = "uuid")
     private String uuid;

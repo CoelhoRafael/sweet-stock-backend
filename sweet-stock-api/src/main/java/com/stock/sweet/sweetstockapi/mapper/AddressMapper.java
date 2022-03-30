@@ -5,12 +5,28 @@ import com.stock.sweet.sweetstockapi.dto.response.AddressResponse;
 import com.stock.sweet.sweetstockapi.model.Address;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Component
 public class AddressMapper {
 
-    public Address convertRequestToModel(AddressRequest addressRequest){
+    public List<AddressResponse> convertModelListToResponseList(List<Address> adresses) {
+        return adresses.stream().map(a -> {
+            return new AddressResponse(
+                    a.getUuid(),
+                    a.getStreet(),
+                    a.getNumber(),
+                    a.getComplement(),
+                    a.getCity(),
+                    a.getState(),
+                    a.getNeighborhood()
+            );
+        }).collect(Collectors.toList());
+    }
+
+    public Address convertRequestToModel(AddressRequest addressRequest) {
         return new Address(
                 null,
                 UUID.randomUUID().toString(),
@@ -23,7 +39,7 @@ public class AddressMapper {
         );
     }
 
-    public AddressResponse convertModelToResponse(Address address){
+    public AddressResponse convertModelToResponse(Address address) {
         return new AddressResponse(
                 address.getUuid(),
                 address.getStreet(),

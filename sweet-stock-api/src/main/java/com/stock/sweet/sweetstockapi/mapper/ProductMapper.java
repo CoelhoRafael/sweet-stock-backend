@@ -1,10 +1,7 @@
 package com.stock.sweet.sweetstockapi.mapper;
 
-import com.stock.sweet.sweetstockapi.dto.request.ConfectionRequest;
 import com.stock.sweet.sweetstockapi.dto.request.ProductRequest;
-import com.stock.sweet.sweetstockapi.dto.response.ConfectionResponse;
 import com.stock.sweet.sweetstockapi.dto.response.ProductResponse;
-import com.stock.sweet.sweetstockapi.model.Confection;
 import com.stock.sweet.sweetstockapi.model.Product;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +11,7 @@ import java.util.stream.Collectors;
 
 @Component
 public class ProductMapper {
-    public Product convertRequestToModel(ProductRequest productRequest){
+    public Product convertRequestToModel(ProductRequest productRequest) {
         return new Product(
                 null,
                 UUID.randomUUID().toString(),
@@ -27,7 +24,7 @@ public class ProductMapper {
         );
     }
 
-    public ProductResponse convertModelToResponse(Product product){
+    public ProductResponse convertModelToResponse(Product product) {
         return new ProductResponse(
                 product.getUuid(),
                 product.getName(),
@@ -38,8 +35,9 @@ public class ProductMapper {
                 product.getCategory()
         );
     }
-    public List<ProductResponse> convertModelListToResponseList(List<Product> products){
-        return products.stream().map(p ->{
+
+    public List<ProductResponse> convertModelListToResponseList(List<Product> products) {
+        return products.stream().map(p -> {
             return new ProductResponse(
                     p.getUuid(),
                     p.getName(),

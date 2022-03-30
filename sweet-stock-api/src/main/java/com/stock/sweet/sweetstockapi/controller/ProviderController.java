@@ -22,7 +22,7 @@ public class ProviderController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ProviderResponse createProvider(@RequestBody ProviderRequest body){
+    public ProviderResponse createProvider(@RequestBody ProviderRequest body) {
         return providerMapper.convertModelToResponse(
                 providerService.createProvider(providerMapper.convertRequestToModel(body))
         );
@@ -30,9 +30,33 @@ public class ProviderController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<ProviderResponse> getAllProviders(){
+    public List<ProviderResponse> getAllProviders() {
         return providerMapper.convertModelListToResponseList(
                 providerService.getAllProviders()
+        );
+    }
+
+    @GetMapping("/{uuid}")
+    @ResponseStatus(HttpStatus.OK)
+    public ProviderResponse getProviderByUuid(@PathVariable String uuid) throws Exception {
+        return providerMapper.convertModelToResponse(
+                providerService.findProviderByUuid(uuid)
+        );
+    }
+
+    @PutMapping("/{uuid}")
+    @ResponseStatus(HttpStatus.OK)
+    public ProviderResponse updateProvider(@PathVariable String uuid, @RequestBody ProviderRequest body) throws Exception {
+        return providerMapper.convertModelToResponse(
+                providerService.updateProvider(uuid, body)
+        );
+    }
+
+    @DeleteMapping("/{uuid}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public ProviderResponse deleteProvider(@PathVariable String uuid) throws Exception {
+        return providerMapper.convertModelToResponse(
+                providerService.deleteProvider(uuid)
         );
     }
 }
