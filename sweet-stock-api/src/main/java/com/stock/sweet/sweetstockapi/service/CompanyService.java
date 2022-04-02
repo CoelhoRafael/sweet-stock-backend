@@ -28,4 +28,12 @@ public class CompanyService {
     public Company findCompanyByUuid(String uuid) throws Exception {
         return companyRepository.findByUuid(uuid).orElseThrow(() -> new Exception("UUID não encontrado!"));
     }
+
+    public List<Company> findAllCompanies() {
+        return companyRepository.findAll();
+    }
+
+    public List<Company> saveAllCompanies(List<Company> companies) {
+        return companyRepository.saveAll(companies);
+    }
 }
