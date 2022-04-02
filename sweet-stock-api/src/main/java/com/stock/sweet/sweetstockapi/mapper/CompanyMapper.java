@@ -6,7 +6,6 @@ import com.stock.sweet.sweetstockapi.model.Address;
 import com.stock.sweet.sweetstockapi.model.Company;
 import com.stock.sweet.sweetstockapi.model.User;
 import com.stock.sweet.sweetstockapi.model.enums.LevelAccess;
-import net.bytebuddy.utility.RandomString;
 import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.stereotype.Component;
 
@@ -43,7 +42,7 @@ public class CompanyMapper {
                 .build();
     }
 
-    public User convertRequestToUserModel(CompanyRequest companyRequest) {
+    public User convertRequestToUserModel(CompanyRequest companyRequest, Integer companyId) {
         return User
                 .builder()
                 .uuid(UUID.randomUUID().toString())
@@ -52,6 +51,7 @@ public class CompanyMapper {
                 .levelAccess(LevelAccess.ADMINISTRATOR.name())
                 .telephoneNumber(companyRequest.getTelephoneNumber())
                 .password(companyRequest.getPassword())
+                .company(Company.builder().id(companyId).build())
                 .build();
     }
 

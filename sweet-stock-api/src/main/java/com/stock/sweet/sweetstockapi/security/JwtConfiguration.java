@@ -1,5 +1,6 @@
 package com.stock.sweet.sweetstockapi.security;
 
+import com.stock.sweet.sweetstockapi.service.CompanyService;
 import com.stock.sweet.sweetstockapi.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -21,6 +22,9 @@ public class JwtConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
 
+    @Autowired
+    private CompanyService companyService;
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -39,9 +43,10 @@ public class JwtConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/employees").hasAuthority("ADMINISTRATOR")
                 .antMatchers(HttpMethod.GET, "/products").hasAnyAuthority("ADMINISTRATOR", "CUSTOMER")
                 .antMatchers(HttpMethod.PUT, "/products").hasAuthority("ADMINISTRATOR")
+                .antMatchers( "/accesses").hasAuthority("ADMINISTRATOR")
                 .anyRequest().authenticated()
                 .and()
-                .addFilter(new JwtAuthenticationFilter(authenticationManager()))
+                .addFilter(new JwtAuthenticationFilter(authenticationManager(), companyService))
                 .addFilter(new JwtValidationFilter(authenticationManager()))
                 .exceptionHandling().authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED));
 
