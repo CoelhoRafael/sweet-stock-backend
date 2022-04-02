@@ -60,4 +60,5 @@ public class ProductController {
                 productService.deleteProduct(uuid)
         );
     }
+
 }
