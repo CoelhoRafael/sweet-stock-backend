@@ -38,4 +38,8 @@ public class User {
     @Column(name = "level_access")
     private String levelAccess;
 
+    @ManyToOne
+    @JoinColumn(name = "fk_company", referencedColumnName = "id")
+    private Company company;
+
 }

@@ -17,7 +17,8 @@ public class EmployeeMapper {
                 employeRequest.getEmail(),
                 employeRequest.getPassword(),
                 employeRequest.getTelephoneNumber(),
-                LevelAccess.EMPLOYEE.name()
+                LevelAccess.EMPLOYEE_NOT_VERIFIED.name(),
+                null
         );
     }
 }

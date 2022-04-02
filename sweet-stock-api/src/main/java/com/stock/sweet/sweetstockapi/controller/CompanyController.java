@@ -3,6 +3,7 @@ package com.stock.sweet.sweetstockapi.controller;
 import com.stock.sweet.sweetstockapi.dto.request.CompanyRequest;
 import com.stock.sweet.sweetstockapi.dto.response.CompanyResponse;
 import com.stock.sweet.sweetstockapi.mapper.CompanyMapper;
+import com.stock.sweet.sweetstockapi.security.JwtAuthenticationFilter;
 import com.stock.sweet.sweetstockapi.service.CompanyService;
 import com.stock.sweet.sweetstockapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController

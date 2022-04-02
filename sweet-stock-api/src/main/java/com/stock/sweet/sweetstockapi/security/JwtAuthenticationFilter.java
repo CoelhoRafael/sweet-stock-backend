@@ -5,6 +5,8 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.stock.sweet.sweetstockapi.dto.request.UserLogin;
 import com.stock.sweet.sweetstockapi.security.data.UserDetailsData;
+import com.stock.sweet.sweetstockapi.service.EmployeeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -27,6 +29,9 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     private final AuthenticationManager authenticationManager;
 
+    @Autowired
+    private EmployeeService employeeService;
+
     public JwtAuthenticationFilter(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
     }
@@ -38,6 +43,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                     user.getLogin(), user.getPassword(), new ArrayList<>()
             ));
+
         } catch (IOException e) {
             throw new RuntimeException("Falha ao autenticar o usuário", e);
         }

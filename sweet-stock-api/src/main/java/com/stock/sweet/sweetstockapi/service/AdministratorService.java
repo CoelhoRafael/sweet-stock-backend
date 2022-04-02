@@ -8,18 +8,13 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class AdministratorService implements Authentication {
+public class AdministratorService{
     @Autowired
     private UserRepository userRepository;
 
-    @Override
     public String login(String email, String password) {
         Optional<User> user = userRepository.findByEmailAndPassword(email, password);
         return user.map(User::getUuid).orElse(null);
     }
 
-    @Override
-    public User createUser(User user) {
-        return null;
-    }
 }
