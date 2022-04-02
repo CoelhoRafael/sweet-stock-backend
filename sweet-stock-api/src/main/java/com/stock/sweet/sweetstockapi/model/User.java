@@ -1,6 +1,5 @@
 package com.stock.sweet.sweetstockapi.model;
 
-import com.stock.sweet.sweetstockapi.model.enums.LevelAccess;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -38,5 +37,9 @@ public class User {
 
     @Column(name = "level_access")
     private String levelAccess;
+
+    @ManyToOne
+    @JoinColumn(name = "fk_company", referencedColumnName = "id")
+    private Company company;
 
 }

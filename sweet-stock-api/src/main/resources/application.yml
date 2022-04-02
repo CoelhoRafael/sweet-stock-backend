@@ -3,6 +3,17 @@ server:
     context-path: /v1/sweet-stock/
 
 spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: xxxxxx
+    password: xxxxxx
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
@@ -12,7 +23,7 @@ spring:
     username: sweetstock
     password: sweetstock
   jpa:
-#    hibernate.ddl-auto: create-drop
+    #    hibernate.ddl-auto: create-drop
     hibernate.ddl-auto: update
     generate-ddl: true
     show-sql: false

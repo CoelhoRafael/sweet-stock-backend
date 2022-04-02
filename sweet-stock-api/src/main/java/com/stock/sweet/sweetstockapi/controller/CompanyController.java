@@ -27,8 +27,8 @@ public class CompanyController {
 
     @PostMapping
     public ResponseEntity createCompany(@RequestBody CompanyRequest body) {
-        userService.createUser(companyMapper.convertRequestToUserModel(body));
-        companyService.createCompany(companyMapper.convertRequestToModel(body));
+        var company = companyService.createCompany(companyMapper.convertRequestToModel(body));
+        var user = userService.createUser(companyMapper.convertRequestToUserModel(body, company.getId()));
         return ResponseEntity.status(201).build();
     }
 
@@ -47,20 +47,4 @@ public class CompanyController {
                 companyService.findCompanyByUuid(uuid)
         );
     }
-
-//    @PutMapping("/{uuid}")
-//    @ResponseStatus(HttpStatus.OK)
-//    public CompanyResponse updateCompany(@PathVariable String uuid, @RequestBody CompanyRequest body) throws Exception {
-//        return companyMapper.convertModelToResponse(
-//                companyService.updateCompany(uuid, body)
-//        );
-//    }
-
-//    @DeleteMapping("/{uuid}")
-//    @ResponseStatus(HttpStatus.NO_CONTENT)
-//    public CompanyResponse deleteCompany(@PathVariable String uuid) throws Exception {
-//        return companyMapper.convertModelToResponse(
-//                companyService.deleteProvider(uuid)
-//        );
-//    }
 }

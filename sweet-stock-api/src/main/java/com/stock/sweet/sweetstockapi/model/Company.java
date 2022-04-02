@@ -43,6 +43,9 @@ public class Company {
     @Column(name = "telephone_number")
     private String telephoneNumber;
 
+    @Column(name = "associate_code")
+    private String associateCode;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_address", referencedColumnName = "id")
     private Address address;

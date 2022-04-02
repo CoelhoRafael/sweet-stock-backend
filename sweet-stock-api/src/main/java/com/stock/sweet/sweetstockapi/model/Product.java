@@ -44,4 +44,5 @@ public class Product {
 
     @OneToMany(mappedBy = "product")
     Set<Confection> confections;
+
 }

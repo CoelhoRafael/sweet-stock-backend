@@ -52,4 +52,8 @@ public class UserDetailsData implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    public Optional<User> getUser() {
+        return user;
+    }
 }
