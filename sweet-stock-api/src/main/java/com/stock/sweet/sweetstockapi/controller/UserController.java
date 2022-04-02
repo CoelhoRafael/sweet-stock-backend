@@ -25,16 +25,6 @@ public class UserController {
     @Autowired
     private UserMapper userMapper;
 
-//    @PostMapping("/login")
-//    public ResponseEntity loginUser(@RequestBody LoginRequest loginRequest) throws UnsupportedEncodingException, NoSuchAlgorithmException {
-//        String uuidUser = employeeService.login(loginRequest.getEmail(), userMapper.getEncryptedPassword(loginRequest.getPassword()));
-//        boolean isAuthenticated = uuidUser != null;
-//        if (isAuthenticated) {
-//            return ResponseEntity.status(200).body(uuidUser);
-//        }
-//        return ResponseEntity.status(401).build();
-//    }
-
     @PostMapping("/create")
     public ResponseEntity createUser(@RequestBody UserRequest userRequest) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         User user = employeeService.createUser(
