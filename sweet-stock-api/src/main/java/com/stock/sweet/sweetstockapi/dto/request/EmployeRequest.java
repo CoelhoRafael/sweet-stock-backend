@@ -7,7 +7,7 @@ import lombok.Value;
 @Data
 public class EmployeRequest {
     private String name;
-    private String companyCode;
+    private String associateCode;
     private String telephoneNumber;
     private String email;
     private String password;

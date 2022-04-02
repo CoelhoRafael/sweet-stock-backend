@@ -22,7 +22,7 @@ public class EmployeeController {
 
     @PostMapping
     public ResponseEntity createEmployee(@RequestBody EmployeRequest employeRequest) {
-        employeeService.createUser(employeeMapper.convertRequestToModel(employeRequest));
+        employeeService.createUser(employeeMapper.convertRequestToModel(employeRequest), employeRequest.getAssociateCode());
         return ResponseEntity.status(201).build();
     }
 }
