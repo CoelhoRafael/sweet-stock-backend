@@ -25,7 +25,8 @@ public class IngredientMapper {
                 ingredientRequest.getProvideCode(),
                 ingredientRequest.getQuantityUsed(),
                 ingredientRequest.getDateInsert(),
-                ingredientRequest.getDateUpdate()
+                ingredientRequest.getDateUpdate(),
+                null
         );
     }
 

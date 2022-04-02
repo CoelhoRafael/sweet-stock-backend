@@ -2,6 +2,9 @@ package com.stock.sweet.sweetstockapi.security;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.stock.sweet.sweetstockapi.security.data.Role;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,6 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Base64;
+import java.util.Map;
 
 public class JwtValidationFilter extends BasicAuthenticationFilter {
     public static final String HEADER_ATTRIBUTE = "Authorization";
@@ -44,16 +49,39 @@ public class JwtValidationFilter extends BasicAuthenticationFilter {
         chain.doFilter(request, response);
     }
 
-    private UsernamePasswordAuthenticationToken getAuthenticationToken(String token) {
-        String username = JWT.require(Algorithm.HMAC512(JwtAuthenticationFilter.TOKEN_PASSWORD))
-                .build()
-                .verify(token)
-                .getSubject();
+    private UsernamePasswordAuthenticationToken getAuthenticationToken(String token) throws JsonProcessingException {
+        String username = getSubjectFromToken(token);
+
+        ArrayList<Role> authorities = getRolesFromToken(token);
 
         if (username == null) {
             return null;
         }
 
-        return new UsernamePasswordAuthenticationToken(username, null, new ArrayList<>());
+        return new UsernamePasswordAuthenticationToken(username, null, authorities);
+    }
+
+    private ArrayList<Role> getRolesFromToken(String token) throws JsonProcessingException {
+        var payloadFromToken = new String(Base64.getDecoder().decode(
+                JWT.require(Algorithm.HMAC512(JwtAuthenticationFilter.TOKEN_PASSWORD))
+                        .build()
+                        .verify(token)
+                        .getPayload()));
+
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        var mappedPayload = objectMapper.readValue(payloadFromToken, Map.class);
+
+        var authorities = new ArrayList<Role>();
+        authorities.add(new Role(mappedPayload.get("role").toString()));
+        return authorities;
+    }
+
+    private String getSubjectFromToken(String token) {
+        String username = JWT.require(Algorithm.HMAC512(JwtAuthenticationFilter.TOKEN_PASSWORD))
+                .build()
+                .verify(token)
+                .getSubject();
+        return username;
     }
 }

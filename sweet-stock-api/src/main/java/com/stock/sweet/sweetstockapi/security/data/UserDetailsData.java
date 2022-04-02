@@ -4,6 +4,7 @@ import com.stock.sweet.sweetstockapi.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -17,7 +18,9 @@ public class UserDetailsData implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        Collection<Role> roles = new ArrayList<>();
+        roles.add(new Role(this.user.orElse(new User()).getLevelAccess()));
+        return roles;
     }
 
     @Override

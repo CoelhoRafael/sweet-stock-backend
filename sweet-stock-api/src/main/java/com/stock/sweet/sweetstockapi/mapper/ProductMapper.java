@@ -20,7 +20,8 @@ public class ProductMapper {
                 productRequest.getExpirationDate(),
                 productRequest.getDateInsert(),
                 productRequest.getDateUpdate(),
-                productRequest.getCategory()
+                productRequest.getCategory(),
+                null
         );
     }
 

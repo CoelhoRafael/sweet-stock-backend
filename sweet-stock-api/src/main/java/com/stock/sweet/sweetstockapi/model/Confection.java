@@ -32,8 +32,11 @@ public class Confection {
     @Column(name = "cost")
     private BigDecimal cost;
 
-    @Column(name = "employee")
-    private Integer employee;
+    @ManyToOne
+    @JoinColumn(name = "id_product", referencedColumnName = "id")
+    Product product;
 
-
+    @ManyToOne
+    @JoinColumn(name = "id_ingredient", referencedColumnName = "id")
+    Ingredient ingredient;
 }

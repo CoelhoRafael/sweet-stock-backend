@@ -6,6 +6,7 @@ import com.stock.sweet.sweetstockapi.mapper.UserMapper;
 import com.stock.sweet.sweetstockapi.model.User;
 import com.stock.sweet.sweetstockapi.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.annotation.AccessType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

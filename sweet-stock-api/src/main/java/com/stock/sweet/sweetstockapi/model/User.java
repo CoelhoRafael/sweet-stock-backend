@@ -1,5 +1,6 @@
 package com.stock.sweet.sweetstockapi.model;
 
+import com.stock.sweet.sweetstockapi.model.enums.LevelAccess;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

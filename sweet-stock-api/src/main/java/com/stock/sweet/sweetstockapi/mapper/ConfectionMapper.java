@@ -18,7 +18,8 @@ public class ConfectionMapper {
                 confectionRequest.getDate(),
                 confectionRequest.getQuantityIngredient(),
                 confectionRequest.getCost(),
-                confectionRequest.getEmployee()
+                null,
+                null
         );
     }
 
@@ -28,7 +29,7 @@ public class ConfectionMapper {
                 confection.getDate(),
                 confection.getQuantityIngredient(),
                 confection.getCost(),
-                confection.getEmployee()
+                null
         );
     }
 
@@ -39,7 +40,7 @@ public class ConfectionMapper {
                     c.getDate(),
                     c.getQuantityIngredient(),
                     c.getCost(),
-                    c.getEmployee()
+                    null
             );
         }).collect(Collectors.toList());
     }

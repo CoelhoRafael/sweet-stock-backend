@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -40,4 +41,7 @@ public class Product {
 
     @Column(name = "category")
     private String category;
+
+    @OneToMany(mappedBy = "product")
+    Set<Confection> confections;
 }
