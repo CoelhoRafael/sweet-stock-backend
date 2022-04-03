@@ -47,5 +47,4 @@ public class UserController {
         }
         return ResponseEntity.status(500).build();
     }
-    //teste para vizualizar na azure
 }
