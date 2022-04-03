@@ -37,7 +37,7 @@ public class UserController {
 //    }
 
     @PostMapping("/create")
-    public ResponseEntity createUser(@RequestBody UserRequest userRequest) throws UnsupportedEncodingException, NoSuchAlgorithmException, UnsupportedEncodingException, NoSuchAlgorithmException {
+    public ResponseEntity createUser(@RequestBody UserRequest userRequest) throws UnsupportedEncodingException, NoSuchAlgorithmException, UnsupportedEncodingException, NoSuchAlgorithmException, UnsupportedEncodingException, NoSuchAlgorithmException, UnsupportedEncodingException, NoSuchAlgorithmException {
         User user = employeeService.createUser(
                 userMapper.convertRequestToModel(userRequest)
         );
