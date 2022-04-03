@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 
+
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -36,7 +37,7 @@ public class UserController {
 //    }
 
     @PostMapping("/create")
-    public ResponseEntity createUser(@RequestBody UserRequest userRequest) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+    public ResponseEntity createUser(@RequestBody UserRequest userRequest) throws UnsupportedEncodingException, NoSuchAlgorithmException, UnsupportedEncodingException, NoSuchAlgorithmException {
         User user = employeeService.createUser(
                 userMapper.convertRequestToModel(userRequest)
         );
@@ -46,4 +47,5 @@ public class UserController {
         }
         return ResponseEntity.status(500).build();
     }
+    //teste para vizualizar na azure
 }
