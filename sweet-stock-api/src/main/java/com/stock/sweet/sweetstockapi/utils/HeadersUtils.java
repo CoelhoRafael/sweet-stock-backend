@@ -1,9 +1,10 @@
-package com.stock.sweet.sweetstockapi.security;
+package com.stock.sweet.sweetstockapi.utils;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.stock.sweet.sweetstockapi.security.JwtAuthenticationFilter;
 import org.springframework.stereotype.Component;
 
 import java.util.Base64;

@@ -4,6 +4,7 @@ import com.stock.sweet.sweetstockapi.dto.request.IngredientRequest;
 import com.stock.sweet.sweetstockapi.dto.response.IngredientResponse;
 import com.stock.sweet.sweetstockapi.mapper.IngredientMapper;
 import com.stock.sweet.sweetstockapi.service.IngredientService;
+import com.sun.xml.bind.v2.TODO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -34,5 +35,10 @@ public class IngredientController {
         return ingredientMapper.convertModelListToResponseList(
                 ingredientService.getAllIngredients()
         );
+    }
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public List<IngredientResponse> getAllExpiredIngredients() {
+        // TODO: 07/04/2022  
     }
 }
