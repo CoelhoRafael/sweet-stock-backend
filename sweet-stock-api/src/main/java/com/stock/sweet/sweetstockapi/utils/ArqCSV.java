@@ -12,20 +12,20 @@ public class ArqCSV {
 
     public static void gravaArquivoCsv(ListaObj<Ingredient> listOfIngredients, String nomeArq){
         FileWriter arq = null; //obj representa o arquivo que sera gravado
-        Formatter saida = null; //obj que usaremos para escrever no arquivo
+        Formatter output = null; //obj que usaremos para escrever no arquivo
         Boolean erro = false;
         nomeArq +=".csv";
         //bloco try catch para abri arq
 
         try{
             arq = new FileWriter(nomeArq);
-            saida = new Formatter(arq);
+            output = new Formatter(arq);
         }catch (IOException e){
             System.out.println("Erro ao abrir arquivo");
             System.exit(1);
 
         }
-        saida.format("Id|" +
+        output.format("Id|" +
                 "Nome|" +
                 "Quantidade|" +
                 "Validade|" +
@@ -39,7 +39,7 @@ public class ArqCSV {
             //Percorrer lista de cachorros
             for (int i = 0; i<listOfIngredients.getTamanho(); i++){
                 var ingredient=listOfIngredients.getElemento(i);
-                saida.format("%s;%s;%.2f;%s;%.2f;%s;%.2f;%.2f;%s;%d\n",
+                output.format("%s;%s;%.2f;%s;%.2f;%s;%.2f;%.2f;%s;%d\n",
                         ingredient.getUuid(),
                         ingredient.getName(),
                         ingredient.getQuantity(),
@@ -56,7 +56,7 @@ public class ArqCSV {
             erro = true;
         }
         finally {
-            saida.close();
+            output.close();
             try{
                 arq.close();
             }catch (IOException e){
@@ -68,48 +68,48 @@ public class ArqCSV {
             }
         }
     }
-    public static void leExibeAqrCsv(String nomeAqr){
-        FileReader arq = null;
-        Scanner in = null;
-        Boolean deuRuim = false;
-        nomeAqr += ".csv";
-
-        try{
-            arq = new FileReader(nomeAqr);
-            in = new Scanner(arq).useDelimiter(";|\n");
-        }catch (FileNotFoundException e){
-            System.out.println("Arquivo não encontrado");
-            System.exit(1);
-        }
-        try{
-            System.out.printf("%4s %-15s %-9s %04s \n","ID","NOME","PORTE","PESO");
-            while(in.hasNext()){
-                Integer id = in.nextInt();
-                String nome = in.next();
-                String porte = in.next();
-                Double peso = in.nextDouble();
-                System.out.printf("%4d %-15s %-9s %4.2f", id,nome,porte,peso);
-            }
-        }catch (NoSuchElementException e){
-            System.out.println("Arquivo com problema");
-            deuRuim = true;
-
-        }
-        catch (  IllegalStateException e){
-            System.out.println("erro leito do arq");
-            deuRuim =true;
-        } finally {
-            in.close();
-            try{
-                arq.close();
-            }catch (IOException e){
-                System.out.println("Erro ao fechar arquivo");
-                deuRuim = true;
-            }
-            if (deuRuim){
-                System.exit(1);
-            }
-        }
-    }
+//    public static void leExibeAqrCsv(String nomeAqr){
+//        FileReader arq = null;
+//        Scanner in = null;
+//        Boolean deuRuim = false;
+//        nomeAqr += ".csv";
+//
+//        try{
+//            arq = new FileReader(nomeAqr);
+//            in = new Scanner(arq).useDelimiter(";|\n");
+//        }catch (FileNotFoundException e){
+//            System.out.println("Arquivo não encontrado");
+//            System.exit(1);
+//        }
+//        try{
+//            System.out.printf("%4s %-15s %-9s %04s \n","ID","NOME","PORTE","PESO");
+//            while(in.hasNext()){
+//                Integer id = in.nextInt();
+//                String nome = in.next();
+//                String porte = in.next();
+//                Double peso = in.nextDouble();
+//                System.out.printf("%4d %-15s %-9s %4.2f", id,nome,porte,peso);
+//            }
+//        }catch (NoSuchElementException e){
+//            System.out.println("Arquivo com problema");
+//            deuRuim = true;
+//
+//        }
+//        catch (IllegalStateException e){
+//            System.out.println("erro leito do arq");
+//            deuRuim =true;
+//        } finally {
+//            in.close();
+//            try{
+//                arq.close();
+//            }catch (IOException e){
+//                System.out.println("Erro ao fechar arquivo");
+//                deuRuim = true;
+//            }
+//            if (deuRuim){
+//                System.exit(1);
+//            }
+//        }
+//    }
 
 }

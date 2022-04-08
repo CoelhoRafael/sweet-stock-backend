@@ -4,11 +4,14 @@ import com.stock.sweet.sweetstockapi.dto.request.IngredientRequest;
 import com.stock.sweet.sweetstockapi.dto.response.IngredientResponse;
 import com.stock.sweet.sweetstockapi.mapper.IngredientMapper;
 import com.stock.sweet.sweetstockapi.service.IngredientService;
+import com.stock.sweet.sweetstockapi.utils.ArqCSV;
 import com.sun.xml.bind.v2.TODO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.FileWriter;
 import java.util.List;
 
 @RestController
@@ -38,7 +41,15 @@ public class IngredientController {
     }
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<IngredientResponse> getAllExpiredIngredients() {
-        // TODO: 07/04/2022  
-    }
+    public ResponseEntity getAllExpiredIngredients() {
+        
+        return  ResponseEntity
+                .status(200)
+                .header("content-type", "text/csv")
+                .header("content-length", "1000")
+                .header("content-disposition", "filename=\"relatorio-ingredientes.csv\"")
+                .body(ingredientService.downloadCSVExpiredIngredients());
+
+        }
+
 }
