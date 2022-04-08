@@ -36,9 +36,10 @@ public class IngredientController {
                 ingredientService.getAllIngredients()
         );
     }
-    @GetMapping
+
+    @GetMapping("/expired")
     @ResponseStatus(HttpStatus.OK)
     public List<IngredientResponse> getAllExpiredIngredients() {
-        // TODO: 07/04/2022  
+        return null;
     }
 }
