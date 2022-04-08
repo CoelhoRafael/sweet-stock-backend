@@ -1,6 +1,7 @@
 package com.stock.sweet.sweetstockapi.service;
 
 import com.stock.sweet.sweetstockapi.dto.request.ProductRequest;
+import com.stock.sweet.sweetstockapi.exception.NotFoundException;
 import com.stock.sweet.sweetstockapi.model.Product;
 import com.stock.sweet.sweetstockapi.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +23,10 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public Product findProductByUuid(String uuid) throws Exception {
-        return productRepository.findByUuid(uuid).orElseThrow(() -> new Exception("UUID não encontrado!"));
+    public Product findProductByUuid(String uuid) throws NotFoundException {
+        return productRepository.findByUuid(uuid).orElseThrow(
+                () -> new NotFoundException("Produto não encontrado.")
+        );
     }
 
     public Product updateProduct(String uuid, ProductRequest productRequest) throws Exception {

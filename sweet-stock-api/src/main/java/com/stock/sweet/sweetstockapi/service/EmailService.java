@@ -23,8 +23,7 @@ public class EmailService {
             message.setSubject(emailModel.getSubject());
             message.setText(emailModel.getText());
             emailSender.send(message);
-            System.out.println("Email enviado");
-
+            System.out.println("Email enviado para " + emailModel.getEmailTo());
         } catch (MailException e) {
             System.out.println("Falha ao enviar email" + e);
         }

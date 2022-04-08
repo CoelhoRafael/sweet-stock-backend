@@ -10,6 +10,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/products")
@@ -39,9 +40,9 @@ public class ProductController {
 
     @GetMapping("/{uuid}")
     @ResponseStatus(HttpStatus.OK)
-    public ProductResponse getProductByUuid(@PathVariable String uuid) throws Exception {
+    public ProductResponse getProductByUuid(@PathVariable UUID uuid) throws Exception {
         return productMapper.convertModelToResponse(
-                productService.findProductByUuid(uuid)
+                productService.findProductByUuid(uuid.toString())
         );
     }
 
