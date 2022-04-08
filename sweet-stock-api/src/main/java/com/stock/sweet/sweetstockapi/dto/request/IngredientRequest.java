@@ -15,12 +15,13 @@ public class IngredientRequest {
     private String name;
     private String unitMeasurement;
     private BigDecimal quantity;
-    private Date expirationDate;
+    private LocalDate expirationDate;
     private Double storageTemperature;
     private Boolean isRefigerated;
     private BigDecimal buyValue;
     private Integer provideCode;
     private BigDecimal quantityUsed;
+    private Integer numberLot;
     private LocalDate dateInsert;
     private LocalDate dateUpdate;
 }

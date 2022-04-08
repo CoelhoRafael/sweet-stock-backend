@@ -47,4 +47,5 @@ public class AccessController {
                 employeeService.getAllWaitingApproval(uuidCompany)
         ));
     }
+
 }

@@ -39,8 +39,10 @@ public class IngredientController {
                 ingredientService.getAllIngredients()
         );
     }
-    @GetMapping
+
+    @GetMapping("/expired")
     @ResponseStatus(HttpStatus.OK)
+
     public ResponseEntity getAllExpiredIngredients() {
         
         return  ResponseEntity
@@ -51,5 +53,6 @@ public class IngredientController {
                 .body(ingredientService.downloadCSVExpiredIngredients());
 
         }
+
 
 }

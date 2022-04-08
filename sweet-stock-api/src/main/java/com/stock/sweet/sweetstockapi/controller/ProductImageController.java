@@ -13,7 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 @RestController
-@RequestMapping("/product-images")
+@RequestMapping("/")
 public class ProductImageController {
     @Autowired
     private ProductImageService productImageService;
