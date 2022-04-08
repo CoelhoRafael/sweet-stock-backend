@@ -35,7 +35,7 @@ public class Ingredient {
     private BigDecimal quantity;
 
     @Column(name = "expiration_date")
-    private Date expirationDate;
+    private LocalDate expirationDate;
 
     @Column(name = "storage_temperature")
     private Double storageTemperature;
@@ -58,6 +58,11 @@ public class Ingredient {
     @Column(name = "date_update")
     private LocalDate dateUpdate;
 
+    @Column(name = "number_lot")
+    private Integer numberLot;
+
     @OneToMany(mappedBy = "ingredient")
     Set<Confection> confections;
+
+
 }
