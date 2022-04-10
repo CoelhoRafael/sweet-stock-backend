@@ -1,0 +1,3 @@
+Id;Nome;Quantidade;Validade;Temperatura de armazenamento;Refrigeração;Valor de compra;Cod. Fornecedor;Quantidade utilizada;Data registro;Número do lote
+leite;50,00;2022-04-09;30,00;Sim;100,00;1564;0,00;null;34651
+mandioca;50,00;2022-04-09;30,00;Sim;100,00;1564;0,00;2022-04-10;34651

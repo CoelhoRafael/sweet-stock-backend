@@ -5,6 +5,7 @@ import com.stock.sweet.sweetstockapi.dto.response.IngredientResponse;
 import com.stock.sweet.sweetstockapi.model.Ingredient;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -24,8 +25,8 @@ public class IngredientMapper {
                 ingredientRequest.getBuyValue(),
                 ingredientRequest.getProvideCode(),
                 ingredientRequest.getQuantityUsed(),
-                ingredientRequest.getDateInsert(),
-                ingredientRequest.getDateUpdate(),
+                LocalDate.now(),
+                LocalDate.now(),
                 ingredientRequest.getNumberLot(),
                 null
         );

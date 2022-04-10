@@ -23,7 +23,7 @@ public class AccessService {
             emailService.sendEmail(
                     new Email(
                             "sweet-stock",
-                            "abnerlucasdarochasantos@gmail.com",
+                            "rafaelcoelho3110@gmail.com",
                             email,
                             "Token para cadastro de funcionário - SWEET-STOCK",
                             company.getAssociateCode(),

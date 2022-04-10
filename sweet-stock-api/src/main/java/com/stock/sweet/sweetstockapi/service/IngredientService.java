@@ -2,14 +2,13 @@ package com.stock.sweet.sweetstockapi.service;
 
 import com.stock.sweet.sweetstockapi.model.Ingredient;
 import com.stock.sweet.sweetstockapi.repository.IngredientRepository;
-import com.stock.sweet.sweetstockapi.utils.ArqCSV;
-import com.stock.sweet.sweetstockapi.utils.ListaObj;
+import com.stock.sweet.sweetstockapi.utils.FileCSV;
+import com.stock.sweet.sweetstockapi.utils.ListObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class IngredientService {
@@ -26,18 +25,17 @@ public class IngredientService {
         return ingredientRepository.findAll();
     }
 
-    public ListaObj<Ingredient> downloadCSVExpiredIngredients() {
-        var expiredIngredients = ingredientRepository.findAll()
-                .stream()
-                .filter(a -> LocalDate.now().isAfter(a.getExpirationDate()))
-                .collect(Collectors.toList());
+    public String ExpiredIngredientsCSV() {
+        String nameRelatory = "relatorio-ingredientes-vencidos-" + LocalDate.now();
+        List<Ingredient> ingredientsExpired = ingredientRepository.findIngredientExpired(LocalDate.now());
 
-        ListaObj<Ingredient> listObjIngredients = new ListaObj<>(expiredIngredients.size());
-        expiredIngredients.forEach(listObjIngredients::adiciona);
-        ArqCSV.gravaArquivoCsv( listObjIngredients,"Ingrediente-vencidos");
-        return listObjIngredients;
+        ListObject<Ingredient> ingredientsExpiredObject = new ListObject<>(ingredientsExpired.size());
+        ingredientsExpired.forEach(ingredientsExpiredObject::add);
+
+        String relatory = FileCSV.chaseFileCSV(ingredientsExpiredObject, nameRelatory);
+
+        return relatory;
     }
-
 
 
 }
