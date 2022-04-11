@@ -4,8 +4,6 @@ import com.stock.sweet.sweetstockapi.model.enums.LevelAccess;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import javax.persistence.Column;
-
 @Data
 @AllArgsConstructor
 public class UserRequest {

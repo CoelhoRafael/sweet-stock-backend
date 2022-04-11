@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,6 +21,7 @@ public class IngredientResponse {
     private BigDecimal buyValue;
     private Integer provideCode;
     private BigDecimal quantityUsed;
+    private Boolean viewInReports;
     private LocalDate dateInsert;
     private LocalDate dateUpdate;
 }

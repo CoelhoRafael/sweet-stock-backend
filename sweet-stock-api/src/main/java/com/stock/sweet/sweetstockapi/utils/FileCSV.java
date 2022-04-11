@@ -4,7 +4,8 @@ import com.stock.sweet.sweetstockapi.model.Ingredient;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.*;
+import java.util.Formatter;
+import java.util.FormatterClosedException;
 
 public class FileCSV {
 
@@ -12,11 +13,11 @@ public class FileCSV {
         FileWriter file = null;
         Formatter output = null;
         Boolean wasError = false;
-        String relatory = "";
+        String report = "";
 
         nameFile += ".csv";
 
-        String formatColumns = "Id;" +
+        String formatedColumns = "Id;" +
                 "Nome;" +
                 "Quantidade;" +
                 "Validade;" +
@@ -38,15 +39,15 @@ public class FileCSV {
             System.exit(1);
         }
 
-        output.format(formatColumns);
-        relatory += formatColumns;
+        output.format(formatedColumns);
+        report += formatedColumns;
 
         try {
 
             for (int i = 0; i < listOfIngredients.getTamanho(); i++) {
                 Ingredient ingredient = listOfIngredients.getElemento(i);
 
-                relatory += String.format(stringFormatIngredient,
+                report += String.format(stringFormatIngredient,
                         ingredient.getName(),
                         ingredient.getQuantity(),
                         ingredient.getExpirationDate(),
@@ -89,6 +90,6 @@ public class FileCSV {
                 System.exit(1);
             }
         }
-        return relatory;
+        return report;
     }
 }

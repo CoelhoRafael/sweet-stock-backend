@@ -26,15 +26,20 @@ public class IngredientService {
     }
 
     public String ExpiredIngredientsCSV() {
-        String nameRelatory = "relatorio-ingredientes-vencidos-" + LocalDate.now();
+        String nameReport = "relatorio-ingredientes-vencidos-" + LocalDate.now();
         List<Ingredient> ingredientsExpired = ingredientRepository.findIngredientExpired(LocalDate.now());
+
+
+        for (int i = 0; i < ingredientsExpired.size(); i++) {
+            ingredientRepository.updateForTrueExpiratedIngredient(ingredientsExpired.get(i).getUuid());
+        }
 
         ListObject<Ingredient> ingredientsExpiredObject = new ListObject<>(ingredientsExpired.size());
         ingredientsExpired.forEach(ingredientsExpiredObject::add);
 
-        String relatory = FileCSV.chaseFileCSV(ingredientsExpiredObject, nameRelatory);
+        String report = FileCSV.chaseFileCSV(ingredientsExpiredObject, nameReport);
 
-        return relatory;
+        return report;
     }
 
 

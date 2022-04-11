@@ -47,6 +47,7 @@ public class JwtConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/accesses/invite").hasAuthority("ADMINISTRATOR")
                 .antMatchers(HttpMethod.POST, "/ingredients").permitAll()
                 .antMatchers(HttpMethod.GET, "/ingredients/expired").permitAll()
+                .antMatchers(HttpMethod.POST, "/ingredients-reports/create").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(new JwtAuthenticationFilter(authenticationManager(), companyService))

@@ -6,7 +6,7 @@ import com.stock.sweet.sweetstockapi.mapper.ProductMapper;
 import com.stock.sweet.sweetstockapi.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,26 +24,26 @@ public class ProductController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ProductResponse createProduct(@RequestBody ProductRequest body) {
-        return productMapper.convertModelToResponse(
+    public ResponseEntity<ProductResponse> createProduct(@RequestBody ProductRequest body) {
+        return ResponseEntity.status(201).body(productMapper.convertModelToResponse(
                 productService.createProduct(productMapper.convertRequestToModel(body))
-        );
+        ));
     }
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<ProductResponse> getAllProducts() {
-        return productMapper.convertModelListToResponseList(
+    public ResponseEntity<List<ProductResponse>> getAllProducts() {
+        return ResponseEntity.status(200).body(productMapper.convertModelListToResponseList(
                 productService.getAllProducts()
-        );
+        ));
     }
 
     @GetMapping("/{uuid}")
     @ResponseStatus(HttpStatus.OK)
-    public ProductResponse getProductByUuid(@PathVariable UUID uuid) throws Exception {
-        return productMapper.convertModelToResponse(
+    public ResponseEntity<ProductResponse> getProductByUuid(@PathVariable UUID uuid) throws Exception {
+        return ResponseEntity.status(200).body(productMapper.convertModelToResponse(
                 productService.findProductByUuid(uuid.toString())
-        );
+        ));
     }
 
     @PutMapping("/{uuid}")

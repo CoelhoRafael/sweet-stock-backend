@@ -1,6 +1,6 @@
 package com.stock.sweet.sweetstockapi.model;
 
-public class Employee{
+public class Employee {
 //    private String sector;
 //
 //    @Override

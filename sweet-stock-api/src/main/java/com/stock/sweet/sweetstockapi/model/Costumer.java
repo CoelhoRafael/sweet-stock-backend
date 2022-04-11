@@ -1,6 +1,6 @@
 package com.stock.sweet.sweetstockapi.model;
 
-public class Costumer{
+public class Costumer {
 //    private Integer quantityPurchases;
 //
 //    @Override

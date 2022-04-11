@@ -41,11 +41,11 @@ public class IngredientController {
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity getAllExpiredIngredients() {
 
-        return  ResponseEntity
+        return ResponseEntity
                 .status(200)
                 .header("content-type", "text/csv")
                 .header("content-disposition", "filename=\"relatorio-ingredientes-vencidos.csv\"")
                 .body(ingredientService.ExpiredIngredientsCSV());
 
-        }
+    }
 }

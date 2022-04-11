@@ -28,6 +28,8 @@ public class IngredientMapper {
                 LocalDate.now(),
                 LocalDate.now(),
                 ingredientRequest.getNumberLot(),
+                false,
+                true,
                 null
         );
     }
@@ -44,6 +46,7 @@ public class IngredientMapper {
                 ingredient.getBuyValue(),
                 ingredient.getProvideCode(),
                 ingredient.getQuantityUsed(),
+                ingredient.getViewInReports(),
                 ingredient.getDateInsert(),
                 ingredient.getDateUpdate()
         );
@@ -62,6 +65,7 @@ public class IngredientMapper {
                     i.getBuyValue(),
                     i.getProvideCode(),
                     i.getQuantityUsed(),
+                    i.getViewInReports(),
                     i.getDateInsert(),
                     i.getDateUpdate()
             );

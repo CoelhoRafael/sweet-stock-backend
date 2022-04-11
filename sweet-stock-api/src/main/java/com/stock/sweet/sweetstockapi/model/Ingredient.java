@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -60,6 +59,12 @@ public class Ingredient {
 
     @Column(name = "number_lot")
     private Integer numberLot;
+
+    @Column(name = "expirated")
+    private Boolean expirated;
+
+    @Column(name = "view_in_reports")
+    private Boolean viewInReports;
 
     @OneToMany(mappedBy = "ingredient")
     Set<Confection> confections;
