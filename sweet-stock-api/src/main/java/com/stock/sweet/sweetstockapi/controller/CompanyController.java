@@ -1,5 +1,7 @@
 package com.stock.sweet.sweetstockapi.controller;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
 import com.stock.sweet.sweetstockapi.dto.request.CompanyRequest;
 import com.stock.sweet.sweetstockapi.dto.response.CompanyResponse;
 import com.stock.sweet.sweetstockapi.mapper.CompanyMapper;
@@ -10,7 +12,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
+
+import static com.stock.sweet.sweetstockapi.security.JwtAuthenticationFilter.TOKEN_EXPIRATION;
+import static com.stock.sweet.sweetstockapi.security.JwtAuthenticationFilter.TOKEN_PASSWORD;
 
 @RestController
 @RequestMapping("/companies")
@@ -29,7 +36,17 @@ public class CompanyController {
     public ResponseEntity createCompany(@RequestBody CompanyRequest body) {
         var company = companyService.createCompany(companyMapper.convertRequestToModel(body));
         var user = userService.createUser(companyMapper.convertRequestToUserModel(body, company.getId()));
-        return ResponseEntity.status(201).build();
+
+        String token = JWT.create()
+                .withSubject(user.getEmail())
+                .withPayload(Map.of(
+                        "role", user.getLevelAccess(),
+                        "companyId", company.getUuid()
+                ))
+                .withExpiresAt(new Date(System.currentTimeMillis() + TOKEN_EXPIRATION))
+                .sign(Algorithm.HMAC512(TOKEN_PASSWORD));
+
+        return ResponseEntity.status(201).body(token);
     }
 
     @GetMapping
