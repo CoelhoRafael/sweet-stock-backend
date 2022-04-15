@@ -13,7 +13,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "product")
+@Table(name = "tb_product")
 public class Product {
 
     @Id

@@ -11,7 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "product_image")
+@Table(name = "tb_product_image")
 public class ProductImage {
     @Id
     @GeneratedValue(generator = "uuid")

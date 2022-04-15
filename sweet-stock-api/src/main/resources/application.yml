@@ -17,13 +17,20 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+
   datasource:
-    driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/sweetstock
-    username: sweetstock
-    password: sweetstock
+    driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    url: jdbc:sqlserver://sweet-stock.database.windows.net:1433;database=sweet-stock;user=sweet-stock@sweet-stock;password={your_password_here};encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;
+    username: sweet-stock
+    password: Gfgrupo2@
   jpa:
-    hibernate.ddl-auto: create-drop
 #    hibernate.ddl-auto: update
     generate-ddl: true
-    show-sql: false
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      dialect: org.hibernate.dialect.SQLServer2012Dialect
+
+
+
+
