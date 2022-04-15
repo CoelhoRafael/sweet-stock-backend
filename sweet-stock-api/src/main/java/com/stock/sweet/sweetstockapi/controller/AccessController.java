@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/accesses")
+@CrossOrigin(origins = "*")
 public class AccessController {
 
     @Autowired

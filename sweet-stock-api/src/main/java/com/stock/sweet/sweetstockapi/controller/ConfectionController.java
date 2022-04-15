@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/confections")
+@CrossOrigin(origins = "*")
 public class ConfectionController {
 
     @Autowired

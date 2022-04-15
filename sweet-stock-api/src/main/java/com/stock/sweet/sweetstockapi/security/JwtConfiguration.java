@@ -41,7 +41,7 @@ public class JwtConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/product-images").permitAll()
                 .antMatchers(HttpMethod.POST, "/employees").permitAll()
                 .antMatchers(HttpMethod.GET, "/employees").hasAuthority("ADMINISTRATOR")
-                .antMatchers(HttpMethod.GET, "/products").hasAnyAuthority("ADMINISTRATOR", "CUSTOMER")
+                .antMatchers(HttpMethod.GET, "/products").permitAll()
                 .antMatchers(HttpMethod.PUT, "/products").hasAuthority("ADMINISTRATOR")
                 .antMatchers("/provider/**").hasAuthority("ADMINISTRATOR")
                 .antMatchers("/accesses/invite").hasAuthority("ADMINISTRATOR")
@@ -55,7 +55,7 @@ public class JwtConfiguration extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED));
 
     }
-
+/*
     @Bean
     CorsConfigurationSource corsConfiguration() {
         final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -63,5 +63,5 @@ public class JwtConfiguration extends WebSecurityConfigurerAdapter {
         CorsConfiguration corsConfiguration = new CorsConfiguration().applyPermitDefaultValues();
         source.registerCorsConfiguration("/**", corsConfiguration);
         return source;
-    }
+    }*/
 }
