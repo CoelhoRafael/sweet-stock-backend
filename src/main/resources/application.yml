@@ -13,7 +13,7 @@ spring:
         smtp:
           auth: true
           starttls:
-            enable: true 
+            enable: true
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
