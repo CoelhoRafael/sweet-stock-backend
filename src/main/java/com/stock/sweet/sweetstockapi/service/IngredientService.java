@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class IngredientService {
@@ -40,6 +41,19 @@ public class IngredientService {
         String report = FileCSV.chaseFileCSV(ingredientsExpiredObject, nameReport);
 
         return report;
+    }
+
+    public List<Ingredient> getAllIngredientsByCompanyUuid(String uuid) {
+        List<Ingredient> ingredients = ingredientRepository.findAllByUuidCompany(uuid);
+        return ingredients;
+    }
+
+    public List<Ingredient> getAllIngredientsNearExpire(String uuid) {
+        List<Ingredient> ingredients = ingredientRepository.findAllByUuidCompany(uuid);
+
+        ingredients = ingredients.stream().filter(ingredient -> ingredient.getExpirationDate().isAfter(LocalDate.now().minusDays(15)
+        ) || ingredient.getExpirationDate().isEqual(LocalDate.now().minusDays(15))).collect(Collectors.toList());
+        return ingredients;
     }
 
 

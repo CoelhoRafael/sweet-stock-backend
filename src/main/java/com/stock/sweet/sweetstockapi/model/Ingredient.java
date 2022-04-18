@@ -66,6 +66,9 @@ public class Ingredient {
     @Column(name = "view_in_reports")
     private Boolean viewInReports;
 
+    @Column(name = "uuid_company")
+    private String uuidCompany;
+
     @OneToMany(mappedBy = "ingredient")
     Set<Confection> confections;
 

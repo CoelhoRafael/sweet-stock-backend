@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/dashboards")
 public class DashboardController {
+
     @Autowired
     private HeadersUtils headersUtils;
     @GetMapping

@@ -25,7 +25,7 @@ public class IngredientReportService {
     }
 
     public String createIngredientsReportForDays(IngredientReportRequest body){
-        List<Ingredient> ingredientsExpired = ingredientRepository.findExpiredIngredientsForDays(LocalDate.now().plusDays(body.getQuantityDaysForGenerateReport()));
+        List<Ingredient> ingredientsExpired = ingredientRepository.findExpiredIngredientsByDate(LocalDate.now().plusDays(body.getQuantityDaysForGenerateReport()));
 
         String formatedColumns = "Id;" +
                 "Nome;" +
