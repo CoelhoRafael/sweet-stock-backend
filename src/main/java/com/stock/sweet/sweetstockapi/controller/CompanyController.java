@@ -51,7 +51,7 @@ public class CompanyController {
 
         return ResponseEntity.status(201).body(LoginResponse.builder()
                 .token(token)
-                .username(user.getName())
+                .username(company.getCeo())
                 .build()
         );
     }
