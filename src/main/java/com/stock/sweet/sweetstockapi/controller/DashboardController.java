@@ -17,6 +17,6 @@ public class DashboardController {
     @GetMapping
     public ResponseEntity getDashboardData(@RequestHeader HttpHeaders headers) throws JsonProcessingException {
         String uuidCompany = headersUtils.getCompanyIdFromToken(headers.getFirst(HttpHeaders.AUTHORIZATION));
-
+        return null;
     }
 }

@@ -30,7 +30,9 @@ public class IngredientMapper {
                 ingredientRequest.getNumberLot(),
                 false,
                 true,
+                null,
                 null
+
         );
     }
 
