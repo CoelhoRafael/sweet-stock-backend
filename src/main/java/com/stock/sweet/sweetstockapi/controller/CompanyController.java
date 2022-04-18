@@ -4,6 +4,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.stock.sweet.sweetstockapi.dto.request.CompanyRequest;
 import com.stock.sweet.sweetstockapi.dto.response.CompanyResponse;
+import com.stock.sweet.sweetstockapi.dto.response.LoginResponse;
 import com.stock.sweet.sweetstockapi.mapper.CompanyMapper;
 import com.stock.sweet.sweetstockapi.service.CompanyService;
 import com.stock.sweet.sweetstockapi.service.UserService;
@@ -21,7 +22,7 @@ import static com.stock.sweet.sweetstockapi.security.JwtAuthenticationFilter.TOK
 
 @RestController
 @RequestMapping("/companies")
-@CrossOrigin(origins = "*",allowedHeaders = "*",methods =RequestMethod.POST)
+@CrossOrigin(origins = "*", allowedHeaders = "*", methods = RequestMethod.POST)
 public class CompanyController {
 
     @Autowired
@@ -47,7 +48,12 @@ public class CompanyController {
                 .withExpiresAt(new Date(System.currentTimeMillis() + TOKEN_EXPIRATION))
                 .sign(Algorithm.HMAC512(TOKEN_PASSWORD));
 
-        return ResponseEntity.status(201).body(token);
+
+        return ResponseEntity.status(201).body(LoginResponse.builder()
+                .token(token)
+                .username(user.getName())
+                .build()
+        );
     }
 
     @GetMapping

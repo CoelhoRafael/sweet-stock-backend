@@ -3,7 +3,9 @@ package com.stock.sweet.sweetstockapi.security;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import com.stock.sweet.sweetstockapi.dto.request.UserLogin;
+import com.stock.sweet.sweetstockapi.dto.response.LoginResponse;
 import com.stock.sweet.sweetstockapi.security.data.UserDetailsData;
 import com.stock.sweet.sweetstockapi.service.CompanyService;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,6 +19,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
@@ -68,7 +71,15 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .withExpiresAt(new Date(System.currentTimeMillis() + TOKEN_EXPIRATION))
                 .sign(Algorithm.HMAC512(TOKEN_PASSWORD));
 
-        response.getWriter().write(token);
+        String json = new Gson().toJson(LoginResponse.builder()
+                .token(token)
+                .username(userDetailsData.getUser().get().getName())
+                .build());
+
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+
+        response.getWriter().write(json);
         response.getWriter().flush();
     }
 }
