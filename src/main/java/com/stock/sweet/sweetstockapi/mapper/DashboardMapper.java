@@ -1,12 +1,16 @@
 package com.stock.sweet.sweetstockapi.mapper;
 
 import com.stock.sweet.sweetstockapi.dto.response.dashboard.CardResponse;
-import com.stock.sweet.sweetstockapi.dto.response.ChartResponse;
+import com.stock.sweet.sweetstockapi.dto.response.dashboard.ChartResponse;
 import com.stock.sweet.sweetstockapi.dto.response.dashboard.DashboardResponse;
+import com.stock.sweet.sweetstockapi.dto.response.dashboard.chart.ChartMonthItem;
+import com.stock.sweet.sweetstockapi.dto.response.dashboard.chart.IngredientDashboardResponse;
+import com.stock.sweet.sweetstockapi.dto.response.dashboard.chart.NearExpireIngredients;
 import com.stock.sweet.sweetstockapi.model.Ingredient;
 import com.stock.sweet.sweetstockapi.model.OutStock;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Component
@@ -22,7 +26,7 @@ public class DashboardMapper {
 
         return DashboardResponse
                 .builder()
-                .cardResponse(
+                .cards(
                         CardResponse.builder()
                                 .nearEndIngredients(nearEndIngredients.size())
                                 .productsSoldMonth(productsSoldMonth.size())
@@ -33,10 +37,28 @@ public class DashboardMapper {
                                         .sum())
                                 .build()
                 )
-                .chartsResponse(
+                .chart(
                         ChartResponse
                                 .builder()
+                                .chartMonthItem(List.of(ChartMonthItem.builder().build()))
                                 .build()
+                )
+                .nearExpireIngredients(
+                        List.of(
+                                NearExpireIngredients.builder()
+                                        .date(LocalDate.now())
+                                        .items(
+                                                List.of(
+                                                        IngredientDashboardResponse.builder().build()
+                                                )
+                                        )
+                                        .build()
+                        )
+                )
+                .nearEndIngredients(
+                        List.of(
+                                IngredientDashboardResponse.builder().build()
+                        )
                 )
                 .build();
     }

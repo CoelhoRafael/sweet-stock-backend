@@ -1,4 +1,4 @@
-package com.stock.sweet.sweetstockapi.dto.response;
+package com.stock.sweet.sweetstockapi.dto.response.dashboard.chart;
 
 import lombok.Builder;
 import lombok.Data;

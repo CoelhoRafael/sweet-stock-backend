@@ -1,6 +1,6 @@
 package com.stock.sweet.sweetstockapi.dto.response.dashboard;
 
-import com.stock.sweet.sweetstockapi.dto.response.IngredientDashboardResponse;
+import com.stock.sweet.sweetstockapi.dto.response.dashboard.chart.IngredientDashboardResponse;
 import lombok.Builder;
 import lombok.Data;
 
