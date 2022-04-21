@@ -32,7 +32,6 @@ public class IngredientMapper {
                 true,
                 ingredientRequest.getUuidCompany(),
                 null
-
         );
     }
 

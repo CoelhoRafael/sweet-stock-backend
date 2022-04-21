@@ -56,5 +56,17 @@ public class IngredientService {
         return ingredients;
     }
 
+    public List<Ingredient> getExpiredIngredients() {
+        return ingredientRepository.findAll()
+                .stream()
+                .filter(ingredient -> ingredient.getExpirationDate().isBefore(LocalDate.now()))
+                .collect(Collectors.toList());
+    }
 
+    public List<Ingredient> getIngredientsCurrentMonth() {
+        return ingredientRepository.findAll()
+                .stream()
+                .filter(ingredient -> ingredient.getDateInsert().withDayOfMonth(1).equals(LocalDate.now().withDayOfMonth(1)))
+                .collect(Collectors.toList());
+    }
 }

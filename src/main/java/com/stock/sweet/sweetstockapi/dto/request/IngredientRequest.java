@@ -22,4 +22,5 @@ public class IngredientRequest {
     private BigDecimal quantityUsed;
     private Integer numberLot;
     private String uuidCompany;
+
 }

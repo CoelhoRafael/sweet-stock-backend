@@ -1,21 +1,13 @@
 package com.stock.sweet.sweetstockapi.dto.response;
 
+import com.stock.sweet.sweetstockapi.dto.response.dashboard.chart.ChartMonthItem;
 import lombok.Builder;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 @Builder
 public class ChartResponse {
-    private Double january;
-    private Double february;
-    private Double march;
-    private Double april;
-    private Double may;
-    private Double june;
-    private Double july;
-    private Double august;
-    private Double september;
-    private Double october;
-    private Double november;
-    private Double december;
+    private List<ChartMonthItem> chartMonthItem;
 }

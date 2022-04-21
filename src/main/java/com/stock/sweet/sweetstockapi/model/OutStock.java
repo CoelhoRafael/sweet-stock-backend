@@ -31,6 +31,12 @@ public class OutStock {
     @Column(name = "is_expired_product")
     private Boolean isExpiredProduct;
 
-    @Column(name = "product_id")
-    private Integer productId;
+    @Column(name = "id_company")
+    private String idCompany;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_product", referencedColumnName = "id")
+    private Product product;
+
+
 }

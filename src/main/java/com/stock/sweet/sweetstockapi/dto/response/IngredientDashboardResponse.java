@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 @Builder
 public class IngredientDashboardResponse {
+    private String uuid;
     private String name;
-    private Integer quantity;
-
+    private Integer amount;
 }
