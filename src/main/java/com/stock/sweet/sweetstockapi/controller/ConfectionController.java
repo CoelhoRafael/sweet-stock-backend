@@ -4,6 +4,7 @@ import com.stock.sweet.sweetstockapi.dto.request.ConfectionRequest;
 import com.stock.sweet.sweetstockapi.dto.response.ConfectionResponse;
 import com.stock.sweet.sweetstockapi.mapper.ConfectionMapper;
 import com.stock.sweet.sweetstockapi.service.ConfectionService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/confections")
 @CrossOrigin(origins = "*")
+@SecurityRequirement(name = "bearerAuth")
 public class ConfectionController {
 
     @Autowired

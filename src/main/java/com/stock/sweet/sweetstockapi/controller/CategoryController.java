@@ -4,6 +4,7 @@ import com.stock.sweet.sweetstockapi.dto.request.CategoryRequest;
 import com.stock.sweet.sweetstockapi.dto.response.CategoryResponse;
 import com.stock.sweet.sweetstockapi.mapper.CategoryMapper;
 import com.stock.sweet.sweetstockapi.service.CategoryService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/categories")
 @CrossOrigin(origins = "*")
+@SecurityRequirement(name = "bearerAuth")
 public class CategoryController {
 
     @Autowired

@@ -24,14 +24,12 @@ spring:
     username: sweet-stock
     password: Gfgrupo2@
   jpa:
-#    hibernate.ddl-auto: update
+    #    hibernate.ddl-auto: update
     generate-ddl: true
-#    show-sql: true
+    #    show-sql: true
     hibernate:
       ddl-auto: update
       dialect: org.hibernate.dialect.SQLServer2012Dialect
 
   main:
     allow-bean-definition-overriding: true
-
-

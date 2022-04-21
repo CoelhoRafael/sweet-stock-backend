@@ -4,6 +4,7 @@ import com.stock.sweet.sweetstockapi.dto.request.AddressRequest;
 import com.stock.sweet.sweetstockapi.dto.response.AddressResponse;
 import com.stock.sweet.sweetstockapi.mapper.AddressMapper;
 import com.stock.sweet.sweetstockapi.service.AddressService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/adresses")
 @CrossOrigin(origins = "*")
+@SecurityRequirement(name = "bearerAuth")
 public class AddressController {
 
     @Autowired

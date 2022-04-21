@@ -1,6 +1,7 @@
 package com.stock.sweet.sweetstockapi.controller;
 
 import com.stock.sweet.sweetstockapi.service.ProductImageService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import java.io.IOException;
 @RestController
 @RequestMapping("/")
 @CrossOrigin(origins = "*")
+@SecurityRequirement(name = "bearerAuth")
 public class ProductImageController {
     @Autowired
     private ProductImageService productImageService;

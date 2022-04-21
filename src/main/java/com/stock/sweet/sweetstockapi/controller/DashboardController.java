@@ -7,6 +7,7 @@ import com.stock.sweet.sweetstockapi.service.IngredientService;
 import com.stock.sweet.sweetstockapi.service.OutStockService;
 import com.stock.sweet.sweetstockapi.service.ProductService;
 import com.stock.sweet.sweetstockapi.utils.HeadersUtils;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/dashboards")
+@SecurityRequirement(name = "bearerAuth")
 public class DashboardController {
 
     @Autowired

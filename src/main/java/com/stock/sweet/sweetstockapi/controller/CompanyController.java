@@ -8,6 +8,7 @@ import com.stock.sweet.sweetstockapi.dto.response.LoginResponse;
 import com.stock.sweet.sweetstockapi.mapper.CompanyMapper;
 import com.stock.sweet.sweetstockapi.service.CompanyService;
 import com.stock.sweet.sweetstockapi.service.UserService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,7 @@ import static com.stock.sweet.sweetstockapi.security.JwtAuthenticationFilter.TOK
 @RestController
 @RequestMapping("/companies")
 @CrossOrigin(origins = "*", allowedHeaders = "*", methods = RequestMethod.POST)
+@SecurityRequirement(name = "bearerAuth")
 public class CompanyController {
 
     @Autowired
