@@ -1,5 +1,6 @@
 package com.stock.sweet.sweetstockapi.dto.response.dashboard;
 
+import com.stock.sweet.sweetstockapi.dto.response.dashboard.chart.ChartMonthItem;
 import com.stock.sweet.sweetstockapi.dto.response.dashboard.chart.IngredientDashboardResponse;
 import com.stock.sweet.sweetstockapi.dto.response.dashboard.chart.NearExpireIngredients;
 import lombok.Builder;
@@ -11,7 +12,7 @@ import java.util.List;
 @Builder
 public class DashboardResponse {
     private CardResponse cards;
-    private ChartResponse chart;
+    private List<ChartMonthItem> chart;
     private List<NearExpireIngredients> nearExpireIngredients;
     private List<IngredientDashboardResponse> nearEndIngredients;
 }

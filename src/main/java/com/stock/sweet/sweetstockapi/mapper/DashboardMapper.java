@@ -1,7 +1,6 @@
 package com.stock.sweet.sweetstockapi.mapper;
 
 import com.stock.sweet.sweetstockapi.dto.response.dashboard.CardResponse;
-import com.stock.sweet.sweetstockapi.dto.response.dashboard.ChartResponse;
 import com.stock.sweet.sweetstockapi.dto.response.dashboard.DashboardResponse;
 import com.stock.sweet.sweetstockapi.dto.response.dashboard.chart.ChartMonthItem;
 import com.stock.sweet.sweetstockapi.dto.response.dashboard.chart.IngredientDashboardResponse;
@@ -37,11 +36,7 @@ public class DashboardMapper {
                                         .sum())
                                 .build()
                 )
-                .chart(
-                        ChartResponse
-                                .builder()
-                                .chartMonthItem(List.of(ChartMonthItem.builder().build()))
-                                .build()
+                .chart(List.of(ChartMonthItem.builder().build())
                 )
                 .nearExpireIngredients(
                         List.of(

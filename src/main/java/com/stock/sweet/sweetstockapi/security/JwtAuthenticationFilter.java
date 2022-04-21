@@ -26,7 +26,7 @@ import java.util.Map;
 
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
-    public static final int TOKEN_EXPIRATION = 600_000;
+    public static final int TOKEN_EXPIRATION = 86_400_000;
     public static final String TOKEN_PASSWORD = "506501fb-82f6-4795-ae28-d2805ce94c20";
 
     private final AuthenticationManager authenticationManager;
