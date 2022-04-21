@@ -22,10 +22,6 @@ public class IngredientService {
         return ingredientRepository.save(ingredient);
     }
 
-    public List<Ingredient> getAllIngredients() {
-        return ingredientRepository.findAll();
-    }
-
     public String ExpiredIngredientsCSV() {
         String nameReport = "relatorio-ingredientes-vencidos-" + LocalDate.now();
         List<Ingredient> ingredientsExpired = ingredientRepository.findIngredientExpired(LocalDate.now());
@@ -56,15 +52,19 @@ public class IngredientService {
         return ingredients;
     }
 
-    public List<Ingredient> getExpiredIngredients() {
-        return ingredientRepository.findAll()
+    public List<Ingredient> getExpiredIngredients(String uuid) {
+        return ingredientRepository.findAllByUuidCompany(uuid)
                 .stream()
                 .filter(ingredient -> ingredient.getExpirationDate().isBefore(LocalDate.now()))
                 .collect(Collectors.toList());
     }
 
-    public List<Ingredient> getIngredientsCurrentMonth() {
-        return ingredientRepository.findAll()
+    public List<Ingredient> getAllIngredients(String uuid) {
+        return ingredientRepository.findAllByUuidCompany(uuid);
+    }
+
+    public List<Ingredient> getIngredientsCurrentMonth(String uuid) {
+        return ingredientRepository.findAllByUuidCompany(uuid)
                 .stream()
                 .filter(ingredient -> ingredient.getDateInsert().withDayOfMonth(1).equals(LocalDate.now().withDayOfMonth(1)))
                 .collect(Collectors.toList());

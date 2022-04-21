@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
@@ -28,7 +29,7 @@ public class Product {
     private String name;
 
     @Column(name = "sale_value")
-    private String saleValue;
+    private BigDecimal saleValue;
 
     @Column(name = "expiration_date")
     private Date expirationDate;

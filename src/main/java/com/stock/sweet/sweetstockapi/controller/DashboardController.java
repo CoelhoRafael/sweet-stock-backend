@@ -44,9 +44,10 @@ public class DashboardController {
         DashboardResponse dashboardResponse = dashboardMapper.convertToDashboardResponse(
                 ingredientService.getAllIngredientsNearExpire(uuidCompany),
                 outStockService.getOutStockCurrentMonth(uuidCompany),
-                ingredientService.getExpiredIngredients(),
-                ingredientService.getIngredientsCurrentMonth(),
-                ingredientService.getAllIngredients()
+                ingredientService.getExpiredIngredients(uuidCompany),
+                ingredientService.getIngredientsCurrentMonth(uuidCompany),
+                ingredientService.getAllIngredients(uuidCompany),
+                outStockService.getAllOutStockNonExpiredProduct(uuidCompany)
         );
 
         return ResponseEntity.status(200).body(dashboardResponse);

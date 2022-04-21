@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 @Component
 public class IngredientMapper {
-    public Ingredient convertRequestToModel(IngredientRequest ingredientRequest) {
+    public Ingredient convertRequestToModel(IngredientRequest ingredientRequest, String uuidCompany) {
         return new Ingredient(
                 null,
                 UUID.randomUUID().toString(),
@@ -30,7 +30,7 @@ public class IngredientMapper {
                 ingredientRequest.getNumberLot(),
                 false,
                 true,
-                ingredientRequest.getUuidCompany(),
+                uuidCompany,
                 null
         );
     }
