@@ -46,7 +46,7 @@ public class CompanyMapper {
         return User
                 .builder()
                 .uuid(UUID.randomUUID().toString())
-                .name(companyRequest.getName())
+                .name(companyRequest.getCeo())
                 .email(companyRequest.getEmail())
                 .levelAccess(LevelAccess.ADMINISTRATOR.name())
                 .telephoneNumber(companyRequest.getTelephoneNumber())
