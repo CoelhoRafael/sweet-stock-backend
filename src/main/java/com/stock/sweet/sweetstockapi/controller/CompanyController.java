@@ -7,6 +7,7 @@ import com.stock.sweet.sweetstockapi.dto.response.CompanyResponse;
 import com.stock.sweet.sweetstockapi.dto.response.LoginResponse;
 import com.stock.sweet.sweetstockapi.mapper.CompanyMapper;
 import com.stock.sweet.sweetstockapi.service.CompanyService;
+import com.stock.sweet.sweetstockapi.service.EmailService;
 import com.stock.sweet.sweetstockapi.service.UserService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -36,8 +38,11 @@ public class CompanyController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private EmailService emailService;
+
     @PostMapping
-    public ResponseEntity createCompany(@RequestBody CompanyRequest body) {
+    public ResponseEntity createCompany(@RequestBody CompanyRequest body) throws MessagingException {
         var company = companyService.createCompany(companyMapper.convertRequestToModel(body));
         var user = userService.createUser(companyMapper.convertRequestToUserModel(body, company.getId()));
 
@@ -49,6 +54,7 @@ public class CompanyController {
                 ))
                 .withExpiresAt(new Date(System.currentTimeMillis() + TOKEN_EXPIRATION))
                 .sign(Algorithm.HMAC512(TOKEN_PASSWORD));
+
 
 
         return ResponseEntity.status(201).body(LoginResponse.builder()

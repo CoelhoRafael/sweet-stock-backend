@@ -8,5 +8,5 @@ import lombok.Data;
 public class IngredientDashboardResponse {
     private String uuid;
     private String name;
-    private Integer amount;
+    private Double amount;
 }

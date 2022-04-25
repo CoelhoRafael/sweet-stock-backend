@@ -9,7 +9,6 @@ import com.stock.sweet.sweetstockapi.model.Ingredient;
 import com.stock.sweet.sweetstockapi.model.OutStock;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +18,7 @@ import java.util.stream.Collectors;
 public class DashboardMapper {
 
     public DashboardResponse convertToDashboardResponse(
-            List<Ingredient> nearEndIngredients,
+            List<Ingredient> nearExpireIngredients,
             List<OutStock> productsSoldMonth,
             List<Ingredient> expiredIngredients,
             List<Ingredient> monthExpenses,
@@ -32,7 +31,7 @@ public class DashboardMapper {
                 .builder()
                 .cards(
                         CardResponse.builder()
-                                .nearEndIngredients(nearEndIngredients.size())
+                                .nearEndIngredients(nearExpireIngredients.size())
                                 .productsSoldMonth(productsSoldMonth.size())
                                 .expiredIngredients(expiredIngredients.size())
                                 .monthExpenses(monthExpenses
@@ -42,23 +41,8 @@ public class DashboardMapper {
                                 .build()
                 )
                 .chart(generateChart(allIngredients, allOutStock))
-                .nearExpireIngredients(
-                        List.of(
-                                NearExpireIngredients.builder()
-                                        .date(LocalDate.now())
-                                        .items(
-                                                List.of(
-                                                        IngredientDashboardResponse.builder().build()
-                                                )
-                                        )
-                                        .build()
-                        )
-                )
-                .nearEndIngredients(
-                        List.of(
-                                IngredientDashboardResponse.builder().build()
-                        )
-                )
+                .nearExpireIngredients(x(nearExpireIngredients))
+                .nearEndIngredients(getNearEndIngredients(allIngredients))
                 .build();
     }
 
@@ -110,5 +94,63 @@ public class DashboardMapper {
         });
 
         return chartMonthList;
+    }
+
+
+    public List<NearExpireIngredients> x(List<Ingredient> ingredients) {
+        List<NearExpireIngredients> y = new ArrayList<>();
+
+        var a = ingredients
+                .stream()
+                .map(i -> IngredientDashboardResponse
+                        .builder()
+                        .uuid(i.getUuid())
+                        .amount(i.getQuantity().doubleValue())
+                        .name(i.getName())
+                        .build()
+                ).collect(Collectors.toList());
+
+        var batatinha =
+                ingredients.stream().map(
+                        i -> {
+                            i.getDateInsert().withDayOfMonth(1);
+                            return i;
+                        }
+                ).collect(Collectors.groupingBy(Ingredient::getExpirationDate));
+
+        batatinha.forEach((date, ingredients1) -> {
+            y.add(NearExpireIngredients
+                    .builder()
+                    .date(date)
+                    .items(
+                            ingredients1.
+                                    stream()
+                                    .map(i -> IngredientDashboardResponse
+                                            .builder()
+                                            .uuid(i.getUuid())
+                                            .amount(i.getQuantity().doubleValue())
+                                            .name(i.getName())
+                                            .build()
+                                    )
+                                    .collect(Collectors.toList())
+                    )
+                    .build());
+        });
+
+        return y;
+    }
+
+    public List<IngredientDashboardResponse> getNearEndIngredients(List<Ingredient> ingredients) {
+        return ingredients
+                .stream()
+                .filter(ingredient -> ingredient.getQuantityUsed().doubleValue()
+                        >= (.75 * ingredient.getQuantity().doubleValue()))
+                .map(i -> IngredientDashboardResponse
+                        .builder()
+                        .uuid(i.getUuid())
+                        .amount(i.getQuantity().doubleValue())
+                        .name(i.getName())
+                        .build())
+                .collect(Collectors.toList());
     }
 }
