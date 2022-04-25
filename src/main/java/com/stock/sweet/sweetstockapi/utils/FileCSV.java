@@ -17,7 +17,7 @@ public class FileCSV {
 
         nameFile += ".csv";
 
-        String formatedColumns = "Id;" +
+        String formatedColumns =
                 "Nome;" +
                 "Quantidade;" +
                 "Validade;" +
@@ -48,6 +48,7 @@ public class FileCSV {
                 Ingredient ingredient = listOfIngredients.getElemento(i);
 
                 report += String.format(stringFormatIngredient,
+
                         ingredient.getName(),
                         ingredient.getQuantity(),
                         ingredient.getExpirationDate(),
@@ -61,6 +62,7 @@ public class FileCSV {
                 );
 
                 output.format(stringFormatIngredient,
+                      
                         ingredient.getName(),
                         ingredient.getQuantity(),
                         ingredient.getExpirationDate(),
