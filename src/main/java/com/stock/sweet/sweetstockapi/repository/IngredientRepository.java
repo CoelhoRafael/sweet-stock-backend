@@ -26,4 +26,6 @@ public interface IngredientRepository extends JpaRepository<Ingredient, Integer>
 
     List<Ingredient> findAllByUuidCompany(String uuid);
 
+    List<Ingredient> findAllByNumberLot(Integer number);
+
 }
