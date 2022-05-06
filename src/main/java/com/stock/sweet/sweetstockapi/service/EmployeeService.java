@@ -1,8 +1,8 @@
 package com.stock.sweet.sweetstockapi.service;
 
-import com.stock.sweet.sweetstockapi.model.Company;
-import com.stock.sweet.sweetstockapi.model.Email;
-import com.stock.sweet.sweetstockapi.model.User;
+import com.stock.sweet.sweetstockapi.dto.request.ProviderRequest;
+import com.stock.sweet.sweetstockapi.dto.request.UserRequest;
+import com.stock.sweet.sweetstockapi.model.*;
 import com.stock.sweet.sweetstockapi.model.enums.LevelAccess;
 import com.stock.sweet.sweetstockapi.repository.CompanyRepository;
 import com.stock.sweet.sweetstockapi.repository.UserRepository;
@@ -56,6 +56,37 @@ public class EmployeeService {
             );
         }
         return null;
+    }
+
+
+    public List<User>getUserByUuid(String uuid){
+        List<User> users = userRepository.findAllByCompany_Uuid(uuid);
+
+        return users;
+    }
+
+    public User deleteUserByUuidAndId(String uuid, Integer id){
+       return userRepository.deleteUserByCompanyUuidAndId(uuid, id);
+    }
+    public User getUserByUuidAndId(String uuid, Integer id){
+        return userRepository.findUserByCompany_UuidAndId(uuid, id);
+    }
+
+    public User updateUser(String uuid, Integer id, UserRequest userRequest) throws Exception {
+        User userToUpdate = getUserByUuidAndId(uuid, id);
+
+        if (userToUpdate == null) {
+            return null;
+        }
+        userToUpdate.setName(userRequest.getName());
+        userToUpdate.setEmail(userRequest.getEmail());
+        userToUpdate.setPassword(userRequest.getPassword());
+        userToUpdate.setLevelAccess(String.valueOf(userRequest.getLevelAccess()));
+        userToUpdate.setTelephoneNumber(userRequest.getTelephoneNumber());
+
+      userRepository.save(userToUpdate);
+
+        return userToUpdate;
     }
 
 

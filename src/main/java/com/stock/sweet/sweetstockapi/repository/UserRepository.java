@@ -15,5 +15,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByEmail(String username);
 
     List<User> findAllByLevelAccessAndCompany(String accessLevel, Company company);
+    List<User> findAllByCompany_Uuid(String uuid);
+    User findUserByCompany_UuidAndId(String uuid,Integer id );
+    User deleteUserByCompanyUuidAndId(String uuid,Integer id);
 
 }

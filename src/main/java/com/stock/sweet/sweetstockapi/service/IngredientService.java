@@ -52,6 +52,7 @@ public class IngredientService {
         return ingredients;
     }
 
+
     public List<Ingredient> getAllIngredientsNearExpire(String uuid) {
 
         List<Ingredient> ingredients = ingredientRepository.findAllByUuidCompany(uuid);
