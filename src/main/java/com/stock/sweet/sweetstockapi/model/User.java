@@ -42,4 +42,7 @@ public class User {
     @JoinColumn(name = "fk_company", referencedColumnName = "id")
     private Company company;
 
+    @Column(name = "aproved")
+    private boolean aproved;
+
 }

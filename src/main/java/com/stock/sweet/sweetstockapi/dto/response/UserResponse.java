@@ -13,4 +13,5 @@ public class UserResponse {
     private String email;
     private String telephoneNumber;
     private String levelAccess;
+    private boolean aproved;
 }

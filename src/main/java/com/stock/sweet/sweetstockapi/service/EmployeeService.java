@@ -98,4 +98,20 @@ public class EmployeeService {
         }
         return new ArrayList<>();
     }
+
+    public List<User> getUsersWaitingAcept(String uuidCompany){
+        List<User> employeesAproved = userRepository.findAllEmployeeAproved(uuidCompany);
+
+        return employeesAproved;
+    }
+
+    public List<User> getAllUsers(String uuidCompany){
+        List<User> employees = userRepository.findAllEmployeesByCompany(uuidCompany);
+
+        return employees;
+    }
+
+    public void toApproveEmployees(String uuid, List<String> employeesToApprove) {
+        userRepository.toApproveEmployees(uuid, employeesToApprove);
+    }
 }

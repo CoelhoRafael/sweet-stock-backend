@@ -1,7 +1,10 @@
 package com.stock.sweet.sweetstockapi.mapper;
 
 import com.stock.sweet.sweetstockapi.dto.request.EmployeRequest;
+import com.stock.sweet.sweetstockapi.dto.response.IngredientResponse;
 import com.stock.sweet.sweetstockapi.dto.response.UserResponse;
+import com.stock.sweet.sweetstockapi.model.Employee;
+import com.stock.sweet.sweetstockapi.model.Ingredient;
 import com.stock.sweet.sweetstockapi.model.User;
 import com.stock.sweet.sweetstockapi.model.enums.LevelAccess;
 import org.springframework.stereotype.Component;
@@ -21,7 +24,8 @@ public class EmployeeMapper {
                 employeRequest.getPassword(),
                 employeRequest.getTelephoneNumber(),
                 LevelAccess.EMPLOYEE_NOT_VERIFIED.name(),
-                null
+                null,
+                false
         );
     }
 
@@ -35,5 +39,18 @@ public class EmployeeMapper {
                         .levelAccess(user.getLevelAccess())
                         .build()
         ).collect(Collectors.toList());
+    }
+
+    public List<UserResponse> convertModelListToResponseList(List<User> users) {
+        return users.stream().map(u -> {
+            return new UserResponse(
+                    u.getUuid(),
+                    u.getName(),
+                    u.getEmail(),
+                    u.getTelephoneNumber(),
+                    u.getLevelAccess(),
+                    u.isAproved()
+            );
+        }).collect(Collectors.toList());
     }
 }
