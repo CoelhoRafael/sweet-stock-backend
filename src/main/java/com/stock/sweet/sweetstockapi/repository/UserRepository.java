@@ -21,7 +21,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     List<User> findAllByCompany_Uuid(String uuid);
 
-    User findUserByCompany_UuidAndId(String uuid,Integer id );
+    User findUserByUuid(String uuid);
 
     User deleteUserByCompanyUuidAndId(String uuid,Integer id);
 

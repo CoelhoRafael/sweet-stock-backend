@@ -68,12 +68,12 @@ public class EmployeeService {
     public User deleteUserByUuidAndId(String uuid, Integer id){
        return userRepository.deleteUserByCompanyUuidAndId(uuid, id);
     }
-    public User getUserByUuidAndId(String uuid, Integer id){
-        return userRepository.findUserByCompany_UuidAndId(uuid, id);
+    public User getUserByUuidAndId(String uuid){
+        return userRepository.findUserByUuid(uuid);
     }
 
     public User updateUser(String uuid, Integer id, UserRequest userRequest) throws Exception {
-        User userToUpdate = getUserByUuidAndId(uuid, id);
+        User userToUpdate = getUserByUuidAndId(uuid);
 
         if (userToUpdate == null) {
             return null;

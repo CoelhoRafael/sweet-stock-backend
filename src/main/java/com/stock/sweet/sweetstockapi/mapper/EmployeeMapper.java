@@ -1,8 +1,10 @@
 package com.stock.sweet.sweetstockapi.mapper;
 
 import com.stock.sweet.sweetstockapi.dto.request.EmployeRequest;
+import com.stock.sweet.sweetstockapi.dto.response.CategoryResponse;
 import com.stock.sweet.sweetstockapi.dto.response.IngredientResponse;
 import com.stock.sweet.sweetstockapi.dto.response.UserResponse;
+import com.stock.sweet.sweetstockapi.model.Category;
 import com.stock.sweet.sweetstockapi.model.Employee;
 import com.stock.sweet.sweetstockapi.model.Ingredient;
 import com.stock.sweet.sweetstockapi.model.User;
@@ -28,6 +30,16 @@ public class EmployeeMapper {
                 false
         );
     }
+    public UserResponse convertModelToResponse(User user) {
+        return new UserResponse(
+              user.getUuid(),
+                user.getName(),
+                user.getEmail(),
+                user.getTelephoneNumber(),
+                user.getLevelAccess(),
+                user.isAproved()
+        );
+    }
 
     public List<UserResponse> convertListModelToResponse(List<User> allWaitingApproval) {
         return allWaitingApproval.stream().map(user ->
@@ -40,6 +52,7 @@ public class EmployeeMapper {
                         .build()
         ).collect(Collectors.toList());
     }
+
 
     public List<UserResponse> convertModelListToResponseList(List<User> users) {
         return users.stream().map(u -> {
