@@ -19,7 +19,8 @@ public class UserMapper {
                 userRequest.getPassword(),
                 userRequest.getTelephoneNumber(),
                 userRequest.getLevelAccess().name(),
-                null
+                null,
+                false
         );
     }
 }
