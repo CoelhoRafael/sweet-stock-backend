@@ -29,7 +29,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     List<User> findAllEmployeeAproved(String uuid);
 
     @Query("select u from User u inner join Company c where c.uuid = ?1")
-    List<User> findAllEmployeesByCompany(String uuid);
+    List<User> xxx(String uuid);
 
     @Transactional
     @Modifying

@@ -1,6 +1,5 @@
 package com.stock.sweet.sweetstockapi.service;
 
-import com.stock.sweet.sweetstockapi.dto.request.ProviderRequest;
 import com.stock.sweet.sweetstockapi.dto.request.UserRequest;
 import com.stock.sweet.sweetstockapi.model.*;
 import com.stock.sweet.sweetstockapi.model.enums.LevelAccess;
@@ -106,7 +105,7 @@ public class EmployeeService {
     }
 
     public List<User> getAllUsers(String uuidCompany){
-        List<User> employees = userRepository.findAllEmployeesByCompany(uuidCompany);
+        List<User> employees = userRepository.xxx(uuidCompany);
 
         return employees;
     }

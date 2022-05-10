@@ -80,7 +80,7 @@ public class EmployeeController {
 
 
 
-    @GetMapping("/not-aproved")
+    @GetMapping("/not-approved")
     public ResponseEntity<List<UserResponse>> getAllEmployeesNotAproved(@RequestHeader HttpHeaders headers) throws JsonProcessingException {
         var uuidCompany = headersUtils.getCompanyIdFromToken(headers.getFirst(HttpHeaders.AUTHORIZATION));
 
