@@ -98,14 +98,14 @@ public class EmployeeService {
         return new ArrayList<>();
     }
 
-    public List<User> getUsersWaitingAcept(String uuidCompany){
-        List<User> employeesAproved = userRepository.findAllEmployeeAproved(uuidCompany);
+    public List<User> getUsersWaitingAcept(String levelAccess, String uuidCompany){
+        List<User> employeesAproved = userRepository.findAllByAprovedIsFalseAndLevelAccessAndCompanyUuid(levelAccess, uuidCompany);
 
         return employeesAproved;
     }
 
-    public List<User> getAllUsers(String uuidCompany){
-        List<User> employees = userRepository.xxx(uuidCompany);
+    public List<User> getAllUsers(String levelAccess, String uuidCompany){
+        List<User> employees = userRepository.findAllByAprovedIsTrueAndLevelAccessAndCompanyUuid(levelAccess, uuidCompany);
 
         return employees;
     }

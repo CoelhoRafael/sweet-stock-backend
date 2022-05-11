@@ -31,6 +31,12 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query("select u from User u inner join Company c where c.uuid = ?1")
     List<User> xxx(String uuid);
 
+
+
+    List<User> findAllByAprovedIsTrueAndLevelAccessAndCompanyUuid( String levelAccess, String uuid);
+
+    List<User> findAllByAprovedIsFalseAndLevelAccessAndCompanyUuid( String levelAccess, String uuid);
+
     @Transactional
     @Modifying
     @Query("update User u set u.aproved = true where (select c.uuid from Company c where c.uuid = ?1) = ?1 and u.uuid in (?2)")

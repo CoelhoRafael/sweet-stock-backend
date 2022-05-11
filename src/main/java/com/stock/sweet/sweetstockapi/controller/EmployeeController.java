@@ -10,6 +10,7 @@ import com.stock.sweet.sweetstockapi.dto.response.UserResponse;
 import com.stock.sweet.sweetstockapi.mapper.EmployeeMapper;
 import com.stock.sweet.sweetstockapi.model.Employee;
 import com.stock.sweet.sweetstockapi.model.User;
+import com.stock.sweet.sweetstockapi.model.enums.LevelAccess;
 import com.stock.sweet.sweetstockapi.service.EmployeeService;
 import com.stock.sweet.sweetstockapi.utils.HeadersUtils;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -73,7 +74,7 @@ public class EmployeeController {
 
         return ResponseEntity.status(200).body(
                 employeeMapper.convertModelListToResponseList(
-                        employeeService.getAllUsers(uuidCompany)
+                        employeeService.getAllUsers(LevelAccess.EMPLOYEE.name(), uuidCompany)
                 )
         );
     }
@@ -86,7 +87,7 @@ public class EmployeeController {
 
         return ResponseEntity.status(200).body(
                 employeeMapper.convertModelListToResponseList(
-                        employeeService.getUsersWaitingAcept(uuidCompany)
+                        employeeService.getUsersWaitingAcept(LevelAccess.EMPLOYEE.name(), uuidCompany)
                 )
         );
     }
