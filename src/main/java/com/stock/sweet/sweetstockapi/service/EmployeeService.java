@@ -100,7 +100,6 @@ public class EmployeeService {
 
     public List<User> getUsersWaitingAcept(String levelAccess, String uuidCompany){
         List<User> employeesAproved = userRepository.findAllByAprovedIsFalseAndLevelAccessAndCompanyUuid(levelAccess, uuidCompany);
-
         return employeesAproved;
     }
 
