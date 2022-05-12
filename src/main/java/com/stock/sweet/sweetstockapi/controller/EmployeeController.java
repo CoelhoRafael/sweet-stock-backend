@@ -92,11 +92,8 @@ public class EmployeeController {
         );
     }
 
-    @PutMapping()
-    public ResponseEntity employeesToAprove(
-            @RequestHeader HttpHeaders headers,
-            @RequestBody List<String> employeesToApprove
-    ) throws JsonProcessingException {
+    @PatchMapping()
+    public ResponseEntity employeesToAprove(@RequestHeader HttpHeaders headers, @RequestBody List<String> employeesToApprove) throws JsonProcessingException {
         var uuidCompany = headersUtils.getCompanyIdFromToken(headers.getFirst(HttpHeaders.AUTHORIZATION));
 
         employeeService.toApproveEmployees(uuidCompany, employeesToApprove);
