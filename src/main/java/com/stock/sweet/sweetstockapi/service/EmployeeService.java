@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class EmployeeService {
@@ -109,7 +110,7 @@ public class EmployeeService {
         return employees;
     }
 
-    public void toApproveEmployees(String uuid, List<String> employeesToApprove) {
+    public void toApproveEmployees(String uuid, List<UUID> employeesToApprove) {
         userRepository.toApproveEmployees(uuid, employeesToApprove);
     }
 }

@@ -25,7 +25,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("employees")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*",allowedHeaders = "*")
 @SecurityRequirement(name = "bearerAuth")
 public class EmployeeController {
 
@@ -93,7 +93,7 @@ public class EmployeeController {
     }
 
     @PatchMapping()
-    public ResponseEntity employeesToAprove(@RequestHeader HttpHeaders headers, @RequestBody List<String> employeesToApprove) throws JsonProcessingException {
+    public ResponseEntity employeesToAprove(@RequestHeader HttpHeaders headers, @RequestBody List<UUID> employeesToApprove) throws JsonProcessingException {
         var uuidCompany = headersUtils.getCompanyIdFromToken(headers.getFirst(HttpHeaders.AUTHORIZATION));
 
         employeeService.toApproveEmployees(uuidCompany, employeesToApprove);

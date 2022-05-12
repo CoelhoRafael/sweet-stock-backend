@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
@@ -40,5 +41,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Transactional
     @Modifying
     @Query("update User u set u.aproved = true where (select c.uuid from Company c where c.uuid = ?1) = ?1 and u.uuid in (?2)")
-    void toApproveEmployees(String uuid, List<String> employeesToApprove);
+    void toApproveEmployees(String uuid, List<UUID> employeesToApprove);
 }
