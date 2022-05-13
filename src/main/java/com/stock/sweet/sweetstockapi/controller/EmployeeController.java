@@ -2,15 +2,10 @@ package com.stock.sweet.sweetstockapi.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.stock.sweet.sweetstockapi.dto.request.EmployeRequest;
-import com.stock.sweet.sweetstockapi.dto.request.ProviderRequest;
 import com.stock.sweet.sweetstockapi.dto.request.UserRequest;
-import com.stock.sweet.sweetstockapi.dto.response.ProductResponse;
-import com.stock.sweet.sweetstockapi.dto.response.ProviderResponse;
+import com.stock.sweet.sweetstockapi.dto.request.EmployeesUuidRequest;
 import com.stock.sweet.sweetstockapi.dto.response.UserResponse;
 import com.stock.sweet.sweetstockapi.mapper.EmployeeMapper;
-import com.stock.sweet.sweetstockapi.model.Employee;
-import com.stock.sweet.sweetstockapi.model.User;
-import com.stock.sweet.sweetstockapi.model.enums.LevelAccess;
 import com.stock.sweet.sweetstockapi.service.EmployeeService;
 import com.stock.sweet.sweetstockapi.utils.HeadersUtils;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -21,7 +16,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("employees")
@@ -74,7 +68,7 @@ public class EmployeeController {
 
         return ResponseEntity.status(200).body(
                 employeeMapper.convertModelListToResponseList(
-                        employeeService.getAllUsers(LevelAccess.EMPLOYEE.name(), uuidCompany)
+                        employeeService.getAllUsers("EMPLOYEE", uuidCompany)
                 )
         );
     }
@@ -87,17 +81,15 @@ public class EmployeeController {
 
         return ResponseEntity.status(200).body(
                 employeeMapper.convertModelListToResponseList(
-                        employeeService.getUsersWaitingAcept(LevelAccess.EMPLOYEE.name(), uuidCompany)
+                        employeeService.getUsersWaitingAcept("EMPLOYEE_NOT_VERIFIED", uuidCompany)
                 )
         );
     }
+//, @RequestBody List<EmployeesUuidRequest> uuids
+    @PatchMapping
+    public ResponseEntity employeesToAprove(@RequestBody EmployeesUuidRequest uuidsToApprove) throws JsonProcessingException {
 
-    @PatchMapping()
-    public ResponseEntity employeesToAprove(@RequestHeader HttpHeaders headers, @RequestBody List<UUID> employeesToApprove) throws JsonProcessingException {
-        var uuidCompany = headersUtils.getCompanyIdFromToken(headers.getFirst(HttpHeaders.AUTHORIZATION));
-
-        employeeService.toApproveEmployees(uuidCompany, employeesToApprove);
-
+        employeeService.approveEmployees(uuidsToApprove);
         return ResponseEntity.status(200).build();
     }
 }

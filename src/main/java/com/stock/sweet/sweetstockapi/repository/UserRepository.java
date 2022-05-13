@@ -1,5 +1,6 @@
 package com.stock.sweet.sweetstockapi.repository;
 
+import com.stock.sweet.sweetstockapi.dto.request.EmployeesUuidRequest;
 import com.stock.sweet.sweetstockapi.model.Company;
 import com.stock.sweet.sweetstockapi.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
@@ -40,6 +40,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Transactional
     @Modifying
-    @Query("update User u set u.aproved = true where (select c.uuid from Company c where c.uuid = ?1) = ?1 and u.uuid in (?2)")
-    void toApproveEmployees(String uuid, List<UUID> employeesToApprove);
+    @Query("update User u set u.aproved = true, u.levelAccess = 'EMPLOYEE' where u.uuid in ?1")
+    void toApproveEmployees(List<String> listUuidsToAprove);
+
 }

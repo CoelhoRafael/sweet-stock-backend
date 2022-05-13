@@ -1,6 +1,7 @@
 package com.stock.sweet.sweetstockapi.service;
 
 import com.stock.sweet.sweetstockapi.dto.request.UserRequest;
+import com.stock.sweet.sweetstockapi.dto.request.EmployeesUuidRequest;
 import com.stock.sweet.sweetstockapi.model.*;
 import com.stock.sweet.sweetstockapi.model.enums.LevelAccess;
 import com.stock.sweet.sweetstockapi.repository.CompanyRepository;
@@ -13,7 +14,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class EmployeeService {
@@ -110,7 +111,7 @@ public class EmployeeService {
         return employees;
     }
 
-    public void toApproveEmployees(String uuid, List<UUID> employeesToApprove) {
-        userRepository.toApproveEmployees(uuid, employeesToApprove);
+    public void approveEmployees(EmployeesUuidRequest uuidsToApprove) {
+        userRepository.toApproveEmployees(uuidsToApprove.getUuids());
     }
 }
