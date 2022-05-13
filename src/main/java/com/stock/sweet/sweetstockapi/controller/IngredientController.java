@@ -2,6 +2,7 @@ package com.stock.sweet.sweetstockapi.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.stock.sweet.sweetstockapi.dto.request.IngredientRequest;
+import com.stock.sweet.sweetstockapi.dto.request.ProductRequest;
 import com.stock.sweet.sweetstockapi.dto.response.IngredientResponse;
 import com.stock.sweet.sweetstockapi.mapper.IngredientMapper;
 import com.stock.sweet.sweetstockapi.service.IngredientService;
@@ -51,6 +52,8 @@ public class IngredientController {
         );
     }
 
+
+
     @GetMapping("/expired")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity getAllExpiredIngredients() {
@@ -62,4 +65,22 @@ public class IngredientController {
                 .body(ingredientService.ExpiredIngredientsCSV());
 
     }
+
+    @PutMapping()
+    @ResponseStatus(HttpStatus.OK)
+    public IngredientResponse updateIngredients(@PathVariable Integer number, @RequestBody IngredientRequest body)throws Exception{
+        return ingredientMapper.convertModelToResponse(
+                ingredientService.updateIngredient(number, body)
+        );
+    }
+
+    @DeleteMapping()
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+        public IngredientResponse deleteIngredients(@PathVariable Integer number)throws Exception{
+           return ingredientMapper.convertModelToResponse(
+                  ingredientService.deleteIngredient(number)
+           );
+
+        }
+
 }
