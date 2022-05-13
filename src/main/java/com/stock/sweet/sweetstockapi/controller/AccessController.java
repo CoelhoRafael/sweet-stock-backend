@@ -11,6 +11,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
+
 @RestController
 @RequestMapping("/accesses")
 @CrossOrigin(origins = "*")
@@ -32,7 +34,7 @@ public class AccessController {
     @PostMapping("/invite")
     public ResponseEntity sendAssociateCodeToEmail(
             @RequestHeader HttpHeaders headers,
-            @RequestParam String email) throws JsonProcessingException {
+            @RequestParam String email) throws JsonProcessingException, MessagingException {
 
         String uuidCompany = headersUtils.getCompanyIdFromToken(headers.getFirst(HttpHeaders.AUTHORIZATION));
 

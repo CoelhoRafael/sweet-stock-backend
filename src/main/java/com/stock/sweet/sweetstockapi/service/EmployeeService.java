@@ -1,15 +1,16 @@
 package com.stock.sweet.sweetstockapi.service;
 
-import com.stock.sweet.sweetstockapi.dto.request.ProviderRequest;
 import com.stock.sweet.sweetstockapi.dto.request.UserRequest;
 import com.stock.sweet.sweetstockapi.model.*;
 import com.stock.sweet.sweetstockapi.model.enums.LevelAccess;
 import com.stock.sweet.sweetstockapi.repository.CompanyRepository;
 import com.stock.sweet.sweetstockapi.repository.UserRepository;
+import com.stock.sweet.sweetstockapi.service.mail.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +39,7 @@ public class EmployeeService {
         return null;
     }
 
-    public User createUser(User user, String associateCode) {
+    public User createUser(User user, String associateCode) throws MessagingException {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         var company = companyRepository.findByAssociateCode(associateCode).orElse(null);
         if (company != null) {

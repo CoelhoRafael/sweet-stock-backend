@@ -7,7 +7,7 @@ import com.stock.sweet.sweetstockapi.dto.response.CompanyResponse;
 import com.stock.sweet.sweetstockapi.dto.response.LoginResponse;
 import com.stock.sweet.sweetstockapi.mapper.CompanyMapper;
 import com.stock.sweet.sweetstockapi.service.CompanyService;
-import com.stock.sweet.sweetstockapi.service.EmailService;
+import com.stock.sweet.sweetstockapi.service.mail.EmailService;
 import com.stock.sweet.sweetstockapi.service.UserService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;

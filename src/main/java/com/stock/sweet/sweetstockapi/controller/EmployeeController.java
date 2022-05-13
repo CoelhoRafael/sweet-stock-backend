@@ -14,6 +14,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import java.util.List;
 
 @RestController
@@ -32,7 +33,7 @@ public class EmployeeController {
     private HeadersUtils headersUtils;
 
     @PostMapping
-    public ResponseEntity createEmployee(@RequestBody EmployeRequest employeRequest) {
+    public ResponseEntity createEmployee(@RequestBody EmployeRequest employeRequest) throws MessagingException {
         employeeService.createUser(employeeMapper.convertRequestToModel(employeRequest), employeRequest.getAssociateCode());
         return ResponseEntity.status(201).build();
     }
