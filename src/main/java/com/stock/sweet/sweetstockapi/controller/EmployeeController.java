@@ -87,7 +87,7 @@ public class EmployeeController {
     }
 //, @RequestBody List<EmployeesUuidRequest> uuids
     @PatchMapping
-    public ResponseEntity employeesToAprove(@RequestBody EmployeesUuidRequest uuidsToApprove) throws JsonProcessingException {
+    public ResponseEntity employeesToAprove(@RequestHeader HttpHeaders headers, @RequestBody EmployeesUuidRequest uuidsToApprove) throws JsonProcessingException {
 
         employeeService.approveEmployees(uuidsToApprove);
         return ResponseEntity.status(200).build();
