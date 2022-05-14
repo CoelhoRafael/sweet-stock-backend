@@ -86,10 +86,10 @@ public class EmployeeController {
         );
     }
 //, @RequestBody List<EmployeesUuidRequest> uuids
-    @PatchMapping
+    @PostMapping("/approve")
     public ResponseEntity employeesToAprove(@RequestHeader HttpHeaders headers, @RequestBody EmployeesUuidRequest uuidsToApprove) throws JsonProcessingException {
 
         employeeService.approveEmployees(uuidsToApprove);
-        return ResponseEntity.status(200).build();
+        return uuidsToApprove.getUuids().isEmpty() ? ResponseEntity.status(204).build() : ResponseEntity.status(200).build();
     }
 }
