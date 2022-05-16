@@ -16,4 +16,5 @@ public class CompanyResponse {
     private String cnpj;
     private String email;
     private String telephoneNumber;
+    private String picture;
 }
