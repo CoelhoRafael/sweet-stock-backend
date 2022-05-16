@@ -1,20 +1,23 @@
 package com.stock.sweet.sweetstockapi.service;
 
-import com.stock.sweet.sweetstockapi.dto.request.UserRequest;
 import com.stock.sweet.sweetstockapi.dto.request.EmployeesUuidRequest;
-import com.stock.sweet.sweetstockapi.model.*;
+import com.stock.sweet.sweetstockapi.dto.request.UserRequest;
+import com.stock.sweet.sweetstockapi.model.Company;
+import com.stock.sweet.sweetstockapi.model.Email;
+import com.stock.sweet.sweetstockapi.model.User;
 import com.stock.sweet.sweetstockapi.model.enums.LevelAccess;
 import com.stock.sweet.sweetstockapi.repository.CompanyRepository;
 import com.stock.sweet.sweetstockapi.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.context.Context;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class EmployeeService {
@@ -60,16 +63,17 @@ public class EmployeeService {
     }
 
 
-    public List<User>getUserByUuid(String uuid){
+    public List<User> getUserByUuid(String uuid) {
         List<User> users = userRepository.findAllByCompany_Uuid(uuid);
 
         return users;
     }
 
-    public User deleteUserByUuidAndId(String uuid, Integer id){
-       return userRepository.deleteUserByCompanyUuidAndId(uuid, id);
+    public User deleteUserByUuidAndId(String uuid, Integer id) {
+        return userRepository.deleteUserByCompanyUuidAndId(uuid, id);
     }
-    public User getUserByUuidAndId(String uuid){
+
+    public User getUserByUuidAndId(String uuid) {
         return userRepository.findUserByUuid(uuid);
     }
 
@@ -85,7 +89,7 @@ public class EmployeeService {
         userToUpdate.setLevelAccess(String.valueOf(userRequest.getLevelAccess()));
         userToUpdate.setTelephoneNumber(userRequest.getTelephoneNumber());
 
-      userRepository.save(userToUpdate);
+        userRepository.save(userToUpdate);
 
         return userToUpdate;
     }
@@ -100,18 +104,36 @@ public class EmployeeService {
         return new ArrayList<>();
     }
 
-    public List<User> getUsersWaitingAcept(String levelAccess, String uuidCompany){
+    public List<User> getUsersWaitingAcept(String levelAccess, String uuidCompany) {
         List<User> employeesAproved = userRepository.findAllByAprovedIsFalseAndLevelAccessAndCompanyUuid(levelAccess, uuidCompany);
         return employeesAproved;
     }
 
-    public List<User> getAllUsers(String levelAccess, String uuidCompany){
+    public List<User> getAllUsers(String levelAccess, String uuidCompany) {
         List<User> employees = userRepository.findAllByAprovedIsTrueAndLevelAccessAndCompanyUuid(levelAccess, uuidCompany);
 
         return employees;
     }
 
     public void approveEmployees(EmployeesUuidRequest uuidsToApprove) {
+        String template = "email_funcionario_aprovado";
+
         userRepository.toApproveEmployees(uuidsToApprove.getUuids());
+        uuidsToApprove.getUuids().forEach(uuid -> {
+                    var user = userRepository.findUserByUuid(uuid);
+
+                    Context ctx = new Context(LocaleContextHolder.getLocale());
+                    ctx.setVariable("employee_name", user.getName());
+
+                    var isSucessful = emailService.sendHtmlEmail(
+                            user.getEmail(),
+                            "Código de acesso recebido",
+                            "email_codigo_empresa",
+                            ctx
+                    );
+                }
+        );
+
+
     }
 }
