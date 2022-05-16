@@ -47,7 +47,6 @@ public class Company {
     private String associateCode;
 
     @Column(name = "profile_picture" ,length = 50 * 1024 * 1024)
-
     private String picture;
 
     @OneToOne(cascade = CascadeType.ALL)
