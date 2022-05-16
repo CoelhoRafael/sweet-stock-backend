@@ -28,4 +28,8 @@ public interface IngredientRepository extends JpaRepository<Ingredient, Integer>
 
     List<Ingredient> findAllByNumberLot(Integer number);
 
+    @Query("select i from Ingredient i where i.uuid = ?1 and i.expirationDate >= ?2")
+    List<Ingredient> getAllIngredientsNearExpire(String uuid, LocalDate expirationDate);
+
+
 }
