@@ -83,7 +83,7 @@ public class EmployeeController {
         );
     }
 
-    @PatchMapping("/approve")
+    @PutMapping("/approve")
     public ResponseEntity employeesToAprove(@RequestBody EmployeesUuidRequest uuidsToApprove) {
         employeeService.approveEmployees(uuidsToApprove);
         return uuidsToApprove.getUuids().isEmpty() ? ResponseEntity.status(204).build() : ResponseEntity.status(200).build();

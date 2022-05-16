@@ -1,6 +1,6 @@
 server:
   servlet:
-    context-path: /v1/sweet-stock/
+#    context-path: /v1/sweet-stock/
 
 spring:
   mail:
@@ -31,6 +31,3 @@ spring:
     hibernate:
       ddl-auto: update
       dialect: org.hibernate.dialect.SQLServer2012Dialect
-
-  main:
-    allow-bean-definition-overriding: true
