@@ -19,7 +19,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("employees")
-@CrossOrigin(origins = "*",allowedHeaders = "*")
+@CrossOrigin
 @SecurityRequirement(name = "bearerAuth")
 public class EmployeeController {
 
