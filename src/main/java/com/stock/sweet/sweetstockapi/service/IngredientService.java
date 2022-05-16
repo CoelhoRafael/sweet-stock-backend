@@ -64,10 +64,9 @@ public class IngredientService {
     }
 
     public List<Ingredient> getExpiredIngredients(String uuid) {
-        return ingredientRepository.findAllByUuidCompany(uuid)
-                .stream()
-                .filter(ingredient -> ingredient.getExpirationDate().isBefore(LocalDate.now()))
-                .collect(Collectors.toList());
+        List<Ingredient> expiredIngredients = ingredientRepository.expiredIngredients(uuid, LocalDate.now());
+
+        return expiredIngredients;
     }
 
     public List<Ingredient> getAllIngredients(String uuid) {
