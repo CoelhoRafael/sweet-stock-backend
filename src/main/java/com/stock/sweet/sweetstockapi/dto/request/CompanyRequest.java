@@ -17,4 +17,5 @@ public class CompanyRequest {
     private AddressRequest addressRequest;
     private String email;
     private String password;
+    private String picture;
 }
