@@ -46,7 +46,7 @@ public class User {
     private boolean aproved;
 
 
-    @Column(name = "profile_picture" ,length = 50 * 1024 * 1024)
+    @Column(name = "profile_picture" ,length = 50 * 10240 * 10240)
     private String picture;
 
 }
