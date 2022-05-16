@@ -74,6 +74,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         String json = new Gson().toJson(LoginResponse.builder()
                 .token(token)
                 .username(userDetailsData.getUser().get().getName())
+                .levelAccess(userDetailsData.getUser().get().getLevelAccess())
+                .picture(userDetailsData.getUser().get().getPicture())
                 .build());
 
         response.setContentType("application/json");
