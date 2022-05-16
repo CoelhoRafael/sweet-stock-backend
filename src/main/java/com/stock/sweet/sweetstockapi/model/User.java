@@ -45,4 +45,7 @@ public class User {
     @Column(name = "aproved")
     private boolean aproved;
 
+    @Column(name = "profile_picture")
+    private String picture;
+
 }

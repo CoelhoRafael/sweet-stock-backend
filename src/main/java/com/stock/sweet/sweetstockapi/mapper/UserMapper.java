@@ -20,7 +20,8 @@ public class UserMapper {
                 userRequest.getTelephoneNumber(),
                 userRequest.getLevelAccess().name(),
                 null,
-                false
+                false,
+                userRequest.getPicture()
         );
     }
 }

@@ -52,6 +52,7 @@ public class CompanyMapper {
                 .telephoneNumber(companyRequest.getTelephoneNumber())
                 .password(companyRequest.getPassword())
                 .company(Company.builder().id(companyId).build())
+                .aproved(true)
                 .build();
     }
 

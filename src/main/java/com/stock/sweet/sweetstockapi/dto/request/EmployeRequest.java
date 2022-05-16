@@ -11,4 +11,5 @@ public class EmployeRequest {
     private String telephoneNumber;
     private String email;
     private String password;
+    private String picture;
 }

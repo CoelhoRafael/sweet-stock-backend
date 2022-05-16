@@ -16,4 +16,6 @@ public class UserRequest {
     private String telephoneNumber;
 
     private LevelAccess levelAccess;
+
+    private String picture;
 }

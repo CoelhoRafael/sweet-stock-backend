@@ -27,7 +27,8 @@ public class EmployeeMapper {
                 employeRequest.getTelephoneNumber(),
                 LevelAccess.EMPLOYEE_NOT_VERIFIED.name(),
                 null,
-                false
+                false,
+                employeRequest.getPicture()
         );
     }
     public UserResponse convertModelToResponse(User user) {
@@ -37,7 +38,9 @@ public class EmployeeMapper {
                 user.getEmail(),
                 user.getTelephoneNumber(),
                 user.getLevelAccess(),
-                user.isAproved()
+                user.isAproved(),
+                user.getPicture()
+
         );
     }
 
@@ -49,6 +52,7 @@ public class EmployeeMapper {
                         .email(user.getEmail())
                         .telephoneNumber(user.getTelephoneNumber())
                         .levelAccess(user.getLevelAccess())
+                        .picture(user.getPicture())
                         .build()
         ).collect(Collectors.toList());
     }
@@ -62,7 +66,8 @@ public class EmployeeMapper {
                     u.getEmail(),
                     u.getTelephoneNumber(),
                     u.getLevelAccess(),
-                    u.isAproved()
+                    u.isAproved(),
+                    u.getPicture()
             );
         }).collect(Collectors.toList());
     }
