@@ -55,18 +55,18 @@ public class IngredientService {
 
     public List<Ingredient> getAllIngredientsNearExpire(String uuid) {
 
-        List<Ingredient> ingredients = ingredientRepository.findAllByUuidCompany(uuid);
+        List<Ingredient> ingredientsNearExpire = ingredientRepository.getAllIngredientsNearExpire(
+                uuid,
+                LocalDate.now().minusDays(15)
+        );
 
-        ingredients = ingredients.stream().filter(ingredient -> ingredient.getExpirationDate().isAfter(LocalDate.now().minusDays(15)
-        ) || ingredient.getExpirationDate().isEqual(LocalDate.now().minusDays(15))).collect(Collectors.toList());
-        return ingredients;
+        return ingredientsNearExpire;
     }
 
     public List<Ingredient> getExpiredIngredients(String uuid) {
-        return ingredientRepository.findAllByUuidCompany(uuid)
-                .stream()
-                .filter(ingredient -> ingredient.getExpirationDate().isBefore(LocalDate.now()))
-                .collect(Collectors.toList());
+        List<Ingredient> expiredIngredients = ingredientRepository.expiredIngredients(uuid, LocalDate.now());
+
+        return expiredIngredients;
     }
 
     public List<Ingredient> getAllIngredients(String uuid) {

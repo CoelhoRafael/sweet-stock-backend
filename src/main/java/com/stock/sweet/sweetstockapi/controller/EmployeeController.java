@@ -2,8 +2,8 @@ package com.stock.sweet.sweetstockapi.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.stock.sweet.sweetstockapi.dto.request.EmployeRequest;
-import com.stock.sweet.sweetstockapi.dto.request.UserRequest;
 import com.stock.sweet.sweetstockapi.dto.request.EmployeesUuidRequest;
+import com.stock.sweet.sweetstockapi.dto.request.UserRequest;
 import com.stock.sweet.sweetstockapi.dto.response.UserResponse;
 import com.stock.sweet.sweetstockapi.mapper.EmployeeMapper;
 import com.stock.sweet.sweetstockapi.service.EmployeeService;
@@ -37,9 +37,10 @@ public class EmployeeController {
         employeeService.createUser(employeeMapper.convertRequestToModel(employeRequest), employeRequest.getAssociateCode());
         return ResponseEntity.status(201).build();
     }
+
     @GetMapping("/{uuid}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity <UserResponse> getUserByUuid(@PathVariable String uuid) throws Exception {
+    public ResponseEntity<UserResponse> getUserByUuid(@PathVariable String uuid) throws Exception {
         return ResponseEntity.status(200).body(employeeMapper.convertModelToResponse(employeeService.getUserByUuidAndId(uuid)));
     }
 
@@ -47,20 +48,17 @@ public class EmployeeController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public UserResponse deleteUser(@PathVariable String uuid, Integer id) throws Exception {
         return employeeMapper.convertModelToResponse(
-               employeeService.deleteUserByUuidAndId(uuid, id)
+                employeeService.deleteUserByUuidAndId(uuid, id)
         );
     }
 
     @PutMapping("/{uuid}")
     @ResponseStatus(HttpStatus.OK)
-    public UserResponse updateUser(@PathVariable String uuid,Integer id, @RequestBody UserRequest body) throws Exception {
+    public UserResponse updateUser(@PathVariable String uuid, Integer id, @RequestBody UserRequest body) throws Exception {
         return employeeMapper.convertModelToResponse(
-                employeeService.updateUser(uuid,id,body)
+                employeeService.updateUser(uuid, id, body)
         );
     }
-
-
-
 
     @GetMapping
     public ResponseEntity<List<UserResponse>> getAllEmployees(@RequestHeader HttpHeaders headers) throws JsonProcessingException {
@@ -74,7 +72,6 @@ public class EmployeeController {
     }
 
 
-
     @GetMapping("/not-approved")
     public ResponseEntity<List<UserResponse>> getAllEmployeesNotAproved(@RequestHeader HttpHeaders headers) throws JsonProcessingException {
         var uuidCompany = headersUtils.getCompanyIdFromToken(headers.getFirst(HttpHeaders.AUTHORIZATION));
@@ -85,10 +82,9 @@ public class EmployeeController {
                 )
         );
     }
-//, @RequestBody List<EmployeesUuidRequest> uuids
-    @PostMapping("/approve")
-    public ResponseEntity employeesToAprove(@RequestHeader HttpHeaders headers, @RequestBody EmployeesUuidRequest uuidsToApprove) throws JsonProcessingException {
 
+    @PostMapping("/approve")
+    public ResponseEntity employeesToAprove(@RequestBody EmployeesUuidRequest uuidsToApprove) {
         employeeService.approveEmployees(uuidsToApprove);
         return uuidsToApprove.getUuids().isEmpty() ? ResponseEntity.status(204).build() : ResponseEntity.status(200).build();
     }
