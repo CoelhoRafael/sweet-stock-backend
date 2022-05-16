@@ -66,7 +66,7 @@ public class IngredientController {
 
     }
 
-    @PostMapping()
+    @PostMapping("/update-ingredient")
     @ResponseStatus(HttpStatus.OK)
     public IngredientResponse updateIngredients(@PathVariable Integer number, @RequestBody IngredientRequest body)throws Exception{
         return ingredientMapper.convertModelToResponse(
@@ -74,7 +74,7 @@ public class IngredientController {
         );
     }
 
-    @PostMapping()
+    @PostMapping("/delete-ingredient")
     @ResponseStatus(HttpStatus.NO_CONTENT)
         public IngredientResponse deleteIngredients(@PathVariable Integer number)throws Exception{
            return ingredientMapper.convertModelToResponse(
