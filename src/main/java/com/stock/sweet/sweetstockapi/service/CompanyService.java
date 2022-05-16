@@ -1,5 +1,6 @@
 package com.stock.sweet.sweetstockapi.service;
 
+import com.stock.sweet.sweetstockapi.exception.NotFoundException;
 import com.stock.sweet.sweetstockapi.mapper.AddressMapper;
 import com.stock.sweet.sweetstockapi.model.Company;
 import com.stock.sweet.sweetstockapi.repository.CompanyRepository;
@@ -15,6 +16,16 @@ public class CompanyService {
 
     @Autowired
     private AddressMapper addressMapper;
+
+    public String getAssociateCode(String uuidCompany) throws NotFoundException {
+        Company company = companyRepository.findByUuid(uuidCompany).orElse(null);
+
+        if (company != null) {
+            return company.getAssociateCode();
+        } else {
+            throw new NotFoundException("Empresa não encontrada");
+        }
+    }
 
     public Company createCompany(Company company) {
         return companyRepository.save(company);
