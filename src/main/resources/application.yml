@@ -1,6 +1,6 @@
 server:
   servlet:
-#    context-path: /v1/sweet-stock/
+    context-path: /v1/sweet-stock/
 
 spring:
   mail:
