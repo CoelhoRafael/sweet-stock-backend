@@ -9,6 +9,7 @@ import com.stock.sweet.sweetstockapi.model.Ingredient;
 import com.stock.sweet.sweetstockapi.model.OutStock;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -66,7 +67,7 @@ public class DashboardMapper {
         mapOfIngredientsMonthSum.forEach((localDate, sum) -> chartMonthList.add(
                 ChartMonthItem
                         .builder()
-                        .month(localDate)
+                        .month(getMonthNameFromDate(localDate))
                         .profit(0.0)
                         .spent(sum)
                         .build())
@@ -76,7 +77,7 @@ public class DashboardMapper {
                     outStock.setDate(outStock.getDate().withDayOfMonth(1));
                     return outStock;
                 }
-        ).collect(Collectors.groupingBy(OutStock::getDate));
+        ).collect(Collectors.groupingBy(a -> getMonthNameFromDate(a.getDate())));
 
         var mapOfOutStockMonthSum = mapOfOutStockMonth
                 .entrySet()
@@ -94,6 +95,40 @@ public class DashboardMapper {
         });
 
         return chartMonthList;
+    }
+
+    private String getMonthNameFromDate(LocalDate date) {
+        String month;
+        switch (date.getMonth().getValue()) {
+            case 1:
+                month = "Janeiro";
+            case 2:
+                month = "Fevereiro";
+            case 3:
+                month = "Março";
+            case 4:
+                month = "Abril";
+            case 5:
+                month = "Maio";
+            case 6:
+                month = "Junho";
+            case 7:
+                month = "Julho";
+            case 8:
+                month = "Agosto";
+            case 9:
+                month = "Setembro";
+            case 10:
+                month = "Outubro";
+            case 11:
+                month = "Novembro";
+            case 12:
+                month = "Dezembro";
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + date.getMonth().getValue());
+        }
+        return month;
     }
 
 
