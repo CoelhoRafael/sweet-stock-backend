@@ -1,6 +1,7 @@
 package com.stock.sweet.sweetstockapi.service;
 
 import com.stock.sweet.sweetstockapi.dto.request.IngredientRequest;
+import com.stock.sweet.sweetstockapi.dto.request.IngredientToUpdateRequest;
 import com.stock.sweet.sweetstockapi.model.Ingredient;
 import com.stock.sweet.sweetstockapi.model.Provider;
 import com.stock.sweet.sweetstockapi.repository.IngredientRepository;
@@ -94,7 +95,7 @@ public class IngredientService {
         ingredientToUpdate.setBuyValue(ingredientRequest.getBuyValue());
         ingredientToUpdate.setProvideCode(ingredientRequest.getProvideCode());
         ingredientToUpdate.setQuantityUsed(ingredientRequest.getQuantityUsed());
-        ingredientToUpdate.setNumberLot(ingredientRequest.getNumberLot());
+
 
         ingredientRepository.save(ingredientToUpdate);
 
@@ -102,7 +103,7 @@ public class IngredientService {
     }
 
     public Ingredient deleteIngredient(String uuid) throws Exception {
-        Ingredient ingredientToDelete = (Ingredient) ingredientRepository. findIngredientByUuid(uuid);
+        Ingredient ingredientToDelete = (Ingredient) ingredientRepository.findIngredientByUuid(uuid);
 
         if (ingredientToDelete== null) {
             return null;

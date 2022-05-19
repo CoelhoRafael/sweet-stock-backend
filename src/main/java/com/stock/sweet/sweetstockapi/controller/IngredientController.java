@@ -2,6 +2,7 @@ package com.stock.sweet.sweetstockapi.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.stock.sweet.sweetstockapi.dto.request.IngredientRequest;
+import com.stock.sweet.sweetstockapi.dto.request.IngredientToUpdateRequest;
 import com.stock.sweet.sweetstockapi.dto.request.ProductRequest;
 import com.stock.sweet.sweetstockapi.dto.response.IngredientResponse;
 import com.stock.sweet.sweetstockapi.mapper.IngredientMapper;
