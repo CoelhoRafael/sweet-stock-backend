@@ -38,6 +38,7 @@ public class IngredientMapper {
     public IngredientResponse convertModelToResponse(Ingredient ingredient) {
         return new IngredientResponse(
                 ingredient.getUuid(),
+                ingredient.getNumberLot(),
                 ingredient.getName(),
                 ingredient.getUnitMeasurement(),
                 ingredient.getQuantity(),
@@ -50,6 +51,7 @@ public class IngredientMapper {
                 ingredient.getViewInReports(),
                 ingredient.getDateInsert(),
                 ingredient.getDateUpdate()
+
         );
     }
 
@@ -57,6 +59,7 @@ public class IngredientMapper {
         return ingredients.stream().map(i -> {
             return new IngredientResponse(
                     i.getUuid(),
+                    i.getNumberLot(),
                     i.getName(),
                     i.getUnitMeasurement(),
                     i.getQuantity(),
