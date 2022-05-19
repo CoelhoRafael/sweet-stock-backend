@@ -156,7 +156,7 @@ public class DashboardMapper {
         batatinha.forEach((date, ingredients1) -> {
             listNearExpired.add(NearExpireIngredients
                     .builder()
-                    .date(date)
+                    .date(String.format("%d de %s", date.getDayOfMonth(), getMonthNameFromDate(date)))
                     .items(
                             ingredients1.
                                     stream()
