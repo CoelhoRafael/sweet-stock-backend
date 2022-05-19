@@ -2,7 +2,6 @@ package com.stock.sweet.sweetstockapi.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.stock.sweet.sweetstockapi.dto.request.IngredientRequest;
-import com.stock.sweet.sweetstockapi.dto.request.ProductRequest;
 import com.stock.sweet.sweetstockapi.dto.response.IngredientResponse;
 import com.stock.sweet.sweetstockapi.mapper.IngredientMapper;
 import com.stock.sweet.sweetstockapi.service.IngredientService;
@@ -33,14 +32,17 @@ public class IngredientController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public IngredientResponse createIngredient(
+    public ResponseEntity createIngredient(
             @RequestBody IngredientRequest body,
             @RequestHeader HttpHeaders headers
     ) throws JsonProcessingException {
         var uuidCompany = headersUtils.getCompanyIdFromToken(headers.getFirst(HttpHeaders.AUTHORIZATION));
-        return ingredientMapper.convertModelToResponse(
-                ingredientService.createIngredient(ingredientMapper.convertRequestToModel(body, uuidCompany))
-        );
+        try {
+            ingredientService.createIngredient(ingredientMapper.convertRequestToModel(body, uuidCompany));
+            return ResponseEntity.status(201).build();
+        } catch (Exception e) {
+            return ResponseEntity.status(500).build();
+        }
     }
 
     @GetMapping
@@ -51,7 +53,6 @@ public class IngredientController {
                 ingredientService.getAllIngredients(uuidCompany)
         );
     }
-
 
 
     @GetMapping("/expired")
@@ -68,7 +69,7 @@ public class IngredientController {
 
     @PostMapping("/update-ingredient")
     @ResponseStatus(HttpStatus.OK)
-    public IngredientResponse updateIngredients(@PathVariable Integer number, @RequestBody IngredientRequest body)throws Exception{
+    public IngredientResponse updateIngredients(@PathVariable Integer number, @RequestBody IngredientRequest body) throws Exception {
         return ingredientMapper.convertModelToResponse(
                 ingredientService.updateIngredient(number, body)
         );
@@ -76,11 +77,11 @@ public class IngredientController {
 
     @PostMapping("/delete-ingredient")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-        public IngredientResponse deleteIngredients(@PathVariable Integer number)throws Exception{
-           return ingredientMapper.convertModelToResponse(
-                  ingredientService.deleteIngredient(number)
-           );
+    public IngredientResponse deleteIngredients(@PathVariable Integer number) throws Exception {
+        return ingredientMapper.convertModelToResponse(
+                ingredientService.deleteIngredient(number)
+        );
 
-        }
+    }
 
 }

@@ -2,14 +2,12 @@ package com.stock.sweet.sweetstockapi.service;
 
 import com.stock.sweet.sweetstockapi.dto.request.IngredientRequest;
 import com.stock.sweet.sweetstockapi.model.Ingredient;
-import com.stock.sweet.sweetstockapi.model.Provider;
 import com.stock.sweet.sweetstockapi.repository.IngredientRepository;
 import com.stock.sweet.sweetstockapi.utils.FileCSV;
 import com.stock.sweet.sweetstockapi.utils.ListObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -46,7 +44,8 @@ public class IngredientService {
         List<Ingredient> ingredients = ingredientRepository.findAllByUuidCompany(uuid);
         return ingredients;
     }
-    public List<Ingredient>getIngredientsByNumberLot(Integer number){
+
+    public List<Ingredient> getIngredientsByNumberLot(Integer number) {
         List<Ingredient> ingredients = ingredientRepository.findAllByNumberLot(number);
 
         return ingredients;
@@ -54,13 +53,11 @@ public class IngredientService {
 
 
     public List<Ingredient> getAllIngredientsNearExpire(String uuid) {
-
-        List<Ingredient> ingredientsNearExpire = ingredientRepository.getAllIngredientsNearExpire(
+        var x = ingredientRepository.getAllIngredientsNearExpire(
                 uuid,
-                LocalDate.now().minusDays(15)
+                LocalDate.now().plusDays(15)
         );
-
-        return ingredientsNearExpire;
+        return x;
     }
 
     public List<Ingredient> getExpiredIngredients(String uuid) {
@@ -105,14 +102,13 @@ public class IngredientService {
     public Ingredient deleteIngredient(Integer number) throws Exception {
         Ingredient ingredientToDelete = (Ingredient) getIngredientsByNumberLot(number);
 
-        if (ingredientToDelete== null) {
+        if (ingredientToDelete == null) {
             return null;
         }
 
         ingredientRepository.delete(ingredientToDelete);
         return ingredientToDelete;
     }
-
 
 
 }

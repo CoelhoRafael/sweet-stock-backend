@@ -42,7 +42,7 @@ public class DashboardMapper {
                                 .build()
                 )
                 .chart(generateChart(allIngredients, allOutStock))
-                .nearExpireIngredients(x(nearExpireIngredients))
+                .nearExpireIngredients(getNearExpiredIngredients(nearExpireIngredients))
                 .nearEndIngredients(getNearEndIngredients(allIngredients))
                 .build();
     }
@@ -132,8 +132,8 @@ public class DashboardMapper {
     }
 
 
-    public List<NearExpireIngredients> x(List<Ingredient> ingredients) {
-        List<NearExpireIngredients> y = new ArrayList<>();
+    public List<NearExpireIngredients> getNearExpiredIngredients(List<Ingredient> ingredients) {
+        List<NearExpireIngredients> listNearExpired = new ArrayList<>();
 
         var a = ingredients
                 .stream()
@@ -154,7 +154,7 @@ public class DashboardMapper {
                 ).collect(Collectors.groupingBy(Ingredient::getExpirationDate));
 
         batatinha.forEach((date, ingredients1) -> {
-            y.add(NearExpireIngredients
+            listNearExpired.add(NearExpireIngredients
                     .builder()
                     .date(date)
                     .items(
@@ -172,7 +172,7 @@ public class DashboardMapper {
                     .build());
         });
 
-        return y;
+        return listNearExpired;
     }
 
     public List<IngredientDashboardResponse> getNearEndIngredients(List<Ingredient> ingredients) {
