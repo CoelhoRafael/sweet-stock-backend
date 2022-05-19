@@ -34,8 +34,12 @@ public class EmployeeController {
 
     @PostMapping
     public ResponseEntity createEmployee(@RequestBody EmployeRequest employeRequest) {
-        employeeService.createUser(employeeMapper.convertRequestToModel(employeRequest), employeRequest.getAssociateCode());
-        return ResponseEntity.status(201).build();
+        try {
+            employeeService.createUser(employeeMapper.convertRequestToModel(employeRequest), employeRequest.getAssociateCode());
+            return ResponseEntity.status(201).build();
+        } catch (Exception e) {
+            return ResponseEntity.status(500).build();
+        }
     }
 
     @GetMapping("/{uuid}")
@@ -64,11 +68,11 @@ public class EmployeeController {
     public ResponseEntity<List<UserResponse>> getAllEmployees(@RequestHeader HttpHeaders headers) throws JsonProcessingException {
         var uuidCompany = headersUtils.getCompanyIdFromToken(headers.getFirst(HttpHeaders.AUTHORIZATION));
 
-        return ResponseEntity.status(200).body(
-                employeeMapper.convertModelListToResponseList(
-                        employeeService.getAllUsers("EMPLOYEE", uuidCompany)
-                )
+        var response = employeeMapper.convertModelListToResponseList(
+                employeeService.getAllUsers("EMPLOYEE", uuidCompany)
         );
+
+        return response.isEmpty() ? ResponseEntity.status(204).build() : ResponseEntity.status(200).body(response);
     }
 
 

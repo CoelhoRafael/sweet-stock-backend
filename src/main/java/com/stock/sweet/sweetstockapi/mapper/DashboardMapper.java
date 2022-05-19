@@ -42,7 +42,7 @@ public class DashboardMapper {
                                 .build()
                 )
                 .chart(generateChart(allIngredients, allOutStock))
-                .nearExpireIngredients(x(nearExpireIngredients))
+                .nearExpireIngredients(getNearExpiredIngredients(nearExpireIngredients))
                 .nearEndIngredients(getNearEndIngredients(allIngredients))
                 .build();
     }
@@ -102,26 +102,48 @@ public class DashboardMapper {
         switch (date.getMonth().getValue()) {
             case 1:
                 month = "Janeiro";
+                break;
+
             case 2:
                 month = "Fevereiro";
+                break;
+
             case 3:
                 month = "Março";
+                break;
+
             case 4:
                 month = "Abril";
+                break;
+
             case 5:
                 month = "Maio";
+                break;
+
             case 6:
                 month = "Junho";
+                break;
+
             case 7:
                 month = "Julho";
+                break;
+
             case 8:
                 month = "Agosto";
+                break;
+
             case 9:
                 month = "Setembro";
+                break;
+
             case 10:
                 month = "Outubro";
+                break;
+
             case 11:
                 month = "Novembro";
+                break;
+
             case 12:
                 month = "Dezembro";
                 break;
@@ -132,8 +154,8 @@ public class DashboardMapper {
     }
 
 
-    public List<NearExpireIngredients> x(List<Ingredient> ingredients) {
-        List<NearExpireIngredients> y = new ArrayList<>();
+    public List<NearExpireIngredients> getNearExpiredIngredients(List<Ingredient> ingredients) {
+        List<NearExpireIngredients> listNearExpired = new ArrayList<>();
 
         var a = ingredients
                 .stream()
@@ -154,9 +176,9 @@ public class DashboardMapper {
                 ).collect(Collectors.groupingBy(Ingredient::getExpirationDate));
 
         batatinha.forEach((date, ingredients1) -> {
-            y.add(NearExpireIngredients
+            listNearExpired.add(NearExpireIngredients
                     .builder()
-                    .date(date)
+                    .date(String.format("%d de %s", date.getDayOfMonth(), getMonthNameFromDate(date)))
                     .items(
                             ingredients1.
                                     stream()
@@ -172,7 +194,7 @@ public class DashboardMapper {
                     .build());
         });
 
-        return y;
+        return listNearExpired;
     }
 
     public List<IngredientDashboardResponse> getNearEndIngredients(List<Ingredient> ingredients) {

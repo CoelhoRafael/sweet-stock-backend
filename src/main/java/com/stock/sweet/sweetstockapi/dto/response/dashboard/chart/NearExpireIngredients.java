@@ -8,6 +8,6 @@ import java.util.List;
 @Data
 @Builder
 public class NearExpireIngredients {
-    private LocalDate date;
+    private String date;
     private List<IngredientDashboardResponse> items;
 }

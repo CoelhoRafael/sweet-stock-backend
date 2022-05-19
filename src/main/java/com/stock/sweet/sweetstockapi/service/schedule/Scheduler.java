@@ -14,7 +14,7 @@ public class Scheduler {
     private CompanyService companyService;
 
     //    @Scheduled(cron = "0 0 * * * *")
-    @Scheduled(cron = "0 0 */3 * * *")
+    @Scheduled(cron = "0 0 3 * * *")
     public void changeCompaniesAssociateCode() {
         var companies = companyService.findAllCompanies();
         companies.stream().forEach(

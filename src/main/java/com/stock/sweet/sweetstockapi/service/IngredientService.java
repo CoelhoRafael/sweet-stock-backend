@@ -1,13 +1,15 @@
 package com.stock.sweet.sweetstockapi.service;
 
-import com.stock.sweet.sweetstockapi.dto.request.IngredientToUpdateRequest;
+import com.stock.sweet.sweetstockapi.dto.request.IngredientRequest;
 import com.stock.sweet.sweetstockapi.model.Ingredient;
+import com.stock.sweet.sweetstockapi.model.Provider;
 import com.stock.sweet.sweetstockapi.repository.IngredientRepository;
 import com.stock.sweet.sweetstockapi.utils.FileCSV;
 import com.stock.sweet.sweetstockapi.utils.ListObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -52,13 +54,11 @@ public class IngredientService {
 
 
     public List<Ingredient> getAllIngredientsNearExpire(String uuid) {
-
-        List<Ingredient> ingredientsNearExpire = ingredientRepository.getAllIngredientsNearExpire(
+        var x = ingredientRepository.getAllIngredientsNearExpire(
                 uuid,
-                LocalDate.now().minusDays(15)
+                LocalDate.now().plusDays(15)
         );
-
-        return ingredientsNearExpire;
+        return x;
     }
 
     public List<Ingredient> getExpiredIngredients(String uuid) {
@@ -94,7 +94,7 @@ public class IngredientService {
         ingredientToUpdate.setBuyValue(ingredientRequest.getBuyValue());
         ingredientToUpdate.setProvideCode(ingredientRequest.getProvideCode());
         ingredientToUpdate.setQuantityUsed(ingredientRequest.getQuantityUsed());
-
+        ingredientToUpdate.setNumberLot(ingredientRequest.getNumberLot());
 
         ingredientRepository.save(ingredientToUpdate);
 

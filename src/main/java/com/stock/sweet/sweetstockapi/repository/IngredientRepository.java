@@ -28,10 +28,10 @@ public interface IngredientRepository extends JpaRepository<Ingredient, Integer>
 
     Ingredient findIngredientByUuid (String uuid);
 
-    @Query("select i from Ingredient i where i.uuid = ?1 and i.expirationDate >= ?2")
+    @Query("select i from Ingredient i where i.uuidCompany = ?1 and i.expirationDate < ?2 and i.expirated = false")
     List<Ingredient> getAllIngredientsNearExpire(String uuid, LocalDate expirationDate);
 
-    @Query("select i from Ingredient i where i.uuid = ?1 and i.expirationDate < ?2")
+    @Query("select i from Ingredient i where i.uuidCompany = ?1 and i.expirationDate < ?2")
     List<Ingredient> expiredIngredients(String uuid, LocalDate expirationDate);
 
 

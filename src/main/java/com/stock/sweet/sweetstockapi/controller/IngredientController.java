@@ -2,7 +2,6 @@ package com.stock.sweet.sweetstockapi.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.stock.sweet.sweetstockapi.dto.request.IngredientRequest;
-import com.stock.sweet.sweetstockapi.dto.request.IngredientToUpdateRequest;
 import com.stock.sweet.sweetstockapi.dto.request.ProductRequest;
 import com.stock.sweet.sweetstockapi.dto.response.IngredientResponse;
 import com.stock.sweet.sweetstockapi.mapper.IngredientMapper;
@@ -34,14 +33,17 @@ public class IngredientController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public IngredientResponse createIngredient(
+    public ResponseEntity createIngredient(
             @RequestBody IngredientRequest body,
             @RequestHeader HttpHeaders headers
     ) throws JsonProcessingException {
         var uuidCompany = headersUtils.getCompanyIdFromToken(headers.getFirst(HttpHeaders.AUTHORIZATION));
-        return ingredientMapper.convertModelToResponse(
-                ingredientService.createIngredient(ingredientMapper.convertRequestToModel(body, uuidCompany))
-        );
+        try {
+            ingredientService.createIngredient(ingredientMapper.convertRequestToModel(body, uuidCompany));
+            return ResponseEntity.status(201).build();
+        } catch (Exception e) {
+            return ResponseEntity.status(500).build();
+        }
     }
 
     @GetMapping
