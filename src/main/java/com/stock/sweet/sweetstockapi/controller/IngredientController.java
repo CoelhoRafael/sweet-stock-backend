@@ -78,7 +78,7 @@ public class IngredientController {
         );
     }
 
-    @DeleteMapping("")
+    @DeleteMapping("/{uuid}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
         public IngredientResponse deleteIngredients(@PathVariable String uuid)throws Exception{
            return ingredientMapper.convertModelToResponse(

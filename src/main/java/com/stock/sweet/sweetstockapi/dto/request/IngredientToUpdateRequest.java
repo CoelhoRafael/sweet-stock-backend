@@ -19,7 +19,4 @@ public class IngredientToUpdateRequest {
         private BigDecimal buyValue;
         private Integer provideCode;
         private BigDecimal quantityUsed;
-
-
-
 }

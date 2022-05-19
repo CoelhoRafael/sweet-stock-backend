@@ -28,7 +28,9 @@ public class EmployeeMapper {
                 LevelAccess.EMPLOYEE_NOT_VERIFIED.name(),
                 null,
                 false,
+                employeRequest.isActivated(),
                 employeRequest.getPicture()
+
         );
     }
     public UserResponse convertModelToResponse(User user) {
@@ -38,6 +40,7 @@ public class EmployeeMapper {
                 user.getEmail(),
                 user.getTelephoneNumber(),
                 user.getLevelAccess(),
+                user.isAproved(),
                 user.isAproved(),
                 user.getPicture()
 
@@ -67,6 +70,7 @@ public class EmployeeMapper {
                     u.getTelephoneNumber(),
                     u.getLevelAccess(),
                     u.isAproved(),
+                    u.isActivated(),
                     u.getPicture()
             );
         }).collect(Collectors.toList());

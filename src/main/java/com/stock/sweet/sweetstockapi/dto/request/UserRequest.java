@@ -18,4 +18,6 @@ public class UserRequest {
     private LevelAccess levelAccess;
 
     private String picture;
+
+    private boolean activated;
 }

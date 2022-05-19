@@ -14,5 +14,6 @@ public class UserResponse {
     private String telephoneNumber;
     private String levelAccess;
     private boolean aproved;
+    private boolean activated;
     private String picture;
 }

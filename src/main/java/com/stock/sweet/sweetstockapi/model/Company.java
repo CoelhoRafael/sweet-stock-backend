@@ -49,6 +49,9 @@ public class Company {
     @Column(name = "profile_picture" ,length = 50 * 1024 * 1024)
     private String picture;
 
+    @Column(name= "activated")
+    private boolean activated;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_address", referencedColumnName = "id")
     private Address address;
