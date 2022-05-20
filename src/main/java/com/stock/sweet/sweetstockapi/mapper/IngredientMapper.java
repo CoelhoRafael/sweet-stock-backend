@@ -32,6 +32,7 @@ public class IngredientMapper {
                 false,
                 true,
                 uuidCompany,
+                ingredientRequest.getTotal(),
                 null
         );
     }
@@ -39,6 +40,7 @@ public class IngredientMapper {
     public IngredientResponse convertModelToResponse(Ingredient ingredient) {
         return new IngredientResponse(
                 ingredient.getUuid(),
+                ingredient.getNumberLot(),
                 ingredient.getName(),
                 ingredient.getUnitMeasurement(),
                 ingredient.getNumberUnits(),
@@ -51,7 +53,6 @@ public class IngredientMapper {
                 ingredient.getQuantityUsed(),
                 ingredient.getDateInsert(),
                 ingredient.getDateUpdate(),
-                ingredient.getNumberLot(),
                 ingredient.getExpirated(),
                 ingredient.getViewInReports(),
                 ingredient.getUuidCompany(),
@@ -63,6 +64,7 @@ public class IngredientMapper {
         return ingredients.stream().map(i -> {
             return new IngredientResponse(
                     i.getUuid(),
+                    i.getNumberLot(),
                     i.getName(),
                     i.getUnitMeasurement(),
                     i.getNumberUnits(),
@@ -75,7 +77,6 @@ public class IngredientMapper {
                     i.getQuantityUsed(),
                     i.getDateInsert(),
                     i.getDateUpdate(),
-                    i.getNumberLot(),
                     i.getExpirated(),
                     i.getViewInReports(),
                     i.getUuidCompany(),

@@ -1,5 +1,6 @@
 package com.stock.sweet.sweetstockapi.dto.request;
 
+import com.stock.sweet.sweetstockapi.controller.enums.UnitMeasurement;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,12 +12,15 @@ import java.time.LocalDate;
 @Data
 public class IngredientToUpdateRequest {
         private String name;
-        private String unitMeasurement;
+        private UnitMeasurement unitMeasurement;
         private BigDecimal quantity;
         private LocalDate expirationDate;
         private Double storageTemperature;
         private Boolean isRefigerated;
         private BigDecimal buyValue;
         private Integer provideCode;
-        private BigDecimal quantityUsed;
+        private Integer quantityUsed;
+        private Double quantityPerUnit;
+        private Double total;
+        private Integer numberUnits;
 }

@@ -66,7 +66,7 @@ public class DashboardMapper {
         mapOfIngredientsMonthSum.forEach((localDate, sum) -> chartMonthList.add(
                 ChartMonthItem
                         .builder()
-                        .month(getMonthNameFromDate(localDate))
+                        .month(localDate.toString())
                         .profit(0.0)
                         .spent(sum)
                         .build())
@@ -76,7 +76,7 @@ public class DashboardMapper {
                     outStock.setDate(outStock.getDate().withDayOfMonth(1));
                     return outStock;
                 }
-        ).collect(Collectors.groupingBy(a -> getMonthNameFromDate(a.getDate())));
+        ).collect(Collectors.groupingBy(OutStock::getDate));
 
         var mapOfOutStockMonthSum = mapOfOutStockMonth
                 .entrySet()
@@ -87,11 +87,13 @@ public class DashboardMapper {
                 );
 
         mapOfOutStockMonthSum.forEach((localDate, aDouble) -> {
-            chartMonthList.stream().filter(item -> item.getMonth() == localDate).map(chartMonthItem -> {
+            chartMonthList.stream().filter(item -> item.getMonth() == localDate.toString()).map(chartMonthItem -> {
                 chartMonthItem.setProfit(aDouble);
                 return chartMonthItem;
             });
         });
+
+        chartMonthList.forEach(chartMonthItem -> chartMonthItem.setMonth(getMonthNameFromDate(LocalDate.parse(chartMonthItem.getMonth()))));
 
         return chartMonthList;
     }

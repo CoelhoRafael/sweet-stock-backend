@@ -96,8 +96,6 @@ public class IngredientService {
         ingredientToUpdate.setIsRefigerated(ingredientRequest.getIsRefigerated());
         ingredientToUpdate.setBuyValue(ingredientRequest.getBuyValue());
         ingredientToUpdate.setProvideCode(ingredientRequest.getProvideCode());
-        ingredientToUpdate.setQuantityUsed(ingredientRequest.getQuantityUsed());
-
 
         ingredientRepository.save(ingredientToUpdate);
 

@@ -26,7 +26,6 @@ public class IngredientResponse {
     private Integer quantityUsed;
     private LocalDate dateInsert;
     private LocalDate dateUpdate;
-    private Integer numberLot;
     private Boolean expirated;
     private Boolean viewInReports;
     private String uuidCompany;
