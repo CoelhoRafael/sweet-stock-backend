@@ -32,7 +32,6 @@ public class IngredientMapper {
                 false,
                 true,
                 uuidCompany,
-                ingredientRequest.getTotal(),
                 null
         );
     }

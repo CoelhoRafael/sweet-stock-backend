@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -17,7 +18,7 @@ import java.util.Set;
 @Builder
 @Entity
 @Table(name = "tb_ingredient")
-public class Ingredient {
+public class Ingredient  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

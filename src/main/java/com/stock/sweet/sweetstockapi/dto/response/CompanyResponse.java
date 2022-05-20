@@ -17,4 +17,5 @@ public class CompanyResponse {
     private String email;
     private String telephoneNumber;
     private String picture;
+    private boolean activated;
 }

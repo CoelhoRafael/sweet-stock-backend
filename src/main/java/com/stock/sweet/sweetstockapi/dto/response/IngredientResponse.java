@@ -13,6 +13,7 @@ import java.time.LocalDate;
 @Data
 public class IngredientResponse {
     private String uuid;
+    private Integer numberLot;
     private String name;
     private UnitMeasurement unitMeasurement;
     private Integer numberUnits;

@@ -40,6 +40,7 @@ public class CompanyMapper {
                                 .build()
                 )
                 .picture(companyRequest.getPicture())
+                .activated(companyRequest.isActivated())
 
                 .build();
     }
@@ -56,6 +57,8 @@ public class CompanyMapper {
                 .company(Company.builder().id(companyId).build())
                 .aproved(true)
                 .picture(companyRequest.getPicture())
+                .activated(true)
+
                 .build();
     }
 
@@ -69,7 +72,8 @@ public class CompanyMapper {
                 company.getCnpj(),
                 company.getEmail(),
                 company.getTelephoneNumber(),
-                company.getPicture()
+                company.getPicture(),
+                company.isActivated()
 
         );
     }
@@ -85,7 +89,8 @@ public class CompanyMapper {
                     c.getCnpj(),
                     c.getEmail(),
                     c.getTelephoneNumber(),
-                    c.getPicture()
+                    c.getPicture(),
+                    c.isActivated()
 
             );
         }).collect(Collectors.toList());

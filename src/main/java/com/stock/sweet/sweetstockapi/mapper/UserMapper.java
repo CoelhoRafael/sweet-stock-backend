@@ -21,7 +21,9 @@ public class UserMapper {
                 userRequest.getLevelAccess().name(),
                 null,
                 false,
+                userRequest.isActivated(),
                 userRequest.getPicture()
+
         );
     }
 }
