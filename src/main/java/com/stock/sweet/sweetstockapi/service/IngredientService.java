@@ -5,6 +5,7 @@ import com.stock.sweet.sweetstockapi.dto.request.IngredientToUpdateRequest;
 import com.stock.sweet.sweetstockapi.model.Ingredient;
 import com.stock.sweet.sweetstockapi.model.Provider;
 import com.stock.sweet.sweetstockapi.repository.IngredientRepository;
+import com.stock.sweet.sweetstockapi.utils.ExportTXT;
 import com.stock.sweet.sweetstockapi.utils.FileCSV;
 import com.stock.sweet.sweetstockapi.utils.ListObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,14 @@ public class IngredientService {
         ingredientsExpired.forEach(ingredientsExpiredObject::add);
 
         return FileCSV.chaseFileCSV(ingredientsExpiredObject, nameReport);
+    }
+
+    public String IngredientsTXT(String uuid) {
+        String NAME_ARQUIVO= "ingredients" + LocalDate.now()+".txt";
+
+        List<Ingredient> ingredientsExpired = ingredientRepository.findAllByUuidCompany(uuid);
+        System.out.println(ingredientsExpired);
+        return ExportTXT.gravaArquivoTxt(ingredientsExpired,NAME_ARQUIVO);
     }
 
     public List<Ingredient> getAllIngredientsByCompanyUuid(String uuid) {

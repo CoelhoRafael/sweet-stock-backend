@@ -70,6 +70,18 @@ public class IngredientController {
 
     }
 
+    @GetMapping("/arq-txt")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity getAllIngredientsTXT(@RequestHeader HttpHeaders headers) throws JsonProcessingException {
+        var uuidCompany = headersUtils.getCompanyIdFromToken(headers.getFirst(HttpHeaders.AUTHORIZATION));
+        return ResponseEntity
+                .status(200)
+                .header("content-type", "text/txt")
+                .header("content-disposition", "filename=\"ingredients.txt\"")
+                .body(ingredientService.IngredientsTXT(uuidCompany));
+
+    }
+
     @PutMapping("/{uuid}")
     @ResponseStatus(HttpStatus.OK)
     public IngredientResponse updateIngredients(@PathVariable String uuid, @RequestBody IngredientToUpdateRequest body)throws Exception{
