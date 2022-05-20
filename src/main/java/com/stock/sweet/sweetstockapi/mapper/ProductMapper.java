@@ -21,6 +21,7 @@ public class ProductMapper {
                 productRequest.getDateInsert(),
                 productRequest.getDateUpdate(),
                 productRequest.getCategory(),
+                productRequest.getPicture(),
                 null
         );
     }
@@ -33,7 +34,8 @@ public class ProductMapper {
                 product.getExpirationDate(),
                 product.getDateInsert(),
                 product.getDateUpdate(),
-                product.getCategory()
+                product.getCategory(),
+                product.getPicture()
         );
     }
 
@@ -46,7 +48,8 @@ public class ProductMapper {
                     p.getExpirationDate(),
                     p.getDateInsert(),
                     p.getDateUpdate(),
-                    p.getCategory()
+                    p.getCategory(),
+                    p.getPicture()
             );
         }).collect(Collectors.toList());
     }

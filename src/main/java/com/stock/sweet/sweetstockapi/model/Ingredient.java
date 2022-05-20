@@ -79,6 +79,9 @@ public class Ingredient  {
     @Column(name = "total")
     private Double total;
 
+    @Column(name = "picture" ,length = 50 * 10240 * 10240)
+    private String picture;
+
     @OneToMany(mappedBy = "ingredient")
     Set<Confection> confections;
 

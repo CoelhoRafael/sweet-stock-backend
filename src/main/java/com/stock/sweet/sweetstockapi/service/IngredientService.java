@@ -38,21 +38,13 @@ public class IngredientService {
         ListObject<Ingredient> ingredientsExpiredObject = new ListObject<>(ingredientsExpired.size());
         ingredientsExpired.forEach(ingredientsExpiredObject::add);
 
-        String report = FileCSV.chaseFileCSV(ingredientsExpiredObject, nameReport);
-
-        return report;
+        return FileCSV.chaseFileCSV(ingredientsExpiredObject, nameReport);
     }
 
     public List<Ingredient> getAllIngredientsByCompanyUuid(String uuid) {
         List<Ingredient> ingredients = ingredientRepository.findAllByUuidCompany(uuid);
         return ingredients;
     }
-//    public List<Ingredient>getIngredientsByNumberLot(Integer number){
-//        List<Ingredient> ingredients = ingredientRepository.findAllByNumberLot(number);
-//
-//        return ingredients;
-//    }
-
 
     public List<Ingredient> getAllIngredientsNearExpire(String uuid) {
         return ingredientRepository.getAllIngredientsNearExpire(
@@ -112,7 +104,4 @@ public class IngredientService {
         ingredientRepository.delete(ingredientToDelete);
         return ingredientToDelete;
     }
-
-
-
 }

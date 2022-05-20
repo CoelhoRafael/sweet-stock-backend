@@ -19,4 +19,5 @@ public class ProductResponse {
     private LocalDate dateInsert;
     private LocalDate dateUpdate;
     private String category;
+    private String picture;
 }

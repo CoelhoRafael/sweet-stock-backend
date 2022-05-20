@@ -1,12 +1,7 @@
 package com.stock.sweet.sweetstockapi.mapper;
 
 import com.stock.sweet.sweetstockapi.dto.request.EmployeRequest;
-import com.stock.sweet.sweetstockapi.dto.response.CategoryResponse;
-import com.stock.sweet.sweetstockapi.dto.response.IngredientResponse;
 import com.stock.sweet.sweetstockapi.dto.response.UserResponse;
-import com.stock.sweet.sweetstockapi.model.Category;
-import com.stock.sweet.sweetstockapi.model.Employee;
-import com.stock.sweet.sweetstockapi.model.Ingredient;
 import com.stock.sweet.sweetstockapi.model.User;
 import com.stock.sweet.sweetstockapi.model.enums.LevelAccess;
 import org.springframework.stereotype.Component;

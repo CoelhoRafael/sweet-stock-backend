@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Date;
@@ -18,4 +19,5 @@ public class ProductRequest {
     private LocalDate dateInsert;
     private LocalDate dateUpdate;
     private String category;
+    private String picture;
 }

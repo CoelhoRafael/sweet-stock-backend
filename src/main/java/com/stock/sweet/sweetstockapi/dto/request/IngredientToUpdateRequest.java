@@ -23,4 +23,5 @@ public class IngredientToUpdateRequest {
         private Double quantityPerUnit;
         private Double total;
         private Integer numberUnits;
+        private String picture;
 }
