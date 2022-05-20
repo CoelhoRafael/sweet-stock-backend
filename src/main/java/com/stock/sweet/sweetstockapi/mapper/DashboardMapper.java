@@ -27,7 +27,6 @@ public class DashboardMapper {
             List<OutStock> allOutStock
     ) {
 
-
         return DashboardResponse
                 .builder()
                 .cards(
@@ -162,20 +161,21 @@ public class DashboardMapper {
                 .map(i -> IngredientDashboardResponse
                         .builder()
                         .uuid(i.getUuid())
-                        .amount(i.getQuantity().doubleValue())
+                        .amount(i.getNumberUnits())
                         .name(i.getName())
+                        .unitMeasurement(i.getUnitMeasurement().value)
                         .build()
                 ).collect(Collectors.toList());
 
-        var batatinha =
+        var mapOfIngredientsByDate =
                 ingredients.stream().map(
-                        i -> {
-                            i.getDateInsert().withDayOfMonth(1);
-                            return i;
+                        ingredient -> {
+                            ingredient.getDateInsert().withDayOfMonth(1);
+                            return ingredient;
                         }
                 ).collect(Collectors.groupingBy(Ingredient::getExpirationDate));
 
-        batatinha.forEach((date, ingredients1) -> {
+        mapOfIngredientsByDate.forEach((date, ingredients1) -> {
             listNearExpired.add(NearExpireIngredients
                     .builder()
                     .date(String.format("%d de %s", date.getDayOfMonth(), getMonthNameFromDate(date)))
@@ -185,7 +185,8 @@ public class DashboardMapper {
                                     .map(i -> IngredientDashboardResponse
                                             .builder()
                                             .uuid(i.getUuid())
-                                            .amount(i.getQuantity().doubleValue())
+                                            .amount(i.getNumberUnits())
+                                            .unitMeasurement(i.getUnitMeasurement().value)
                                             .name(i.getName())
                                             .build()
                                     )
@@ -201,12 +202,13 @@ public class DashboardMapper {
         return ingredients
                 .stream()
                 .filter(ingredient -> ingredient.getQuantityUsed().doubleValue()
-                        >= (.75 * ingredient.getQuantity().doubleValue()))
+                        >= (.75 * ingredient.getNumberUnits().doubleValue()))
                 .map(i -> IngredientDashboardResponse
                         .builder()
                         .uuid(i.getUuid())
-                        .amount(i.getQuantity().doubleValue())
+                        .amount(i.getNumberUnits() - i.getQuantityUsed())
                         .name(i.getName())
+                        .unitMeasurement(i.getUnitMeasurement().value)
                         .build())
                 .collect(Collectors.toList());
     }

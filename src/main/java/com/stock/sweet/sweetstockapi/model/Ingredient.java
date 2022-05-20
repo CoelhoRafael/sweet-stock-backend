@@ -1,5 +1,6 @@
 package com.stock.sweet.sweetstockapi.model;
 
+import com.stock.sweet.sweetstockapi.controller.enums.UnitMeasurement;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -29,11 +30,14 @@ public class Ingredient {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "unitMeasurement")
-    private String unitMeasurement;
+    @Column(name = "unit_measurement")
+    private UnitMeasurement unitMeasurement;
 
-    @Column(name = "quantity")
-    private BigDecimal quantity;
+    @Column(name = "number_units")
+    private Integer numberUnits;
+
+    @Column(name = "quantity_per_unit")
+    private Double quantityPerUnit;
 
     @Column(name = "expiration_date")
     private LocalDate expirationDate;
@@ -51,7 +55,7 @@ public class Ingredient {
     private Integer provideCode;
 
     @Column(name = "quantity_used")
-    private BigDecimal quantityUsed;
+    private Integer quantityUsed;
 
     @Column(name = "date_insert")
     private LocalDate dateInsert;
@@ -71,8 +75,10 @@ public class Ingredient {
     @Column(name = "uuid_company")
     private String uuidCompany;
 
+    @Column(name = "total")
+    private Double total;
+
     @OneToMany(mappedBy = "ingredient")
     Set<Confection> confections;
-
 
 }

@@ -18,7 +18,8 @@ public class IngredientMapper {
                 UUID.randomUUID().toString(),
                 ingredientRequest.getName(),
                 ingredientRequest.getUnitMeasurement(),
-                ingredientRequest.getQuantity(),
+                ingredientRequest.getNumberUnits(),
+                ingredientRequest.getQuantityPerUnit(),
                 ingredientRequest.getExpirationDate(),
                 ingredientRequest.getStorageTemperature(),
                 ingredientRequest.getIsRefigerated(),
@@ -31,6 +32,7 @@ public class IngredientMapper {
                 false,
                 true,
                 uuidCompany,
+                ingredientRequest.getTotal(),
                 null
         );
     }
@@ -40,16 +42,21 @@ public class IngredientMapper {
                 ingredient.getUuid(),
                 ingredient.getName(),
                 ingredient.getUnitMeasurement(),
-                ingredient.getQuantity(),
+                ingredient.getNumberUnits(),
+                ingredient.getQuantityPerUnit(),
                 ingredient.getExpirationDate(),
                 ingredient.getStorageTemperature(),
                 ingredient.getIsRefigerated(),
                 ingredient.getBuyValue(),
                 ingredient.getProvideCode(),
                 ingredient.getQuantityUsed(),
-                ingredient.getViewInReports(),
                 ingredient.getDateInsert(),
-                ingredient.getDateUpdate()
+                ingredient.getDateUpdate(),
+                ingredient.getNumberLot(),
+                ingredient.getExpirated(),
+                ingredient.getViewInReports(),
+                ingredient.getUuidCompany(),
+                ingredient.getTotal()
         );
     }
 
@@ -59,16 +66,21 @@ public class IngredientMapper {
                     i.getUuid(),
                     i.getName(),
                     i.getUnitMeasurement(),
-                    i.getQuantity(),
+                    i.getNumberUnits(),
+                    i.getQuantityPerUnit(),
                     i.getExpirationDate(),
                     i.getStorageTemperature(),
                     i.getIsRefigerated(),
                     i.getBuyValue(),
                     i.getProvideCode(),
                     i.getQuantityUsed(),
-                    i.getViewInReports(),
                     i.getDateInsert(),
-                    i.getDateUpdate()
+                    i.getDateUpdate(),
+                    i.getNumberLot(),
+                    i.getExpirated(),
+                    i.getViewInReports(),
+                    i.getUuidCompany(),
+                    i.getTotal()
             );
         }).collect(Collectors.toList());
     }

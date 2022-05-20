@@ -24,7 +24,7 @@ public class IngredientReportService {
         return ingredientReportRepository.save(ingredientReport);
     }
 
-    public String createIngredientsReportForDays(IngredientReportRequest body){
+    public String createIngredientsReportForDays(IngredientReportRequest body) {
         List<Ingredient> ingredientsExpired = ingredientRepository.findExpiredIngredientsByDate(LocalDate.now().plusDays(body.getQuantityDaysForGenerateReport()));
 
         String formatedColumns = "Id;" +
@@ -48,7 +48,8 @@ public class IngredientReportService {
         for (Ingredient ingredientExpired : ingredientsExpired) {
             ingredientReport += String.format(stringFormatIngredient,
                     ingredientExpired.getName(),
-                    ingredientExpired.getQuantity(),
+                    0.0,
+//                    ingredientExpired.getQuantity(),
                     ingredientExpired.getExpirationDate(),
                     ingredientExpired.getStorageTemperature(),
                     ingredientExpired.getIsRefigerated() ? "Sim" : "Não",

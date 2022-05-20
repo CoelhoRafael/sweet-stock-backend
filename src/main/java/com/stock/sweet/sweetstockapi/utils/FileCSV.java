@@ -50,7 +50,7 @@ public class FileCSV {
                 report += String.format(stringFormatIngredient,
 
                         ingredient.getName(),
-                        ingredient.getQuantity(),
+//                        ingredient.getQuantity(),
                         ingredient.getExpirationDate(),
                         ingredient.getStorageTemperature(),
                         ingredient.getIsRefigerated() ? "Sim" : "Não",
@@ -64,7 +64,7 @@ public class FileCSV {
                 output.format(stringFormatIngredient,
                       
                         ingredient.getName(),
-                        ingredient.getQuantity(),
+//                        ingredient.getQuantity(),
                         ingredient.getExpirationDate(),
                         ingredient.getStorageTemperature(),
                         ingredient.getIsRefigerated() ? "Sim" : "Não",

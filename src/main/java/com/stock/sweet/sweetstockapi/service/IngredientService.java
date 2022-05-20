@@ -53,11 +53,10 @@ public class IngredientService {
 
 
     public List<Ingredient> getAllIngredientsNearExpire(String uuid) {
-        var x = ingredientRepository.getAllIngredientsNearExpire(
+        return ingredientRepository.getAllIngredientsNearExpire(
                 uuid,
                 LocalDate.now().plusDays(15)
         );
-        return x;
     }
 
     public List<Ingredient> getExpiredIngredients(String uuid) {
@@ -85,7 +84,10 @@ public class IngredientService {
         }
         ingredientToUpdate.setName(ingredientRequest.getName());
         ingredientToUpdate.setUnitMeasurement(ingredientRequest.getUnitMeasurement());
-        ingredientToUpdate.setQuantity(ingredientRequest.getQuantity());
+        ingredientToUpdate.setQuantityPerUnit(ingredientRequest.getQuantityPerUnit());
+        ingredientToUpdate.setTotal(ingredientRequest.getTotal());
+        ingredientToUpdate.setNumberUnits(ingredientRequest.getNumberUnits());
+        ingredientToUpdate.setQuantityUsed(ingredientRequest.getQuantityUsed());
         ingredientToUpdate.setExpirationDate(ingredientRequest.getExpirationDate());
         ingredientToUpdate.setStorageTemperature(ingredientRequest.getStorageTemperature());
         ingredientToUpdate.setIsRefigerated(ingredientRequest.getIsRefigerated());
