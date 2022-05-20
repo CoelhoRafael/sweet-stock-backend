@@ -56,10 +56,11 @@ public class CompanyController {
                 .sign(Algorithm.HMAC512(TOKEN_PASSWORD));
 
 
-
         return ResponseEntity.status(201).body(LoginResponse.builder()
                 .token(token)
                 .username(company.getCeo())
+                .levelAccess(user.getLevelAccess())
+                .picture(company.getPicture())
                 .build()
         );
     }

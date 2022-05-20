@@ -58,7 +58,6 @@ public class CompanyMapper {
                 .aproved(true)
                 .picture(companyRequest.getPicture())
                 .activated(true)
-
                 .build();
     }
 
