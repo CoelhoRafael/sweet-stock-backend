@@ -85,4 +85,8 @@ public class Ingredient  {
     @OneToMany(mappedBy = "ingredient")
     Set<Confection> confections;
 
+
+
+    public Ingredient(Integer id, String name, Double quantityPerUnit, UnitMeasurement unitMeasurement, LocalDate expirationDate, Double storageTemperature, Boolean isRefigerated, BigDecimal buyValue, Integer quantityUsed, BigDecimal buyValue1, LocalDate dateInsert, Integer numberLot) {
+    }
 }
