@@ -137,6 +137,10 @@ public class EmployeeService {
     }
 
     public void updateEmployeePicture(String userEmail, String picture) throws InternalServerErrorException {
-        userRepository.updatePicture(picture, userEmail);
+        var result = userRepository.updatePicture(picture, userEmail);
+
+        if (result <= 0) {
+            throw new InternalServerErrorException("Erro ao atualizar a imagem");
+        }
     }
 }
