@@ -2,7 +2,7 @@ package com.stock.sweet.sweetstockapi.service;
 
 import com.stock.sweet.sweetstockapi.model.User;
 import com.stock.sweet.sweetstockapi.repository.UserRepository;
-import com.stock.sweet.sweetstockapi.security.data.UserDetailsData;
+import com.stock.sweet.sweetstockapi.config.security.data.UserDetailsData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

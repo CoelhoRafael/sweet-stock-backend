@@ -20,8 +20,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import static com.stock.sweet.sweetstockapi.security.JwtAuthenticationFilter.TOKEN_EXPIRATION;
-import static com.stock.sweet.sweetstockapi.security.JwtAuthenticationFilter.TOKEN_PASSWORD;
+import static com.stock.sweet.sweetstockapi.config.security.JwtAuthenticationFilter.TOKEN_EXPIRATION;
+import static com.stock.sweet.sweetstockapi.config.security.JwtAuthenticationFilter.TOKEN_PASSWORD;
 
 @RestController
 @RequestMapping("/companies")

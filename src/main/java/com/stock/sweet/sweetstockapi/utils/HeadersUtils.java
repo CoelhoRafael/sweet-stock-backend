@@ -4,13 +4,13 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.stock.sweet.sweetstockapi.security.JwtAuthenticationFilter;
+import com.stock.sweet.sweetstockapi.config.security.JwtAuthenticationFilter;
 import org.springframework.stereotype.Component;
 
 import java.util.Base64;
 import java.util.Map;
 
-import static com.stock.sweet.sweetstockapi.security.JwtValidationFilter.ATTRIBUTE_PREFIX;
+import static com.stock.sweet.sweetstockapi.config.security.JwtValidationFilter.ATTRIBUTE_PREFIX;
 
 @Component
 public class HeadersUtils {

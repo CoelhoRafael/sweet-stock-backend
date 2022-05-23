@@ -1,10 +1,10 @@
-package com.stock.sweet.sweetstockapi.security;
+package com.stock.sweet.sweetstockapi.config.security;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.stock.sweet.sweetstockapi.security.data.Role;
+import com.stock.sweet.sweetstockapi.config.security.data.Role;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;

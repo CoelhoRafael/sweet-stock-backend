@@ -1,4 +1,4 @@
-package com.stock.sweet.sweetstockapi.security.data;
+package com.stock.sweet.sweetstockapi.config.security.data;
 
 import org.springframework.security.core.GrantedAuthority;
 
