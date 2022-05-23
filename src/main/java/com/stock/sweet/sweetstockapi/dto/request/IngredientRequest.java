@@ -25,5 +25,6 @@ public class IngredientRequest {
     private Integer numberLot;
     private String uuidCompany;
     private Double total;
+    private String brand;
     private String picture;
 }

@@ -2,6 +2,7 @@ package com.stock.sweet.sweetstockapi.service;
 
 import com.stock.sweet.sweetstockapi.dto.request.EmployeesUuidRequest;
 import com.stock.sweet.sweetstockapi.dto.request.UserRequest;
+import com.stock.sweet.sweetstockapi.exception.InternalServerErrorException;
 import com.stock.sweet.sweetstockapi.model.Company;
 import com.stock.sweet.sweetstockapi.model.Email;
 import com.stock.sweet.sweetstockapi.model.User;
@@ -133,7 +134,9 @@ public class EmployeeService {
                     );
                 }
         );
+    }
 
-
+    public void updateEmployeePicture(String userEmail, String picture) throws InternalServerErrorException {
+        userRepository.updatePicture(picture, userEmail);
     }
 }

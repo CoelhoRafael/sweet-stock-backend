@@ -30,5 +30,6 @@ public class IngredientResponse {
     private Boolean viewInReports;
     private String uuidCompany;
     private Double total;
+    private String brand;
     private String picture;
 }

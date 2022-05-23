@@ -34,6 +34,7 @@ public class IngredientMapper {
                 uuidCompany,
                 ingredientRequest.getTotal(),
                 ingredientRequest.getPicture(),
+                ingredientRequest.getBrand(),
                 null
         );
     }
@@ -58,6 +59,7 @@ public class IngredientMapper {
                 ingredient.getViewInReports(),
                 ingredient.getUuidCompany(),
                 ingredient.getTotal(),
+                ingredient.getBrand(),
                 ingredient.getPicture()
         );
     }
@@ -83,6 +85,7 @@ public class IngredientMapper {
                     i.getViewInReports(),
                     i.getUuidCompany(),
                     i.getTotal(),
+                    i.getBrand(),
                     i.getPicture()
             );
         }).collect(Collectors.toList());

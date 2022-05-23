@@ -92,4 +92,16 @@ public class EmployeeController {
         employeeService.approveEmployees(uuidsToApprove);
         return uuidsToApprove.getUuids().isEmpty() ? ResponseEntity.status(204).build() : ResponseEntity.status(200).build();
     }
+
+    @PatchMapping("/picture/{picture}")
+    public ResponseEntity updateEmployeePicture(@PathVariable String picture, @RequestHeader HttpHeaders headers
+    ) throws JsonProcessingException {
+        try {
+            var userEmail = headersUtils.getEmailFromToken(headers.getFirst(HttpHeaders.AUTHORIZATION));
+            employeeService.updateEmployeePicture(userEmail, picture);
+            return ResponseEntity.status(200).build();
+        } catch (Exception e) {
+            return ResponseEntity.status(500).build();
+        }
+    }
 }

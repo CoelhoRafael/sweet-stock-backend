@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -18,7 +17,7 @@ import java.util.Set;
 @Builder
 @Entity
 @Table(name = "tb_ingredient")
-public class Ingredient  {
+public class Ingredient {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -79,13 +78,14 @@ public class Ingredient  {
     @Column(name = "total")
     private Double total;
 
-    @Column(name = "picture" ,length = 50 * 10240 * 10240)
+    @Column(name = "picture", length = 50 * 10240 * 10240)
     private String picture;
+
+    @Column(name = "brand")
+    private String brand;
 
     @OneToMany(mappedBy = "ingredient")
     Set<Confection> confections;
-
-
 
     public Ingredient(Integer id, String name, Double quantityPerUnit, UnitMeasurement unitMeasurement, LocalDate expirationDate, Double storageTemperature, Boolean isRefigerated, BigDecimal buyValue, Integer quantityUsed, BigDecimal buyValue1, LocalDate dateInsert, Integer numberLot) {
     }
