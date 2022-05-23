@@ -1,12 +1,16 @@
 package com.stock.sweet.sweetstockapi.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.stock.sweet.sweetstockapi.dto.request.ProviderRequest;
 import com.stock.sweet.sweetstockapi.dto.response.ProviderResponse;
 import com.stock.sweet.sweetstockapi.mapper.ProviderMapper;
 import com.stock.sweet.sweetstockapi.service.ProviderService;
+import com.stock.sweet.sweetstockapi.utils.HeadersUtils;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,12 +27,20 @@ public class ProviderController {
     @Autowired
     private ProviderService providerService;
 
+    @Autowired
+    private HeadersUtils headersUtils;
+
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public ProviderResponse createProvider(@RequestBody ProviderRequest body) {
-        return providerMapper.convertModelToResponse(
-                providerService.createProvider(providerMapper.convertRequestToModel(body))
-        );
+    public ResponseEntity createProvider(@RequestBody ProviderRequest body, @RequestHeader HttpHeaders headers) throws JsonProcessingException {
+        var companyId = headersUtils.getCompanyIdFromToken(headers);
+        try {
+            providerMapper.convertModelToResponse(
+                    providerService.createProvider(providerMapper.convertRequestToModel(body, companyId))
+            );
+            return ResponseEntity.status(201).build();
+        } catch (Exception e) {
+            return ResponseEntity.status(500).build();
+        }
     }
 
     @GetMapping

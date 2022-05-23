@@ -39,7 +39,7 @@ public class DashboardController {
 
     @GetMapping
     public ResponseEntity getDashboardData(@RequestHeader HttpHeaders headers) throws JsonProcessingException {
-        String uuidCompany = headersUtils.getCompanyIdFromToken(headers.getFirst(HttpHeaders.AUTHORIZATION));
+        String uuidCompany = headersUtils.getCompanyIdFromToken(headers);
 
         DashboardResponse dashboardResponse = dashboardMapper.convertToDashboardResponse(
                 ingredientService.getAllIngredientsNearExpire(uuidCompany),

@@ -38,7 +38,7 @@ public class IngredientController {
             @RequestBody IngredientRequest body,
             @RequestHeader HttpHeaders headers
     ) throws JsonProcessingException {
-        var uuidCompany = headersUtils.getCompanyIdFromToken(headers.getFirst(HttpHeaders.AUTHORIZATION));
+        var uuidCompany = headersUtils.getCompanyIdFromToken(headers);
         try {
             ingredientService.createIngredient(ingredientMapper.convertRequestToModel(body, uuidCompany));
             return ResponseEntity.status(201).build();
@@ -50,7 +50,7 @@ public class IngredientController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<IngredientResponse> getAllIngredients(@RequestHeader HttpHeaders headers) throws JsonProcessingException {
-        var uuidCompany = headersUtils.getCompanyIdFromToken(headers.getFirst(HttpHeaders.AUTHORIZATION));
+        var uuidCompany = headersUtils.getCompanyIdFromToken(headers);
         return ingredientMapper.convertModelListToResponseList(
                 ingredientService.getAllIngredients(uuidCompany)
         );
@@ -73,7 +73,7 @@ public class IngredientController {
     @GetMapping("/arq-txt")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity getAllIngredientsTXT(@RequestHeader HttpHeaders headers) throws JsonProcessingException {
-        var uuidCompany = headersUtils.getCompanyIdFromToken(headers.getFirst(HttpHeaders.AUTHORIZATION));
+        var uuidCompany = headersUtils.getCompanyIdFromToken(headers);
         return ResponseEntity
                 .status(200)
                 .header("content-type", "text/txt")

@@ -66,7 +66,7 @@ public class EmployeeController {
 
     @GetMapping
     public ResponseEntity<List<UserResponse>> getAllEmployees(@RequestHeader HttpHeaders headers) throws JsonProcessingException {
-        var uuidCompany = headersUtils.getCompanyIdFromToken(headers.getFirst(HttpHeaders.AUTHORIZATION));
+        var uuidCompany = headersUtils.getCompanyIdFromToken(headers);
 
         var response = employeeMapper.convertModelListToResponseList(
                 employeeService.getAllUsers("EMPLOYEE", uuidCompany)
@@ -78,7 +78,7 @@ public class EmployeeController {
 
     @GetMapping("/not-approved")
     public ResponseEntity<List<UserResponse>> getAllEmployeesNotAproved(@RequestHeader HttpHeaders headers) throws JsonProcessingException {
-        var uuidCompany = headersUtils.getCompanyIdFromToken(headers.getFirst(HttpHeaders.AUTHORIZATION));
+        var uuidCompany = headersUtils.getCompanyIdFromToken(headers);
 
         return ResponseEntity.status(200).body(
                 employeeMapper.convertModelListToResponseList(
@@ -97,7 +97,7 @@ public class EmployeeController {
     public ResponseEntity updateEmployeePicture(@PathVariable String picture, @RequestHeader HttpHeaders headers
     ) throws JsonProcessingException {
         try {
-            var userEmail = headersUtils.getEmailFromToken(headers.getFirst(HttpHeaders.AUTHORIZATION));
+            var userEmail = headersUtils.getEmailFromToken(headers);
             employeeService.updateEmployeePicture(userEmail, picture);
             return ResponseEntity.status(200).build();
         } catch (Exception e) {

@@ -16,13 +16,14 @@ public class ProviderMapper {
     @Autowired
     private AddressMapper addressMapper;
 
-    public Provider convertRequestToModel(ProviderRequest providerRequest) {
+    public Provider convertRequestToModel(ProviderRequest providerRequest, String uuidCompany) {
         return new Provider(
                 null,
                 UUID.randomUUID().toString(),
                 providerRequest.getName(),
                 providerRequest.getCnpj(),
-                providerRequest.getAverageTimeForDeliveryInDays()
+                providerRequest.getAverageTimeForDeliveryInDays(),
+                uuidCompany
         );
     }
 

@@ -29,4 +29,7 @@ public class Provider {
 
     @Column(name = "average_time_for_delivery_in_days")
     private Integer averageTimeForDeliveryInDays;
+
+    @Column(name = "company_uuid")
+    private String companyUuid;
 }

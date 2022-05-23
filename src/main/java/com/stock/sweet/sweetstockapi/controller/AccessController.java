@@ -46,8 +46,7 @@ public class AccessController {
 
 
         var company = companyService.findCompanyByUuid(
-                headersUtils.getCompanyIdFromToken(headers.getFirst(HttpHeaders.AUTHORIZATION)
-                ));
+                headersUtils.getCompanyIdFromToken(headers));
 
         Context ctx = new Context(LocaleContextHolder.getLocale());
         ctx.setVariable("company_name", company.getName());
@@ -71,7 +70,7 @@ public class AccessController {
     public ResponseEntity getAllWaitingForApproval(
             @RequestHeader HttpHeaders headers) throws JsonProcessingException {
 
-        String uuidCompany = headersUtils.getCompanyIdFromToken(headers.getFirst(HttpHeaders.AUTHORIZATION));
+        String uuidCompany = headersUtils.getCompanyIdFromToken(headers);
 
         return ResponseEntity.status(200).body(employeeMapper.convertListModelToResponse(
                 employeeService.getAllWaitingApproval(uuidCompany)

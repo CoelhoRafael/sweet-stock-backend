@@ -4,9 +4,9 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import com.stock.sweet.sweetstockapi.config.security.data.UserDetailsData;
 import com.stock.sweet.sweetstockapi.dto.request.UserLogin;
 import com.stock.sweet.sweetstockapi.dto.response.LoginResponse;
-import com.stock.sweet.sweetstockapi.config.security.data.UserDetailsData;
 import com.stock.sweet.sweetstockapi.service.CompanyService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -52,35 +52,40 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
         UserDetailsData userDetailsData = (UserDetailsData) authResult.getPrincipal();
-        String companyUUID = null;
-        try {
-            if (userDetailsData.getUser().isPresent()) {
-                companyUUID = companyService.findCompanyById(userDetailsData.getUser().get().getCompany().getId())
-                        .getUuid();
+        if (userDetailsData.getUser().get().isActivated()) {
+            String companyUUID = null;
+            try {
+                if (userDetailsData.getUser().isPresent()) {
+                    companyUUID = companyService.findCompanyById(userDetailsData.getUser().get().getCompany().getId())
+                            .getUuid();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+            String token = JWT.create()
+                    .withSubject(userDetailsData.getUsername())
+                    .withPayload(Map.of(
+                            "role", userDetailsData.getAuthorities().stream().findFirst().get().getAuthority(),
+                            "companyId", companyUUID
+                    ))
+                    .withExpiresAt(new Date(System.currentTimeMillis() + TOKEN_EXPIRATION))
+                    .sign(Algorithm.HMAC512(TOKEN_PASSWORD));
+
+            String json = new Gson().toJson(LoginResponse.builder()
+                    .token(token)
+                    .username(userDetailsData.getUser().get().getName())
+                    .levelAccess(userDetailsData.getUser().get().getLevelAccess())
+                    .picture(userDetailsData.getUser().get().getPicture())
+                    .build());
+
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+
+            response.getWriter().write(json);
+            response.getWriter().flush();
+        } else {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         }
-        String token = JWT.create()
-                .withSubject(userDetailsData.getUsername())
-                .withPayload(Map.of(
-                        "role", userDetailsData.getAuthorities().stream().findFirst().get().getAuthority(),
-                        "companyId", companyUUID
-                ))
-                .withExpiresAt(new Date(System.currentTimeMillis() + TOKEN_EXPIRATION))
-                .sign(Algorithm.HMAC512(TOKEN_PASSWORD));
-
-        String json = new Gson().toJson(LoginResponse.builder()
-                .token(token)
-                .username(userDetailsData.getUser().get().getName())
-                .levelAccess(userDetailsData.getUser().get().getLevelAccess())
-                .picture(userDetailsData.getUser().get().getPicture())
-                .build());
-
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-
-        response.getWriter().write(json);
-        response.getWriter().flush();
     }
+
 }
