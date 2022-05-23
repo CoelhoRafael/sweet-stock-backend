@@ -1,4 +1,4 @@
-package com.stock.sweet.sweetstockapi.security;
+package com.stock.sweet.sweetstockapi.config.security;
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
