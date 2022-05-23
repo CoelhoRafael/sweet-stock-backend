@@ -11,5 +11,4 @@ public class ProviderRequest {
     private String name;
     private String cnpj;
     private Integer averageTimeForDeliveryInDays;
-    private AddressRequest addressRequest;
 }
