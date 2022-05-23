@@ -12,5 +12,4 @@ public class ProviderResponse {
     private String name;
     private String cnpj;
     private Integer averageTimeForDeliveryInDays;
-    private AddressResponse addressResponse;
 }

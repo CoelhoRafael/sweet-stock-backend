@@ -40,7 +40,6 @@ public class ProviderService {
         providerToUpdate.setName(providerRequest.getName());
         providerToUpdate.setCnpj(providerRequest.getCnpj());
         providerToUpdate.setAverageTimeForDeliveryInDays(providerRequest.getAverageTimeForDeliveryInDays());
-        providerToUpdate.setAddress(addressMapper.convertRequestToModel(providerRequest.getAddressRequest()));
 
         providerRepository.save(providerToUpdate);
 
