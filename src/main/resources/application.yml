@@ -20,14 +20,15 @@ spring:
       matching-strategy: ant_path_matcher
 
   datasource:
-    driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
-    url: jdbc:sqlserver://sweet-stock.database.windows.net:1433;database=sweet-stock;user=sweet-stock@sweet-stock;password={your_password_here};encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;
-    username: sweet-stock
-    password: Gfgrupo2@
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://ec2-3-231-82-226.compute-1.amazonaws.com:5432/d8to2suiio4k8u?user=vvfqmakigpkewn&password=0e91cfc0dc5550a6805fa33365ba91d54c195b4a83c2c3ac02a0b5094a485267
+    username: vvfqmakigpkewn
+    password: 0e91cfc0dc5550a6805fa33365ba91d54c195b4a83c2c3ac02a0b5094a485267
   jpa:
     #    hibernate.ddl-auto: update
     generate-ddl: true
     #    show-sql: true
     hibernate:
       ddl-auto: update
-      dialect: org.hibernate.dialect.SQLServer2012Dialect
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+
