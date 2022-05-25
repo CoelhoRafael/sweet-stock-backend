@@ -43,7 +43,7 @@ public class Product {
     @Column(name = "category")
     private String category;
 
-    @Column(name = "picture" ,length = 50 * 10240 * 10240)
+    @Column(name = "picture")
     private String picture;
 
     @OneToMany(mappedBy = "product")

@@ -46,7 +46,7 @@ public class Company {
     @Column(name = "associate_code")
     private String associateCode;
 
-    @Column(name = "profile_picture" ,length = 50 * 1024 * 1024)
+    @Column(name = "profile_picture")
     private String picture;
 
     @Column(name= "activated")
