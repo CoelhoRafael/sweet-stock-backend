@@ -22,8 +22,8 @@ public class ProviderService {
         return providerRepository.save(provider);
     }
 
-    public List<Provider> getAllProviders() {
-        return providerRepository.findAll();
+    public List<Provider> getAllProviders(String uuid) {
+        return providerRepository.findAllByCompanyUuid(uuid);
     }
 
     public Provider findProviderByUuid(String uuid) throws Exception {

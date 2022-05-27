@@ -12,7 +12,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 
 @Configuration
 public class CorsConfiguration extends org.springframework.web.cors.CorsConfiguration {
@@ -28,12 +27,13 @@ public class CorsConfiguration extends org.springframework.web.cors.CorsConfigur
             }
         };
     }
+
     @Bean
     public FilterRegistrationBean<CorsFilter> simpleCorsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.setAllowedOrigins(Arrays.asList("http://localhost:3001","https://sweet-stock.vercel.app"));
+        config.setAllowedOrigins(Arrays.asList("http://localhost:3001", "https://sweet-stock.vercel.app"));
         config.setAllowedMethods(Collections.singletonList("*"));
         config.setAllowedHeaders(Collections.singletonList("*"));
         source.registerCorsConfiguration("/**", config);

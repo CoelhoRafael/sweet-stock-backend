@@ -10,5 +10,7 @@ import lombok.NoArgsConstructor;
 public class ProviderRequest {
     private String name;
     private String cnpj;
+    private String email;
+    private String telephone;
     private Integer averageTimeForDeliveryInDays;
 }

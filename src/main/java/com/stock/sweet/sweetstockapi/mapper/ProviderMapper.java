@@ -22,6 +22,8 @@ public class ProviderMapper {
                 UUID.randomUUID().toString(),
                 providerRequest.getName(),
                 providerRequest.getCnpj(),
+                providerRequest.getEmail(),
+                providerRequest.getTelephone(),
                 providerRequest.getAverageTimeForDeliveryInDays(),
                 uuidCompany
         );
@@ -30,18 +32,14 @@ public class ProviderMapper {
     public ProviderResponse convertModelToResponse(Provider provider) {
         return new ProviderResponse(
                 provider.getUuid(),
-                provider.getName(),
-                provider.getCnpj(),
-                provider.getAverageTimeForDeliveryInDays());
+                provider.getName());
     }
 
     public List<ProviderResponse> convertModelListToResponseList(List<Provider> providers) {
         return providers.stream().map(p -> {
             return new ProviderResponse(
                     p.getUuid(),
-                    p.getName(),
-                    p.getCnpj(),
-                    p.getAverageTimeForDeliveryInDays());
+                    p.getName());
         }).collect(Collectors.toList());
     }
 

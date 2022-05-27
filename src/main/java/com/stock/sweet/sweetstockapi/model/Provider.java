@@ -27,6 +27,12 @@ public class Provider {
     @Column(name = "cnpj")
     private String cnpj;
 
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "telephone")
+    private String telephone;
+
     @Column(name = "average_time_for_delivery_in_days")
     private Integer averageTimeForDeliveryInDays;
 
