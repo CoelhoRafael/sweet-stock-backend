@@ -21,9 +21,9 @@ spring:
 
   datasource:
     driverClassName: org.postgresql.Driver
-    url: jdbc:postgresql://ec2-3-231-82-226.compute-1.amazonaws.com:5432/d8to2suiio4k8u?user=vvfqmakigpkewn&password=0e91cfc0dc5550a6805fa33365ba91d54c195b4a83c2c3ac02a0b5094a485267
-    username: vvfqmakigpkewn
-    password: 0e91cfc0dc5550a6805fa33365ba91d54c195b4a83c2c3ac02a0b5094a485267
+    url: jdbc:postgresql://containers-us-west-65.railway.app:5737/railway?user=postgres&password=Z0XIndERLgf1ZkAXIIll
+    username: postgres
+    password: Z0XIndERLgf1ZkAXIIll
   jpa:
     #    hibernate.ddl-auto: update
     generate-ddl: true
