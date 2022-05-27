@@ -1,9 +1,7 @@
 package com.stock.sweet.sweetstockapi.service;
 
-import com.stock.sweet.sweetstockapi.dto.request.IngredientRequest;
 import com.stock.sweet.sweetstockapi.dto.request.IngredientToUpdateRequest;
 import com.stock.sweet.sweetstockapi.model.Ingredient;
-import com.stock.sweet.sweetstockapi.model.Provider;
 import com.stock.sweet.sweetstockapi.repository.IngredientRepository;
 import com.stock.sweet.sweetstockapi.utils.ExportTXT;
 import com.stock.sweet.sweetstockapi.utils.FileCSV;
@@ -11,7 +9,6 @@ import com.stock.sweet.sweetstockapi.utils.ListObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -43,11 +40,11 @@ public class IngredientService {
     }
 
     public String IngredientsTXT(String uuid) {
-        String NAME_ARQUIVO= "ingredients" + LocalDate.now()+".txt";
+        String NAME_ARQUIVO = "ingredients" + LocalDate.now() + ".txt";
 
         List<Ingredient> ingredientsExpired = ingredientRepository.findAllByUuidCompany(uuid);
         System.out.println(ingredientsExpired);
-        return ExportTXT.gravaArquivoTxt(ingredientsExpired,NAME_ARQUIVO);
+        return ExportTXT.gravaArquivoTxt(ingredientsExpired, NAME_ARQUIVO);
     }
 
     public List<Ingredient> getAllIngredientsByCompanyUuid(String uuid) {
@@ -81,7 +78,7 @@ public class IngredientService {
 
     public Ingredient updateIngredient(String uuid, IngredientToUpdateRequest ingredientRequest) throws Exception {
         Ingredient ingredientToUpdate;
-        ingredientToUpdate = (Ingredient) ingredientRepository. findIngredientByUuid(uuid);
+        ingredientToUpdate = (Ingredient) ingredientRepository.findIngredientByUuid(uuid);
 
         if (ingredientToUpdate == null) {
             return null;
@@ -106,7 +103,7 @@ public class IngredientService {
     public Ingredient deleteIngredient(String uuid) throws Exception {
         Ingredient ingredientToDelete = (Ingredient) ingredientRepository.findIngredientByUuid(uuid);
 
-        if (ingredientToDelete== null) {
+        if (ingredientToDelete == null) {
             return null;
         }
 

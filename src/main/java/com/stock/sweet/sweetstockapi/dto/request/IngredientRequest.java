@@ -21,10 +21,7 @@ public class IngredientRequest {
     private Boolean isRefigerated;
     private BigDecimal buyValue;
     private Integer provideCode;
-    private Integer quantityUsed;
     private Integer numberLot;
-    private String uuidCompany;
-    private Double total;
     private String brand;
     private String picture;
 }

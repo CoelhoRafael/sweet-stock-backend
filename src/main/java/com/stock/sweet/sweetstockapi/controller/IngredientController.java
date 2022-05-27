@@ -3,7 +3,6 @@ package com.stock.sweet.sweetstockapi.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.stock.sweet.sweetstockapi.dto.request.IngredientRequest;
 import com.stock.sweet.sweetstockapi.dto.request.IngredientToUpdateRequest;
-import com.stock.sweet.sweetstockapi.dto.request.ProductRequest;
 import com.stock.sweet.sweetstockapi.dto.response.IngredientResponse;
 import com.stock.sweet.sweetstockapi.mapper.IngredientMapper;
 import com.stock.sweet.sweetstockapi.service.IngredientService;
@@ -57,7 +56,6 @@ public class IngredientController {
     }
 
 
-
     @GetMapping("/expired")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity getAllExpiredIngredients() {
@@ -84,7 +82,7 @@ public class IngredientController {
 
     @PutMapping("/{uuid}")
     @ResponseStatus(HttpStatus.OK)
-    public IngredientResponse updateIngredients(@PathVariable String uuid, @RequestBody IngredientToUpdateRequest body)throws Exception{
+    public IngredientResponse updateIngredients(@PathVariable String uuid, @RequestBody IngredientToUpdateRequest body) throws Exception {
         return ingredientMapper.convertModelToResponse(
                 ingredientService.updateIngredient(uuid, body)
         );
@@ -92,11 +90,9 @@ public class IngredientController {
 
     @DeleteMapping("/{uuid}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-        public IngredientResponse deleteIngredients(@PathVariable String uuid)throws Exception{
-           return ingredientMapper.convertModelToResponse(
-                  ingredientService.deleteIngredient(uuid)
-           );
-
-        }
-
+    public IngredientResponse deleteIngredients(@PathVariable String uuid) throws Exception {
+        return ingredientMapper.convertModelToResponse(
+                ingredientService.deleteIngredient(uuid)
+        );
+    }
 }

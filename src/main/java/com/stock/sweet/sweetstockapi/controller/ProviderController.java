@@ -13,6 +13,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/providers")
 @CrossOrigin(origins = "*")
@@ -48,13 +50,13 @@ public class ProviderController {
     ) throws JsonProcessingException {
         var companyId = headersUtils.getCompanyIdFromToken(headers);
 
-        var response = providerMapper.convertModelListToResponseList(
+        List<ProviderResponse> providers = providerMapper.convertModelListToResponseList(
                 providerService.getAllProviders(companyId)
         );
-        if (response.isEmpty()) {
+        if (providers.isEmpty()) {
             return ResponseEntity.status(204).build();
         }
-        return ResponseEntity.status(200).build();
+        return ResponseEntity.status(200).body(providers);
     }
 
     @GetMapping("/{uuid}")
