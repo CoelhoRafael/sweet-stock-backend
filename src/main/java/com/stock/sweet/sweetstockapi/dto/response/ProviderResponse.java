@@ -10,4 +10,8 @@ import lombok.NoArgsConstructor;
 public class ProviderResponse {
     private String uuid;
     private String name;
+    private String cnpj;
+    private String email;
+    private String telephone;
+    private Integer averageTimeForDeliveryInDays;
 }
