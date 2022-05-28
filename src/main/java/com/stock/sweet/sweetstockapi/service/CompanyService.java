@@ -28,6 +28,9 @@ public class CompanyService {
     }
 
     public Company createCompany(Company company) {
+        if (company == null){
+            throw new IllegalArgumentException("tem que passar dados");
+        }
         return companyRepository.save(company);
     }
 

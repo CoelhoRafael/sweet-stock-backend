@@ -16,10 +16,12 @@ public class CategoryService {
     private CategoryRepository categoryRepository;
 
     public Category createCategory(Category category) {
+        if (category == null) throw new IllegalArgumentException("Corpo vazio");
         return categoryRepository.save(category);
     }
 
     public List<Category> getAllCategories() {
+        if (categoryRepository.findAll().isEmpty())throw new IllegalArgumentException();
         return categoryRepository.findAll();
     }
 
