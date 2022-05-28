@@ -2,6 +2,7 @@ package com.stock.sweet.sweetstockapi.mapper;
 
 import com.stock.sweet.sweetstockapi.dto.request.ProviderRequest;
 import com.stock.sweet.sweetstockapi.dto.response.ProviderResponse;
+import com.stock.sweet.sweetstockapi.dto.response.dashboard.ProviderResponseIngredients;
 import com.stock.sweet.sweetstockapi.model.Provider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -50,5 +51,14 @@ public class ProviderMapper {
                     p.getAverageTimeForDeliveryInDays());
         }).collect(Collectors.toList());
     }
+    public List<ProviderResponseIngredients> convertModelListToResponseListIngredients(List<Provider> providers) {
+        return providers.stream().map(p -> {
+            return new ProviderResponseIngredients(
+              p.getUuid(),
+              p.getName() );
+        }).collect(Collectors.toList());
+    }
+
+
 
 }

@@ -3,6 +3,7 @@ package com.stock.sweet.sweetstockapi.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.stock.sweet.sweetstockapi.dto.request.ProviderRequest;
 import com.stock.sweet.sweetstockapi.dto.response.ProviderResponse;
+import com.stock.sweet.sweetstockapi.dto.response.dashboard.ProviderResponseIngredients;
 import com.stock.sweet.sweetstockapi.mapper.ProviderMapper;
 import com.stock.sweet.sweetstockapi.service.ProviderService;
 import com.stock.sweet.sweetstockapi.utils.HeadersUtils;
@@ -51,6 +52,22 @@ public class ProviderController {
         var companyId = headersUtils.getCompanyIdFromToken(headers);
 
         List<ProviderResponse> providers = providerMapper.convertModelListToResponseList(
+                providerService.getAllProviders(companyId)
+        );
+        if (providers.isEmpty()) {
+            return ResponseEntity.status(204).build();
+        }
+        return ResponseEntity.status(200).body(providers);
+    }
+
+    @GetMapping("/providers-uuid")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity getAllProvidersByNameAndUuid(
+            @RequestHeader HttpHeaders headers
+    ) throws JsonProcessingException {
+        var companyId = headersUtils.getCompanyIdFromToken(headers);
+
+        List<ProviderResponseIngredients> providers = providerMapper.convertModelListToResponseListIngredients(
                 providerService.getAllProviders(companyId)
         );
         if (providers.isEmpty()) {
