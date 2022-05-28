@@ -35,4 +35,5 @@ public interface IngredientRepository extends JpaRepository<Ingredient, Integer>
     List<Ingredient> expiredIngredients(String uuid, LocalDate expirationDate);
 
 
+
 }

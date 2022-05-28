@@ -110,4 +110,9 @@ public class IngredientService {
         ingredientRepository.delete(ingredientToDelete);
         return ingredientToDelete;
     }
+
+    public Ingredient getIngredientByUuid(String uuid) {
+        return ingredientRepository.findIngredientByUuid(uuid);
+    }
+
 }
