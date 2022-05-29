@@ -11,37 +11,37 @@ import java.util.stream.Collectors;
 
 @Component
 public class ConfectionMapper {
-    public Confection convertRequestToModel(ConfectionRequest confectionRequest) {
-        return new Confection(
-                null,
-                UUID.randomUUID().toString(),
-                confectionRequest.getDate(),
-                confectionRequest.getQuantityIngredient(),
-                confectionRequest.getCost(),
-                null,
-                null
-        );
-    }
+//    public Confection convertRequestToModel(ConfectionRequest confectionRequest) {
+//        return new Confection(
+//                null,
+//                UUID.randomUUID().toString(),
+//                confectionRequest.getDate(),
+//                confectionRequest.getQuantityIngredient(),
+//                confectionRequest.getCost(),
+//                null,
+//                null
+//        );
+//    }
 
-    public ConfectionResponse convertModelToResponse(Confection confection) {
-        return new ConfectionResponse(
-                confection.getUuid(),
-                confection.getDate(),
-                confection.getQuantityIngredient(),
-                confection.getCost(),
-                null
-        );
-    }
-
-    public List<ConfectionResponse> convertModelListToResponseList(List<Confection> confections) {
-        return confections.stream().map(c -> {
-            return new ConfectionResponse(
-                    c.getUuid(),
-                    c.getDate(),
-                    c.getQuantityIngredient(),
-                    c.getCost(),
-                    null
-            );
-        }).collect(Collectors.toList());
-    }
+//    public ConfectionResponse convertModelToResponse(Confection confection) {
+//        return new ConfectionResponse(
+//                confection.getUuid(),
+//                confection.getDate(),
+//                confection.getQuantityIngredient(),
+//                confection.getCost(),
+//                null
+//        );
+//    }
+//
+//    public List<ConfectionResponse> convertModelListToResponseList(List<Confection> confections) {
+//        return confections.stream().map(c -> {
+//            return new ConfectionResponse(
+//                    c.getUuid(),
+//                    c.getDate(),
+//                    c.getQuantityIngredient(),
+//                    c.getCost(),
+//                    null
+//            );
+//        }).collect(Collectors.toList());
+//    }
 }

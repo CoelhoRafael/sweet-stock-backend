@@ -23,19 +23,19 @@ public class ConfectionController {
     @Autowired
     private ConfectionService confectionService;
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public ConfectionResponse createConfection(@RequestBody ConfectionRequest body) {
-        return confectionMapper.convertModelToResponse(
-                confectionService.createConfection(confectionMapper.convertRequestToModel(body))
-        );
-    }
-
-    @GetMapping
-    @ResponseStatus(HttpStatus.OK)
-    public List<ConfectionResponse> getAllConfections() {
-        return confectionMapper.convertModelListToResponseList(
-                confectionService.getAllConfections()
-        );
-    }
+//    @PostMapping
+//    @ResponseStatus(HttpStatus.CREATED)
+//    public ConfectionResponse createConfection(@RequestBody ConfectionRequest body) {
+//        return confectionMapper.convertModelToResponse(
+//                confectionService.createConfection(confectionMapper.convertRequestToModel(body))
+//        );
+//    }
+//
+//    @GetMapping
+//    @ResponseStatus(HttpStatus.OK)
+//    public List<ConfectionResponse> getAllConfections() {
+//        return confectionMapper.convertModelListToResponseList(
+//                confectionService.getAllConfections()
+//        );
+//    }
 } 

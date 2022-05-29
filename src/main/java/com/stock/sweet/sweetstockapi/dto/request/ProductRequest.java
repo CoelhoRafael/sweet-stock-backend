@@ -16,8 +16,6 @@ public class ProductRequest {
     private String name;
     private BigDecimal saleValue;
     private Date expirationDate;
-    private LocalDate dateInsert;
-    private LocalDate dateUpdate;
     private String category;
     private String picture;
 }

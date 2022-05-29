@@ -2,6 +2,7 @@ package com.stock.sweet.sweetstockapi.controller;
 
 import com.stock.sweet.sweetstockapi.dto.request.ProductRequest;
 import com.stock.sweet.sweetstockapi.dto.response.ProductResponse;
+import com.stock.sweet.sweetstockapi.mapper.IngredientMapper;
 import com.stock.sweet.sweetstockapi.mapper.ProductMapper;
 import com.stock.sweet.sweetstockapi.model.Ingredient;
 import com.stock.sweet.sweetstockapi.model.IngredientConfection;
@@ -34,9 +35,12 @@ public class ProductController {
     private IngredientService ingredientService;
 
     @Autowired
+    private IngredientMapper ingredientMapper;
+
+    @Autowired
     private HeadersUtils headersUtils;
 
-    @PostMapping("/add-ingredient")
+    @PostMapping("/confection-queue")
     public ResponseEntity addIngredientToProduct(
             @RequestHeader HttpHeaders headers,
             @RequestBody IngredientConfection ingredientConfection
@@ -51,9 +55,70 @@ public class ProductController {
         if (ingredient == null) {
             return ResponseEntity.status(404).build();
         }
-        return productService.addIngredientToQueue(companyUuid, ingredient, ingredientConfection) ?
+        return productService.addIngredientToConfectionQueue(companyUuid, ingredient, ingredientConfection) ?
                 ResponseEntity.status(200).build() :
                 ResponseEntity.status(500).build();
+    }
+
+    @PutMapping("/confection-queue")
+    public ResponseEntity undoLastIngredientConfetionOperation(
+            @RequestHeader HttpHeaders headers
+    ) {
+        String companyUuid;
+        try {
+            companyUuid = headersUtils.getCompanyIdFromToken(headers);
+        } catch (Exception e) {
+            return ResponseEntity.status(403).build();
+        }
+        var isSuccessful = productService.undoLastIngredientConfetionOperation(companyUuid);
+        return isSuccessful ? ResponseEntity.status(200).build() : ResponseEntity.status(500).build();
+    }
+
+    @DeleteMapping("/confection-queue")
+    public ResponseEntity removeLastIngredientConfection(
+            @RequestHeader HttpHeaders headers
+    ) {
+        String companyUuid;
+        try {
+            companyUuid = headersUtils.getCompanyIdFromToken(headers);
+        } catch (Exception e) {
+            return ResponseEntity.status(403).build();
+        }
+        var isSuccessful = productService.removeLastIngredientConfection(companyUuid);
+        return isSuccessful ? ResponseEntity.status(200).build() : ResponseEntity.status(403).build();
+    }
+
+    @DeleteMapping("/confection-queue/{uuidIngredient}")
+    public ResponseEntity removeLastIngredientConfection(
+            @PathVariable String uuidIngredient,
+            @RequestHeader HttpHeaders headers
+    ) {
+        String companyUuid;
+        try {
+            companyUuid = headersUtils.getCompanyIdFromToken(headers);
+        } catch (Exception e) {
+            return ResponseEntity.status(403).build();
+        }
+        var isSuccessful = productService.removeIngredientFromQueueByUuid(uuidIngredient,companyUuid);
+        return isSuccessful ? ResponseEntity.status(200).build() : ResponseEntity.status(403).build();
+    }
+
+
+    @GetMapping("/confection-queue")
+    public ResponseEntity getAllIngredientsFromConfectionQueue(
+            @RequestHeader HttpHeaders headers
+    ) {
+        String companyUuid;
+        try {
+            companyUuid = headersUtils.getCompanyIdFromToken(headers);
+        } catch (Exception e) {
+            return ResponseEntity.status(403).build();
+        }
+        var response = ingredientMapper.convertModelListToResponseList(productService.getAllIngredientsFromConfectionQueue(companyUuid));
+        if (response.isEmpty()) {
+            return ResponseEntity.status(204).build();
+        }
+        return ResponseEntity.status(200).body(response);
     }
 
     @PostMapping

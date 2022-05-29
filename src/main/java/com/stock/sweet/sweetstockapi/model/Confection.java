@@ -1,11 +1,11 @@
 package com.stock.sweet.sweetstockapi.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @AllArgsConstructor
@@ -13,6 +13,7 @@ import java.time.LocalDate;
 @Data
 @Entity
 @Table(name = "tb_confection")
+@Builder
 public class Confection {
 
     @Id
@@ -27,10 +28,10 @@ public class Confection {
     private LocalDate date;
 
     @Column(name = "quantity_ingredient")
-    private BigDecimal quantityIngredient;
+    private Integer quantity;
 
     @Column(name = "cost")
-    private BigDecimal cost;
+    private Double cost;
 
     @ManyToOne
     @JoinColumn(name = "id_product", referencedColumnName = "id")

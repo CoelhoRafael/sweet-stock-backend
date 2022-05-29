@@ -1,5 +1,8 @@
 package com.stock.sweet.sweetstockapi.utils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class FilaObj<T> {
 
     private int tamanho;
@@ -47,5 +50,13 @@ public class FilaObj<T> {
 
     public int getTamanho() {
         return this.tamanho;
+    }
+
+    public List<T> retornarTodos() {
+        List<T> todos = new ArrayList<>();
+        for (int i = 0; i < this.getTamanho(); i++) {
+            todos.add(fila[i]);
+        }
+        return todos;
     }
 }

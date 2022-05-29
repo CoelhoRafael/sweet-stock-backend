@@ -9,5 +9,5 @@ import lombok.Data;
 @Builder
 public class IngredientConfection {
     private String uuidIngredient;
-    private Integer numberUnits;
+    private Integer amount;
 }

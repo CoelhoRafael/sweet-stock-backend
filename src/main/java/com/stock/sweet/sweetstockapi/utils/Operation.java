@@ -8,4 +8,5 @@ import lombok.Data;
 public class Operation {
     private String alteredItemUuid;
     private OperationType operationType;
+    private Integer numberUnits;
 }

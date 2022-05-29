@@ -5,6 +5,7 @@ import com.stock.sweet.sweetstockapi.dto.response.ProductResponse;
 import com.stock.sweet.sweetstockapi.model.Product;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -18,8 +19,8 @@ public class ProductMapper {
                 productRequest.getName(),
                 productRequest.getSaleValue(),
                 productRequest.getExpirationDate(),
-                productRequest.getDateInsert(),
-                productRequest.getDateUpdate(),
+                LocalDate.now(),
+                LocalDate.now(),
                 productRequest.getCategory(),
                 productRequest.getPicture(),
                 null
