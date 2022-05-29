@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProviderService {
@@ -24,6 +25,12 @@ public class ProviderService {
 
     public List<Provider> getAllProviders(String uuid) {
         return providerRepository.findAllByCompanyUuid(uuid);
+    }
+
+    public Provider getAllProvidersById(Integer id) {
+        Optional<Provider> provider = providerRepository.findProviderById(id);
+
+        return provider.get();
     }
 
     public Provider findProviderByUuid(String uuid) throws Exception {

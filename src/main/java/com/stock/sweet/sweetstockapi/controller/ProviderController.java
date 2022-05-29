@@ -76,12 +76,18 @@ public class ProviderController {
         return ResponseEntity.status(200).body(providers);
     }
 
-    @GetMapping("/{uuid}")
+//    @GetMapping("/{uuid}")
+//    @ResponseStatus(HttpStatus.OK)
+//    public ProviderResponse getProviderByUuid(@PathVariable String uuid) throws Exception {
+//        return providerMapper.convertModelToResponse(
+//                providerService.findProviderByUuid(uuid)
+//        );
+//    }
+
+    @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ProviderResponse getProviderByUuid(@PathVariable String uuid) throws Exception {
-        return providerMapper.convertModelToResponse(
-                providerService.findProviderByUuid(uuid)
-        );
+    public ProviderResponse getProviderById(@PathVariable Integer id){
+        return providerMapper.convertModelToResponse(providerService.getAllProvidersById(id));
     }
 
     @PutMapping("/{uuid}")
