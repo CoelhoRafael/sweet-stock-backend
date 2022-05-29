@@ -6,11 +6,12 @@ import com.stock.sweet.sweetstockapi.mapper.CategoryMapper;
 import com.stock.sweet.sweetstockapi.model.Category;
 import com.stock.sweet.sweetstockapi.repository.CategoryRepository;
 import com.stock.sweet.sweetstockapi.service.CategoryService;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 
 import java.util.Collections;
 import java.util.List;
@@ -39,6 +40,7 @@ class CategoryControllerTest {
     private CategoryResponse res;
 
     @Test
+    @DisplayName("Should Create a category ")
     void createCategory() {
             Category c1 = mock(Category.class);
             Category c2 = mock(Category.class);
@@ -48,9 +50,11 @@ class CategoryControllerTest {
         when(categoryRequest.getStorageTemperature()).thenReturn(10.2);
         when(categoryRequest.getIsRefrigerated()).thenReturn(true);
         when (categoryRequest.getUnitMeasurement()).thenReturn("liters");
-        CategoryResponse resposta= con.createCategory(req);
+      CategoryResponse resposta= con.createCategory(req);
+
     }
     @Test
+    @DisplayName("Should return all categories")
     void getAllCategories() {
         Category c1 = mock(Category.class);
         Category c2 = mock(Category.class);
@@ -64,6 +68,7 @@ class CategoryControllerTest {
     }
 
     @Test
+    @DisplayName("Should return category by uuid")
     void getCategoryByUuid() {
         Category c1 = mock(Category.class);
         Category c2 = mock(Category.class);
@@ -83,5 +88,7 @@ class CategoryControllerTest {
             e.printStackTrace();
         }
     }
+
+
 
 }
