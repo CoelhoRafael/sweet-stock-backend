@@ -28,6 +28,9 @@ public class IngredientReport {
     @Column(name = "quantity_days_for_generate_report")
     private Integer quantityDaysForGenerateReport;
 
+    @Column(name = "arquivo_txt")
+    private String arquivoTxt;
+
     @Column(name = "id_company")
     private Integer idCompany;
 

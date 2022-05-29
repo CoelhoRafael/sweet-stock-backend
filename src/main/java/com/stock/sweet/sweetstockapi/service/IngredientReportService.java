@@ -1,6 +1,7 @@
 package com.stock.sweet.sweetstockapi.service;
 
 import com.stock.sweet.sweetstockapi.dto.request.IngredientReportRequest;
+import com.stock.sweet.sweetstockapi.mapper.IngredientReportMapper;
 import com.stock.sweet.sweetstockapi.model.Ingredient;
 import com.stock.sweet.sweetstockapi.model.IngredientReport;
 import com.stock.sweet.sweetstockapi.repository.IngredientReportRepository;
@@ -8,22 +9,25 @@ import com.stock.sweet.sweetstockapi.repository.IngredientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class IngredientReportService {
-
     @Autowired
     private IngredientReportRepository ingredientReportRepository;
-
     @Autowired
     private IngredientRepository ingredientRepository;
+
+    @Autowired
+    private IngredientReportMapper ingredientReportMapper;
 
     public IngredientReport createIngredientReport(IngredientReport ingredientReport) {
         return ingredientReportRepository.save(ingredientReport);
     }
-
     public String createIngredientsReportForDays(IngredientReportRequest body) {
         List<Ingredient> ingredientsExpired = ingredientRepository.findExpiredIngredientsByDate(LocalDate.now().plusDays(body.getQuantityDaysForGenerateReport()));
 
@@ -61,5 +65,13 @@ public class IngredientReportService {
             );
         }
         return ingredientReport;
+    }
+
+    public void saveTxt(String arquivoTxt) {
+        IngredientReportRequest ingredientReportRequest = new IngredientReportRequest(null,
+                null,
+                arquivoTxt);
+
+        ingredientReportRepository.save(ingredientReportMapper.convertRequestToModel(ingredientReportRequest));
     }
 }

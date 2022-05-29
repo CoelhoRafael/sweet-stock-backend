@@ -26,6 +26,7 @@ public class IngredientReportMapper {
                 UUID.randomUUID().toString(),
                 LocalDateTime.now(),
                 ingredientReportRequest.getQuantityDaysForGenerateReport(),
+                ingredientReportRequest.getArquivoTxt(),
                 ingredientReportRequest.getIdCompany()
         );
     }
