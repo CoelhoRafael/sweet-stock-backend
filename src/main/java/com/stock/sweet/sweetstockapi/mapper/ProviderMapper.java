@@ -57,7 +57,7 @@ public class ProviderMapper {
         return providers.stream().map(p -> {
             return new ProviderResponseIngredients(
               p.getUuid(),
-              p.getName() );
+              p.getId());
         }).collect(Collectors.toList());
     }
 

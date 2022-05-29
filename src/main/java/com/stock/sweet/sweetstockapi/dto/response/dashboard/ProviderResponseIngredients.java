@@ -8,5 +8,5 @@ import lombok.NoArgsConstructor;
 @Data
 public class ProviderResponseIngredients {
         private String key;
-        private String value;
+        private Integer value;
 }
