@@ -10,4 +10,5 @@ import lombok.NoArgsConstructor;
 public class IngredientReportRequest {
     private Integer quantityDaysForGenerateReport;
     private Integer idCompany;
+    private String arquivoTxt;
 }
