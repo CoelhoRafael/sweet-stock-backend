@@ -1,6 +1,7 @@
 package com.stock.sweet.sweetstockapi.mapper;
 
 import com.stock.sweet.sweetstockapi.dto.request.ProductRequest;
+import com.stock.sweet.sweetstockapi.dto.request.ProductRequestDashboard;
 import com.stock.sweet.sweetstockapi.dto.response.ProductResponse;
 import com.stock.sweet.sweetstockapi.model.Product;
 import org.springframework.stereotype.Component;
@@ -25,6 +26,24 @@ public class ProductMapper {
                 LocalDate.now(),
                 productRequest.getProductedBy(),
                 productRequest.getCategory(),
+                productRequest.getIsRefigerated(),
+                productRequest.getPicture(),
+                null
+        );
+    }
+    public Product convertRequestToModel(ProductRequestDashboard productRequest) {
+        return new Product(
+                null,
+                UUID.randomUUID().toString(),
+                productRequest.getName(),
+                productRequest.getUnitMeasurement(),
+                productRequest.getSaleValue(),
+                productRequest.getTotal(),
+                null,
+                LocalDate.now(),
+                LocalDate.now(),
+                productRequest.getProductedBy(),
+                null,
                 productRequest.getIsRefigerated(),
                 productRequest.getPicture(),
                 null
