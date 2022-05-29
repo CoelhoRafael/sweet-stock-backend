@@ -112,7 +112,11 @@ public class IngredientService {
     }
 
     public Ingredient getIngredientByUuid(String uuid) {
-        return ingredientRepository.findIngredientByUuid(uuid);
+        Ingredient ingredient = ingredientRepository.findIngredientByUuid(uuid);
+        if (ingredient != null){
+            return ingredient;
+        }
+        return null;
     }
 
 }

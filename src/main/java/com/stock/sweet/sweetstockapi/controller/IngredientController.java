@@ -77,6 +77,7 @@ public class IngredientController {
                 .body(ingredientService.getExpiredIngredients(uuidCompany));
 
     }
+
     @GetMapping("/arq-txt")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity getAllIngredientsTXT(@RequestHeader HttpHeaders headers) throws JsonProcessingException {
@@ -103,5 +104,15 @@ public class IngredientController {
         return ingredientMapper.convertModelToResponse(
                 ingredientService.deleteIngredient(uuid)
         );
+    }
+
+    @GetMapping("/ingredient-by-uuid/{uuid}")
+    public ResponseEntity<IngredientResponse> ingredientByUuid(@PathVariable String uuid) {
+        Ingredient ingredient = ingredientService.getIngredientByUuid(uuid);
+        if (ingredient != null) {
+            return ResponseEntity.status(200).body(ingredientMapper.convertModelToResponse(
+                    ingredientService.getIngredientByUuid(uuid)));
+        }
+        return ResponseEntity.status(404).build();
     }
 }
