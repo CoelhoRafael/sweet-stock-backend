@@ -31,7 +31,7 @@ public class DashboardMapper {
                 .builder()
                 .cards(
                         CardResponse.builder()
-                                .nearEndIngredients(nearExpireIngredients.size())
+                                .nearEndIngredients(getNearEndIngredients(allIngredients).size())
                                 .productsSoldMonth(productsSoldMonth.size())
                                 .expiredIngredients(expiredIngredients.size())
                                 .monthExpenses(monthExpenses
