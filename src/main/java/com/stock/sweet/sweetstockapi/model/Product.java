@@ -47,7 +47,7 @@ public class Product {
     @Column(name = "date_update")
     private LocalDate dateUpdate;
 
-    @Column(name = "producted-by")
+    @Column(name = "producted_by")
     private LocalDate productedBy;
 
     @Column(name = "category")
