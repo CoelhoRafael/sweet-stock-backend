@@ -1,5 +1,6 @@
 package com.stock.sweet.sweetstockapi.mapper;
 
+import com.stock.sweet.sweetstockapi.controller.enums.UnitMeasurement;
 import com.stock.sweet.sweetstockapi.dto.request.IngredientRequest;
 import com.stock.sweet.sweetstockapi.dto.response.IngredientResponse;
 import com.stock.sweet.sweetstockapi.model.Ingredient;
@@ -17,12 +18,12 @@ public class IngredientMapper {
                 null,
                 UUID.randomUUID().toString(),
                 ingredientRequest.getName(),
-                ingredientRequest.getUnitMeasurement(),
+                ingredientRequest.getUnitMeasurement() == null ? UnitMeasurement.UNIDADE : ingredientRequest.getUnitMeasurement(),
                 ingredientRequest.getNumberUnits(),
                 ingredientRequest.getQuantityPerUnit(),
                 ingredientRequest.getExpirationDate(),
                 ingredientRequest.getStorageTemperature(),
-                ingredientRequest.getIsRefigerated(),
+                ingredientRequest.getIsRefigerated() != null,
                 ingredientRequest.getBuyValue(),
                 ingredientRequest.getProvideCode(),
                 0,

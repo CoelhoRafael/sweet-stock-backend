@@ -165,7 +165,7 @@ public class DashboardMapper {
                         .uuid(i.getUuid())
                         .amount(i.getNumberUnits())
                         .name(i.getName())
-                        .unitMeasurement(i.getUnitMeasurement().value)
+                        .unitMeasurement(i.getUnitMeasurement() == null ? "" : i.getUnitMeasurement().value)
                         .build()
                 ).collect(Collectors.toList());
 
@@ -188,7 +188,7 @@ public class DashboardMapper {
                                             .builder()
                                             .uuid(i.getUuid())
                                             .amount(i.getNumberUnits())
-                                            .unitMeasurement(i.getUnitMeasurement().value)
+                                            .unitMeasurement(i.getUnitMeasurement() == null ? "" : i.getUnitMeasurement().value)
                                             .name(i.getName())
                                             .build()
                                     )
@@ -210,7 +210,7 @@ public class DashboardMapper {
                         .uuid(i.getUuid())
                         .amount(i.getNumberUnits() - i.getQuantityUsed())
                         .name(i.getName())
-                        .unitMeasurement(i.getUnitMeasurement().value)
+                        .unitMeasurement(i.getUnitMeasurement() == null ? "" : i.getUnitMeasurement().value)
                         .build())
                 .collect(Collectors.toList());
     }
