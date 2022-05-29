@@ -22,7 +22,7 @@ public class IngredientResponse {
     private Double storageTemperature;
     private Boolean isRefigerated;
     private BigDecimal buyValue;
-    private String provideCode;
+    private Integer provideCode;
     private Integer quantityUsed;
     private LocalDate dateInsert;
     private LocalDate dateUpdate;

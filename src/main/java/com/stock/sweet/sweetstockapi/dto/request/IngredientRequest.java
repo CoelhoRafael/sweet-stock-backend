@@ -20,7 +20,7 @@ public class IngredientRequest {
     private Double storageTemperature;
     private Boolean isRefigerated;
     private BigDecimal buyValue;
-    private String provideCode;
+    private Integer provideCode;
     private Integer numberLot;
     private String brand;
     private String picture;

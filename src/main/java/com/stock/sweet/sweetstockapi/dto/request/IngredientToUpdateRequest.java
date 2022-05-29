@@ -18,7 +18,7 @@ public class IngredientToUpdateRequest {
         private Double storageTemperature;
         private Boolean isRefigerated;
         private BigDecimal buyValue;
-        private String provideCode;
+        private Integer provideCode;
         private Integer quantityUsed;
         private Double quantityPerUnit;
         private Double total;
