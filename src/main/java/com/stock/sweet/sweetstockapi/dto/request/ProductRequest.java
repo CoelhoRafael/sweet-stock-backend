@@ -13,9 +13,12 @@ import java.util.Date;
 @NoArgsConstructor
 @Data
 public class ProductRequest {
+    private String uuid;
     private String name;
     private BigDecimal saleValue;
     private Date expirationDate;
+    private LocalDate dateInsert;
+    private LocalDate dateUpdate;
     private String category;
     private String picture;
 }
