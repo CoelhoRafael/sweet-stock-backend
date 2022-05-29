@@ -31,7 +31,7 @@ public class ProductMapper {
                 null
         );
     }
-    public Product convertRequestToModel(ProductRequestDashboard productRequest) {
+    public Product convertRequestToModelDashboard(ProductRequestDashboard productRequest) {
         return new Product(
                 null,
                 UUID.randomUUID().toString(),

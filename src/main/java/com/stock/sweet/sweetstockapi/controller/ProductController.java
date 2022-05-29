@@ -126,7 +126,7 @@ public class ProductController {
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<ProductResponse> createProduct(@RequestBody ProductRequestDashboard body) {
         return ResponseEntity.status(201).body(productMapper.convertModelToResponse(
-                productService.createProduct(productMapper.convertRequestToModel(body))
+                productService.createProduct(productMapper.convertRequestToModelDashboard(body))
         ));
     }
 
