@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class ProviderResponse {
+    private Integer id;
     private String uuid;
     private String name;
     private String cnpj;

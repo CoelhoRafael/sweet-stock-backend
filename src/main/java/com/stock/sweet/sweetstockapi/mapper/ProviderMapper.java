@@ -32,6 +32,7 @@ public class ProviderMapper {
 
     public ProviderResponse convertModelToResponse(Provider provider) {
         return new ProviderResponse(
+                provider.getId(),
                 provider.getUuid(),
                 provider.getName(),
                 provider.getCnpj(),
@@ -43,6 +44,7 @@ public class ProviderMapper {
     public List<ProviderResponse> convertModelListToResponseList(List<Provider> providers) {
         return providers.stream().map(p -> {
             return new ProviderResponse(
+                    p.getId(),
                     p.getUuid(),
                     p.getName(),
                     p.getCnpj(),
