@@ -4,15 +4,23 @@ import com.stock.sweet.sweetstockapi.controller.enums.UnitMeasurement;
 import com.stock.sweet.sweetstockapi.dto.request.IngredientRequest;
 import com.stock.sweet.sweetstockapi.dto.response.IngredientResponse;
 import com.stock.sweet.sweetstockapi.model.Ingredient;
+import com.stock.sweet.sweetstockapi.model.Provider;
+import com.stock.sweet.sweetstockapi.service.ProviderService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
 @Component
 public class IngredientMapper {
+
+    @Autowired
+    private ProviderService providerService;
+
     public Ingredient convertRequestToModel(IngredientRequest ingredientRequest, String uuidCompany) {
         return new Ingredient(
                 null,
@@ -41,6 +49,13 @@ public class IngredientMapper {
     }
 
     public IngredientResponse convertModelToResponse(Ingredient ingredient) {
+        String providerName = "";
+
+        if(ingredient.getProvideCode() != null){
+            Provider provider = providerService.getAllProvidersById(ingredient.getProvideCode());
+            providerName = provider.getName();
+        }
+
         return new IngredientResponse(
                 ingredient.getUuid(),
                 ingredient.getNumberLot(),
@@ -52,7 +67,7 @@ public class IngredientMapper {
                 ingredient.getStorageTemperature(),
                 ingredient.getIsRefigerated(),
                 ingredient.getBuyValue(),
-                ingredient.getProvideCode(),
+                providerName,
                 ingredient.getQuantityUsed(),
                 ingredient.getDateInsert(),
                 ingredient.getDateUpdate(),
@@ -66,7 +81,13 @@ public class IngredientMapper {
     }
 
     public List<IngredientResponse> convertModelListToResponseList(List<Ingredient> ingredients) {
+        AtomicReference<String> providerName = new AtomicReference<>("");
+
         return ingredients.stream().map(i -> {
+            if(i.getProvideCode() != null){
+                Provider provider = providerService.getAllProvidersById(i.getProvideCode());
+                providerName.set(provider.getName());
+            }
             return new IngredientResponse(
                     i.getUuid(),
                     i.getNumberLot(),
@@ -78,7 +99,7 @@ public class IngredientMapper {
                     i.getStorageTemperature(),
                     i.getIsRefigerated(),
                     i.getBuyValue(),
-                    i.getProvideCode(),
+                    providerName.get(),
                     i.getQuantityUsed(),
                     i.getDateInsert(),
                     i.getDateUpdate(),
