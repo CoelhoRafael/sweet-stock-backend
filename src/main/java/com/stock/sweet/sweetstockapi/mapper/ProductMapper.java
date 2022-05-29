@@ -17,11 +17,15 @@ public class ProductMapper {
                 null,
                 UUID.randomUUID().toString(),
                 productRequest.getName(),
+                productRequest.getUnitMeasurement(),
                 productRequest.getSaleValue(),
+                productRequest.getTotal(),
                 productRequest.getExpirationDate(),
                 LocalDate.now(),
                 LocalDate.now(),
+                productRequest.getProductedBy(),
                 productRequest.getCategory(),
+                productRequest.getIsRefigerated(),
                 productRequest.getPicture(),
                 null
         );
@@ -34,7 +38,11 @@ public class ProductMapper {
                 product.getSaleValue(),
                 product.getExpirationDate(),
                 product.getDateInsert(),
+                product.getProductedBy(),
                 product.getDateUpdate(),
+                product.getIsRefigerated(),
+                product.getTotal(),
+                product.getUnitMeasurement(),
                 product.getCategory(),
                 product.getPicture()
         );
@@ -48,7 +56,11 @@ public class ProductMapper {
                     p.getSaleValue(),
                     p.getExpirationDate(),
                     p.getDateInsert(),
+                    p.getProductedBy(),
                     p.getDateUpdate(),
+                    p.getIsRefigerated(),
+                    p.getTotal(),
+                    p.getUnitMeasurement(),
                     p.getCategory(),
                     p.getPicture()
             );

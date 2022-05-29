@@ -1,5 +1,6 @@
 package com.stock.sweet.sweetstockapi.dto.request;
 
+import com.stock.sweet.sweetstockapi.controller.enums.UnitMeasurement;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,7 +19,11 @@ public class ProductRequest {
     private BigDecimal saleValue;
     private Date expirationDate;
     private LocalDate dateInsert;
+    private LocalDate productedBy;
     private LocalDate dateUpdate;
+    private Boolean isRefigerated;
+    private Double total;
+    private UnitMeasurement unitMeasurement;
     private String category;
     private String picture;
 }
