@@ -52,7 +52,7 @@ public class Ingredient {
     private BigDecimal buyValue;
 
     @Column(name = "provide_code")
-    private Integer provideCode;
+    private String provideCode;
 
     @Column(name = "quantity_used")
     private Integer quantityUsed;
