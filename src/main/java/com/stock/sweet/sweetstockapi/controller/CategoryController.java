@@ -26,6 +26,7 @@ public class CategoryController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public CategoryResponse createCategory(@RequestBody CategoryRequest body) {
+        if (body == null) throw new IllegalArgumentException();
         return categoryMapper.convertModelToResponse(
                 categoryService.createCategory(categoryMapper.convertRequestToModel(body))
         );

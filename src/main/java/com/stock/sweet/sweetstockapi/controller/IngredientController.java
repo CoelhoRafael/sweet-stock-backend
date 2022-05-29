@@ -5,6 +5,7 @@ import com.stock.sweet.sweetstockapi.dto.request.IngredientRequest;
 import com.stock.sweet.sweetstockapi.dto.request.IngredientToUpdateRequest;
 import com.stock.sweet.sweetstockapi.dto.response.IngredientResponse;
 import com.stock.sweet.sweetstockapi.mapper.IngredientMapper;
+import com.stock.sweet.sweetstockapi.model.Ingredient;
 import com.stock.sweet.sweetstockapi.service.IngredientService;
 import com.stock.sweet.sweetstockapi.utils.HeadersUtils;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -56,10 +57,9 @@ public class IngredientController {
     }
 
 
-    @GetMapping("/expired")
+    @GetMapping("/expired-csv")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity getAllExpiredIngredients() {
-
         return ResponseEntity
                 .status(200)
                 .header("content-type", "text/csv")
@@ -68,6 +68,15 @@ public class IngredientController {
 
     }
 
+    @GetMapping("/expired")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity getAllExpiredIngredientsList(@RequestHeader HttpHeaders headers) throws JsonProcessingException {
+        var uuidCompany = headersUtils.getCompanyIdFromToken(headers);
+        return ResponseEntity
+                .status(200)
+                .body(ingredientService.getExpiredIngredients(uuidCompany));
+
+    }
     @GetMapping("/arq-txt")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity getAllIngredientsTXT(@RequestHeader HttpHeaders headers) throws JsonProcessingException {
