@@ -7,6 +7,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class ProviderResponseIngredients {
-        private String key;
-        private Integer value;
+        private Integer key;
+        private String value;
 }

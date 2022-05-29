@@ -56,8 +56,8 @@ public class ProviderMapper {
     public List<ProviderResponseIngredients> convertModelListToResponseListIngredients(List<Provider> providers) {
         return providers.stream().map(p -> {
             return new ProviderResponseIngredients(
-              p.getUuid(),
-              p.getId());
+              p.getId(),
+              p.getName());
         }).collect(Collectors.toList());
     }
 
