@@ -24,9 +24,9 @@ public class IngredientService {
         return ingredientRepository.save(ingredient);
     }
 
-    public String ExpiredIngredientsCSV() {
+    public String ExpiredIngredientsCSV(String uuid) {
         String nameReport = "relatorio-ingredientes-vencidos-" + LocalDate.now();
-        List<Ingredient> ingredientsExpired = ingredientRepository.findIngredientExpired(LocalDate.now());
+        List<Ingredient> ingredientsExpired = ingredientRepository.findIngredientExpired(LocalDate.now(), uuid);
 
 
         for (int i = 0; i < ingredientsExpired.size(); i++) {
@@ -42,7 +42,7 @@ public class IngredientService {
     public String IngredientsTXT(String uuid) {
         String NAME_ARQUIVO = "ingredients" + LocalDate.now() + ".txt";
 
-        List<Ingredient> ingredientsExpired = ingredientRepository.findAllByUuidCompany(uuid);
+        List<Ingredient> ingredientsExpired = ingredientRepository.findIngredientExpired(LocalDate.now(),uuid);
         System.out.println(ingredientsExpired);
         return ExportTXT.gravaArquivoTxt(ingredientsExpired, NAME_ARQUIVO);
     }
