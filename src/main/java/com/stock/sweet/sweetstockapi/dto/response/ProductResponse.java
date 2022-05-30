@@ -21,6 +21,7 @@ public class ProductResponse {
     private LocalDate productedBy;
     private LocalDate dateUpdate;
     private Boolean isRefigerated;
+    private Boolean sold;
     private Double total;
     private UnitMeasurement unitMeasurement;
     private String category;

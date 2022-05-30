@@ -27,6 +27,7 @@ public class ProductMapper {
                 productRequest.getProductedBy(),
                 productRequest.getCategory(),
                 productRequest.getIsRefigerated(),
+                productRequest.getSold(),
                 productRequest.getPicture(),
                 null
         );
@@ -45,6 +46,7 @@ public class ProductMapper {
                 productRequest.getProductedBy(),
                 null,
                 productRequest.getIsRefigerated(),
+                productRequest.getSold(),
                 productRequest.getPicture(),
                 null
         );
@@ -60,6 +62,7 @@ public class ProductMapper {
                 product.getProductedBy(),
                 product.getDateUpdate(),
                 product.getIsRefigerated(),
+                product.getSold(),
                 product.getTotal(),
                 product.getUnitMeasurement(),
                 product.getCategory(),
@@ -78,6 +81,7 @@ public class ProductMapper {
                     p.getProductedBy(),
                     p.getDateUpdate(),
                     p.getIsRefigerated(),
+                    p.getSold(),
                     p.getTotal(),
                     p.getUnitMeasurement(),
                     p.getCategory(),

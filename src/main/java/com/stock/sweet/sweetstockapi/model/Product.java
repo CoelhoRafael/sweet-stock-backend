@@ -56,6 +56,9 @@ public class Product {
     @Column(name = "is_refigerated")
     private Boolean isRefigerated;
 
+    @Column(name = "sold")
+    private Boolean sold;
+
     @Column(name = "picture")
     private String picture;
 

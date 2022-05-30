@@ -19,5 +19,6 @@ public class ProductRequestDashboard {
     private Double total;
     private UnitMeasurement unitMeasurement;
     private String picture;
+    private Boolean sold;
 
 }

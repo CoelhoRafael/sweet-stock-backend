@@ -2,11 +2,13 @@ package com.stock.sweet.sweetstockapi.controller;
 
 import com.stock.sweet.sweetstockapi.dto.request.ProductRequest;
 import com.stock.sweet.sweetstockapi.dto.request.ProductRequestDashboard;
+import com.stock.sweet.sweetstockapi.dto.request.ProductRequestSell;
 import com.stock.sweet.sweetstockapi.dto.response.ProductResponse;
 import com.stock.sweet.sweetstockapi.mapper.IngredientMapper;
 import com.stock.sweet.sweetstockapi.mapper.ProductMapper;
 import com.stock.sweet.sweetstockapi.model.Ingredient;
 import com.stock.sweet.sweetstockapi.model.IngredientConfection;
+import com.stock.sweet.sweetstockapi.model.Product;
 import com.stock.sweet.sweetstockapi.service.IngredientService;
 import com.stock.sweet.sweetstockapi.service.ProductService;
 import com.stock.sweet.sweetstockapi.utils.HeadersUtils;
@@ -152,6 +154,12 @@ public class ProductController {
         return productMapper.convertModelToResponse(
                 productService.updateProduct(uuid, body)
         );
+    }
+    @PutMapping("/{soldQuantity}/{uuid}")
+    @ResponseStatus(HttpStatus.OK)
+    public ProductRequestSell sellProduct(@PathVariable String uuid, @PathVariable Double soldQuantity) throws Exception {
+        return productService.sellProduct(uuid, soldQuantity);
+
     }
 
     @DeleteMapping("/{uuid}")
