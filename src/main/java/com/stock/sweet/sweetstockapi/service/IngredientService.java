@@ -77,12 +77,13 @@ public class IngredientService {
     }
 
     public Ingredient updateIngredient(String uuid, IngredientToUpdateRequest ingredientRequest) throws Exception {
-        Ingredient ingredientToUpdate;
-        ingredientToUpdate = (Ingredient) ingredientRepository.findIngredientByUuid(uuid);
+
+        Ingredient ingredientToUpdate = ingredientRepository.findIngredientByUuid(uuid);
 
         if (ingredientToUpdate == null) {
             return null;
         }
+
         ingredientToUpdate.setName(ingredientRequest.getName());
         ingredientToUpdate.setUnitMeasurement(ingredientRequest.getUnitMeasurement());
         ingredientToUpdate.setQuantityPerUnit(ingredientRequest.getQuantityPerUnit());

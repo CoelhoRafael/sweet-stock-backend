@@ -94,7 +94,7 @@ public class IngredientController {
     @ResponseStatus(HttpStatus.OK)
     public IngredientResponse updateIngredients(@PathVariable String uuid, @RequestBody IngredientToUpdateRequest body) throws Exception {
         return ingredientMapper.convertModelToResponse(
-                ingredientService.updateIngredient(uuid, body)
+            ingredientService.updateIngredient(uuid, body)
         );
     }
 
