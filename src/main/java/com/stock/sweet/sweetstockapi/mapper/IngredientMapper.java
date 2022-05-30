@@ -44,6 +44,7 @@ public class IngredientMapper {
                 (ingredientRequest.getQuantityPerUnit() * ingredientRequest.getNumberUnits()),
                 ingredientRequest.getPicture(),
                 ingredientRequest.getBrand(),
+                ingredientRequest.getPurchaseDate(),
                 null
         );
     }
