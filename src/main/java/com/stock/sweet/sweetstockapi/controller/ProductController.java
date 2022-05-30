@@ -103,7 +103,7 @@ public class ProductController {
             return ResponseEntity.status(403).build();
         }
         var isSuccessful = productService.removeIngredientFromQueueByUuid(uuidIngredient,companyUuid);
-        return isSuccessful ? ResponseEntity.status(200).build() : ResponseEntity.status(403).build();
+        return isSuccessful ? ResponseEntity.status(200).build() : ResponseEntity.status(500).build();
     }
 
 
