@@ -13,8 +13,8 @@ import java.util.List;
 @Repository
 public interface IngredientRepository extends JpaRepository<Ingredient, Integer> {
 
-    @Query("select i from Ingredient i where ?1 > i.expirationDate")
-    List<Ingredient> findIngredientExpired(LocalDate now);
+    @Query("select i from Ingredient i where ?1 > i.expirationDate and i.uuidCompany = ?2")
+    List<Ingredient> findIngredientExpired(LocalDate now, String uuid);
 
     @Modifying
     @Transactional

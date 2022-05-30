@@ -45,7 +45,8 @@ public class ProductService {
     }
 
     public List<Product> getAllProducts() {
-        return productRepository.findAllBySoldIsFalse();
+//        return productRepository.findAllBySoldIsFalse();
+        return  productRepository.findAll();
     }
 
     public Product findProductByUuid(String uuid) throws NotFoundException {

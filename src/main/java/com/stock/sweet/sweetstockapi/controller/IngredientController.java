@@ -59,12 +59,13 @@ public class IngredientController {
 
     @GetMapping("/expired-csv")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity getAllExpiredIngredients() {
+    public ResponseEntity getAllExpiredIngredients(@RequestHeader HttpHeaders headers) throws JsonProcessingException {
+        var uuidCompany = headersUtils.getCompanyIdFromToken(headers);
         return ResponseEntity
                 .status(200)
                 .header("content-type", "text/csv")
                 .header("content-disposition", "filename=\"relatorio-ingredientes-vencidos.csv\"")
-                .body(ingredientService.ExpiredIngredientsCSV());
+                .body(ingredientService.ExpiredIngredientsCSV(uuidCompany));
 
     }
 
@@ -84,7 +85,7 @@ public class IngredientController {
         var uuidCompany = headersUtils.getCompanyIdFromToken(headers);
         return ResponseEntity
                 .status(200)
-                .header("content-type", "text/txt")
+                .header("content-type", "text/plain")
                 .header("content-disposition", "filename=\"ingredients.txt\"")
                 .body(ingredientService.IngredientsTXT(uuidCompany));
 
