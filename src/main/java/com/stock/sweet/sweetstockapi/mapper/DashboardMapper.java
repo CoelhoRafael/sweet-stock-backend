@@ -36,7 +36,7 @@ public class DashboardMapper {
                                 .expiredIngredients(expiredIngredients.size())
                                 .monthExpenses(monthExpenses
                                         .stream()
-                                        .mapToDouble(i -> i.getBuyValue().doubleValue())
+                                        .mapToDouble(i -> i.getBuyValue().doubleValue() * i.getTotal())
                                         .sum())
                                 .build()
                 )
