@@ -38,7 +38,6 @@ class AddressServiceTest {
     @Test
     @DisplayName("Should return null ")
     void getAllAdressesError() {
-
         when(rep.findAll()).thenReturn(null);
         assertEquals(null, service.getAllAdresses());
     }

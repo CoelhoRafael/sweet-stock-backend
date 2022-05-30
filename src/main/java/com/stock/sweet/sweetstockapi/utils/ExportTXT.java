@@ -49,17 +49,17 @@ public class ExportTXT {
         String corpo = "";
         for (Ingredient a : listOfIngredients) {
             corpo += "02";
-            corpo += String.format("%40d", a.getId());
-            corpo += String.format("%-50.50s", a.getName());
-            corpo += String.format("%-40.40s", a.getUnitMeasurement());
-            corpo += String.format("%06.2f", a.getQuantityPerUnit());
+            corpo += String.format("%40d ", a.getId());
+            corpo += String.format("%-50.50s ", a.getName());
+            corpo += String.format("%-40.40s ", a.getUnitMeasurement());
+            corpo += String.format("%06.2f ", a.getQuantityPerUnit());
             corpo += String.format("%-8.08s", a.getExpirationDate());
-            corpo += String.format("%04.2f", a.getStorageTemperature());
-            corpo += String.format("%-6.6s", a.getIsRefigerated());
-            corpo += String.format("%06.2f", a.getBuyValue());
-            corpo += String.format("%05d", a.getQuantityUsed());
-            corpo += String.format("%-19.19s", a.getDateInsert());
-            corpo += String.format("%06d", a.getNumberLot());
+            corpo += String.format("%04.2f ", a.getStorageTemperature());
+            corpo += String.format("%-6.6s ", a.getIsRefigerated());
+            corpo += String.format("%06.2f ", a.getBuyValue());
+            corpo += String.format("%05d ", a.getQuantityUsed());
+            corpo += String.format("%-19.19s ", a.getDateInsert());
+            corpo += String.format("%06d ", a.getNumberLot());
             contaRegCorpo++;
             gravaRegistro(corpo, nomeArq);
         }
@@ -139,7 +139,7 @@ public class ExportTXT {
                     buyValue = BigDecimal.valueOf(Double.parseDouble(register.substring(163,169).replace(',','.')));
                     quantityUsed = Integer.valueOf(register.substring(170,175).trim());
                     dateInsert = LocalDate.parse(register.substring(176,196).trim());
-                    numberLot = Integer.valueOf(register.substring(197,203));
+                    numberLot = Integer.valueOf(register.substring(197,203).trim());
                     contaRegCorpoLido++;
 
                      Ingredient a = new Ingredient(id,name,quantityPerUnit,unitMeasurement,expirationDate,
