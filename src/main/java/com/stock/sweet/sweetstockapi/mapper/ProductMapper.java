@@ -27,7 +27,7 @@ public class ProductMapper {
                 productRequest.getProductedBy(),
                 productRequest.getCategory(),
                 productRequest.getIsRefigerated(),
-                productRequest.getSold(),
+                false,
                 productRequest.getPicture(),
                 null
         );

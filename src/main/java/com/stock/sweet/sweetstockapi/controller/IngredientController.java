@@ -85,7 +85,7 @@ public class IngredientController {
         var uuidCompany = headersUtils.getCompanyIdFromToken(headers);
         return ResponseEntity
                 .status(200)
-                .header("content-type", "text/txt")
+                .header("content-type", "text/plain")
                 .header("content-disposition", "filename=\"ingredients.txt\"")
                 .body(ingredientService.IngredientsTXT(uuidCompany));
 
