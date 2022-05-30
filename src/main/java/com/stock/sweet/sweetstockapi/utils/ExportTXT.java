@@ -36,11 +36,12 @@ public class ExportTXT {
 
     public static String gravaArquivoTxt(List<Ingredient> listOfIngredients, String nomeArq) {
         int contaRegCorpo = 0;
-
+        String body = "";
         // Monta o register de header
         String header = "00INGREDIENTS20221";
         header += LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
         header += "01";
+        body+= header+ "\n";
         // Grava o register de header
         gravaRegistro(header, nomeArq);
 
@@ -60,15 +61,18 @@ public class ExportTXT {
             corpo += String.format("%05d ", a.getQuantityUsed());
             corpo += String.format("%-19.19s ", a.getDateInsert());
             corpo += String.format("%06d ", a.getNumberLot());
+            corpo+="\n";
             contaRegCorpo++;
-            gravaRegistro(corpo, nomeArq);
+           gravaRegistro(corpo, nomeArq);
         }
-
+        body += corpo+"\n";
         // Monta e grava o register de trailer
         String trailer = "01";
         trailer += String.format("%010d", contaRegCorpo);
         gravaRegistro(trailer, nomeArq);
-        return header;
+
+        body +=trailer;
+        return body;
     }
 
     public static void leArquivoTxt(String nomeArq) {

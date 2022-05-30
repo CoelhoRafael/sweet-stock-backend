@@ -39,13 +39,13 @@ public class IngredientService {
         return FileCSV.chaseFileCSV(ingredientsExpiredObject, nameReport);
     }
 
-    public String IngredientsTXT(String uuid) {
-        String NAME_ARQUIVO = "ingredients" + LocalDate.now() + ".txt";
-
-        List<Ingredient> ingredientsExpired = ingredientRepository.findIngredientExpired(LocalDate.now(),uuid);
-        System.out.println(ingredientsExpired);
-        return ExportTXT.gravaArquivoTxt(ingredientsExpired, NAME_ARQUIVO);
-    }
+//    public String IngredientsTXT(String uuid) {
+//        String NAME_ARQUIVO = "ingredients" + LocalDate.now() + ".txt";
+//
+//        List<Ingredient> ingredientsExpired = ingredientRepository.findIngredientExpired(LocalDate.now(),uuid);
+//        System.out.println(ingredientsExpired);
+//         ExportTXT.gravaArquivoTxt(ingredientsExpired, NAME_ARQUIVO);
+//    }
 
     public List<Ingredient> getAllIngredientsByCompanyUuid(String uuid) {
         List<Ingredient> ingredients = ingredientRepository.findAllByUuidCompany(uuid);
