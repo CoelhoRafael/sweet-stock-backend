@@ -97,7 +97,7 @@ public class IngredientController {
 
        return ResponseEntity
                 .status(200)
-                .header("content-type", "text/plain")
+                .header("content-type", "text/csv")
                 .header("content-disposition", "filename=\"ingredients.txt\"")
                 .body(ExportTXT.gravaArquivoTxt(ingredientsExpired, NAME_ARQUIVO));
 
