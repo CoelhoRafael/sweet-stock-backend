@@ -23,5 +23,6 @@ public class IngredientRequest {
     private Integer provideCode;
     private Integer numberLot;
     private String brand;
+    private LocalDate purchaseDate;
     private String picture;
 }

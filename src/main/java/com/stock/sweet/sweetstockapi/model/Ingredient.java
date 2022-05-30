@@ -84,6 +84,9 @@ public class Ingredient {
     @Column(name = "brand")
     private String brand;
 
+    @Column(name = "purchase_date")
+    private LocalDate purchaseDate;
+
     @OneToMany(mappedBy = "ingredient")
     Set<Confection> confections;
 
