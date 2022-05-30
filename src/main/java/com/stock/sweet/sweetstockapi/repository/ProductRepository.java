@@ -14,6 +14,7 @@ import java.util.Optional;
 public interface ProductRepository extends JpaRepository<Product, Integer> {
     Optional<Product> findByUuid(String uuid);
 
+    List<Product> findAllBySoldIsFalse();
     @Modifying
     @Transactional
     @Query("update Product p set p.total = ?2 where p.uuid = ?1")
