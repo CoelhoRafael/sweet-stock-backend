@@ -89,11 +89,11 @@ public class IngredientController {
 
     @GetMapping("/arq-txt")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity getAllIngredientsTXT() throws JsonProcessingException {
-//        var uuidCompany = headersUtils.getCompanyIdFromToken(headers);
+    public ResponseEntity getAllIngredientsTXT(@RequestHeader HttpHeaders headers) throws JsonProcessingException {
+        var uuidCompany = headersUtils.getCompanyIdFromToken(headers);
         String NAME_ARQUIVO = "ingredients" + LocalDate.now() + ".txt";
 
-        List<Ingredient> ingredientsExpired = ingredientRepository.findIngredientExpired(LocalDate.now(),"40c5ad5c-3597-4190-b9a7-3c3d868acff9");
+        List<Ingredient> ingredientsExpired = ingredientRepository.findIngredientExpired(LocalDate.now(),uuidCompany);
 
        return ResponseEntity
                 .status(200)
