@@ -20,9 +20,7 @@ public class TemplateEngineConfig implements WebMvcConfigurer {
     @Primary
     public TemplateEngine emailTemplateEngine() {
         final SpringTemplateEngine templateEngine = new SpringTemplateEngine();
-        // Resolver for HTML emails (except the editable one)
         templateEngine.addTemplateResolver(emailTemplateResolver());
-
         return templateEngine;
     }
 
@@ -34,7 +32,6 @@ public class TemplateEngineConfig implements WebMvcConfigurer {
         templateResolver.setTemplateMode(TemplateMode.HTML);
         templateResolver.setCharacterEncoding(EMAIL_TEMPLATE_ENCODING);
         templateResolver.setCacheable(false);
-
         return templateResolver;
     }
 }

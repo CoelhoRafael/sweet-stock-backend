@@ -8,7 +8,6 @@ import com.stock.sweet.sweetstockapi.mapper.IngredientMapper;
 import com.stock.sweet.sweetstockapi.model.Ingredient;
 import com.stock.sweet.sweetstockapi.repository.IngredientRepository;
 import com.stock.sweet.sweetstockapi.service.IngredientService;
-import com.stock.sweet.sweetstockapi.utils.ExportTXT;
 import com.stock.sweet.sweetstockapi.utils.HeadersUtils;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.List;
-
-import static com.stock.sweet.sweetstockapi.utils.ExportTXT.gravaArquivoTxt;
 
 @RestController
 @RequestMapping("/ingredients")
@@ -64,19 +60,6 @@ public class IngredientController {
         );
     }
 
-
-    @GetMapping("/expired-csv")
-    @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity getAllExpiredIngredients(@RequestHeader HttpHeaders headers) throws JsonProcessingException {
-        var uuidCompany = headersUtils.getCompanyIdFromToken(headers);
-        return ResponseEntity
-                .status(200)
-                .header("content-type", "text/csv")
-                .header("content-disposition", "filename=\"relatorio-ingredientes-vencidos.csv\"")
-                .body(ingredientService.ExpiredIngredientsCSV(uuidCompany));
-
-    }
-
     @GetMapping("/expired")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity getAllExpiredIngredientsList(@RequestHeader HttpHeaders headers) throws JsonProcessingException {
@@ -87,27 +70,11 @@ public class IngredientController {
 
     }
 
-    @GetMapping("/arq-txt")
-    @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity getAllIngredientsTXT(@RequestHeader HttpHeaders headers) throws JsonProcessingException {
-        var uuidCompany = headersUtils.getCompanyIdFromToken(headers);
-        String NAME_ARQUIVO = "ingredients" + LocalDate.now() + ".txt";
-
-        List<Ingredient> ingredientsExpired = ingredientRepository.findIngredientExpired(LocalDate.now(),uuidCompany);
-
-       return ResponseEntity
-                .status(200)
-                .header("content-type", "text/csv")
-                .header("content-disposition", "filename=\"ingredients.txt\"")
-                .body(ExportTXT.gravaArquivoTxt(ingredientsExpired, NAME_ARQUIVO));
-
-    }
-
     @PutMapping("/{uuid}")
     @ResponseStatus(HttpStatus.OK)
     public IngredientResponse updateIngredients(@PathVariable String uuid, @RequestBody IngredientToUpdateRequest body) throws Exception {
         return ingredientMapper.convertModelToResponse(
-            ingredientService.updateIngredient(uuid, body)
+                ingredientService.updateIngredient(uuid, body)
         );
     }
 

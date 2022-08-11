@@ -3,9 +3,6 @@ package com.stock.sweet.sweetstockapi.service;
 import com.stock.sweet.sweetstockapi.dto.request.IngredientToUpdateRequest;
 import com.stock.sweet.sweetstockapi.model.Ingredient;
 import com.stock.sweet.sweetstockapi.repository.IngredientRepository;
-import com.stock.sweet.sweetstockapi.utils.ExportTXT;
-import com.stock.sweet.sweetstockapi.utils.FileCSV;
-import com.stock.sweet.sweetstockapi.utils.ListObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,29 +20,6 @@ public class IngredientService {
     public Ingredient createIngredient(Ingredient ingredient) {
         return ingredientRepository.save(ingredient);
     }
-
-    public String ExpiredIngredientsCSV(String uuid) {
-        String nameReport = "relatorio-ingredientes-vencidos-" + LocalDate.now();
-        List<Ingredient> ingredientsExpired = ingredientRepository.findIngredientExpired(LocalDate.now(), uuid);
-
-
-        for (int i = 0; i < ingredientsExpired.size(); i++) {
-            ingredientRepository.updateForTrueExpiratedIngredient(ingredientsExpired.get(i).getUuid());
-        }
-
-        ListObject<Ingredient> ingredientsExpiredObject = new ListObject<>(ingredientsExpired.size());
-        ingredientsExpired.forEach(ingredientsExpiredObject::add);
-
-        return FileCSV.chaseFileCSV(ingredientsExpiredObject, nameReport);
-    }
-
-//    public String IngredientsTXT(String uuid) {
-//        String NAME_ARQUIVO = "ingredients" + LocalDate.now() + ".txt";
-//
-//        List<Ingredient> ingredientsExpired = ingredientRepository.findIngredientExpired(LocalDate.now(),uuid);
-//        System.out.println(ingredientsExpired);
-//         ExportTXT.gravaArquivoTxt(ingredientsExpired, NAME_ARQUIVO);
-//    }
 
     public List<Ingredient> getAllIngredientsByCompanyUuid(String uuid) {
         List<Ingredient> ingredients = ingredientRepository.findAllByUuidCompany(uuid);
@@ -114,7 +88,7 @@ public class IngredientService {
 
     public Ingredient getIngredientByUuid(String uuid) {
         Ingredient ingredient = ingredientRepository.findIngredientByUuid(uuid);
-        if (ingredient != null){
+        if (ingredient != null) {
             return ingredient;
         }
         return null;
