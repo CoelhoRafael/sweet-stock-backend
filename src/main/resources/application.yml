@@ -20,15 +20,11 @@ spring:
       matching-strategy: ant_path_matcher
 
   datasource:
-    driverClassName: org.postgresql.Driver
-    url: jdbc:postgresql://containers-us-west-65.railway.app:5737/railway?user=postgres&password=Z0XIndERLgf1ZkAXIIll
-    username: postgres
-    password: Z0XIndERLgf1ZkAXIIll
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/sweetstock
+    username: sweetstock
+    password: sweetstock
   jpa:
-    #    hibernate.ddl-auto: update
+    hibernate.ddl-auto: update
     generate-ddl: true
-    #    show-sql: true
-    hibernate:
-      ddl-auto: update
-      dialect: org.hibernate.dialect.PostgreSQLDialect
-
+    show-sql: false
