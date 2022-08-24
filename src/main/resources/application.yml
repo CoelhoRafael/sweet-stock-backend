@@ -21,7 +21,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
