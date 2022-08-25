@@ -1,6 +1,7 @@
 package com.stock.sweet.sweetstockapi.model;
 
 import com.stock.sweet.sweetstockapi.controller.enums.UnitMeasurement;
+import com.stock.sweet.sweetstockapi.model.enums.CategoryEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -59,7 +60,7 @@ public class Product {
     @Column(name = "sold")
     private Boolean sold;
 
-    @Column(name = "picture")
+    @Column(name = "picture", columnDefinition = "text")
     private String picture;
 
 

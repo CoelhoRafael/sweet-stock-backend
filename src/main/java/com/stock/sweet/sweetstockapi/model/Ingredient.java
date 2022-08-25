@@ -78,7 +78,7 @@ public class Ingredient {
     @Column(name = "total")
     private Double total;
 
-    @Column(name = "picture")
+    @Column(name = "picture", columnDefinition = "text")
     private String picture;
 
     @Column(name = "brand")
