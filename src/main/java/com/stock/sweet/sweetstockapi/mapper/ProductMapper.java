@@ -1,19 +1,27 @@
 package com.stock.sweet.sweetstockapi.mapper;
 
 import com.stock.sweet.sweetstockapi.dto.request.ProductRequest;
-import com.stock.sweet.sweetstockapi.dto.request.ProductRequestDashboard;
 import com.stock.sweet.sweetstockapi.dto.response.ProductResponse;
+import com.stock.sweet.sweetstockapi.model.Confection;
 import com.stock.sweet.sweetstockapi.model.Product;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Component
 public class ProductMapper {
+
+    @Autowired
+    private IngredientMapper ingredientMapper;
+
     public Product convertRequestToModel(ProductRequest productRequest) {
+        Set<Confection> confections = Set.of();
+        
         return new Product(
                 null,
                 UUID.randomUUID().toString(),
@@ -24,31 +32,11 @@ public class ProductMapper {
                 productRequest.getExpirationDate(),
                 LocalDate.now(),
                 LocalDate.now(),
-                productRequest.getProductedBy(),
                 productRequest.getCategory(),
-                productRequest.getIsRefigerated(),
+                productRequest.getIsRefrigerated(),
                 false,
                 productRequest.getPicture(),
-                null
-        );
-    }
-    public Product convertRequestToModelDashboard(ProductRequestDashboard productRequest) {
-        return new Product(
-                null,
-                UUID.randomUUID().toString(),
-                productRequest.getName(),
-                productRequest.getUnitMeasurement(),
-                productRequest.getSaleValue(),
-                productRequest.getTotal(),
-                null,
-                LocalDate.now(),
-                LocalDate.now(),
-                productRequest.getProductedBy(),
-                null,
-                productRequest.getIsRefigerated(),
-                productRequest.getSold(),
-                productRequest.getPicture(),
-                null
+                confections
         );
     }
 
@@ -59,7 +47,6 @@ public class ProductMapper {
                 product.getSaleValue(),
                 product.getExpirationDate(),
                 product.getDateInsert(),
-                product.getProductedBy(),
                 product.getDateUpdate(),
                 product.getIsRefigerated(),
                 product.getSold(),
@@ -78,7 +65,6 @@ public class ProductMapper {
                     p.getSaleValue(),
                     p.getExpirationDate(),
                     p.getDateInsert(),
-                    p.getProductedBy(),
                     p.getDateUpdate(),
                     p.getIsRefigerated(),
                     p.getSold(),

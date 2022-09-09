@@ -1,16 +1,10 @@
 package com.stock.sweet.sweetstockapi.controller;
 
-import com.stock.sweet.sweetstockapi.dto.request.CategoryRequest;
 import com.stock.sweet.sweetstockapi.dto.request.CompanyRequest;
-import com.stock.sweet.sweetstockapi.dto.response.CategoryResponse;
 import com.stock.sweet.sweetstockapi.dto.response.CompanyResponse;
-import com.stock.sweet.sweetstockapi.mapper.CategoryMapper;
 import com.stock.sweet.sweetstockapi.mapper.CompanyMapper;
-import com.stock.sweet.sweetstockapi.model.Category;
 import com.stock.sweet.sweetstockapi.model.Company;
-import com.stock.sweet.sweetstockapi.repository.CategoryRepository;
 import com.stock.sweet.sweetstockapi.repository.CompanyRepository;
-import com.stock.sweet.sweetstockapi.service.CategoryService;
 import com.stock.sweet.sweetstockapi.service.CompanyService;
 import com.stock.sweet.sweetstockapi.service.EmailService;
 import com.stock.sweet.sweetstockapi.service.UserService;

@@ -48,11 +48,8 @@ public class Product {
     @Column(name = "date_update")
     private LocalDate dateUpdate;
 
-    @Column(name = "producted_by")
-    private LocalDate productedBy;
-
     @Column(name = "category")
-    private String category;
+    private CategoryEnum category;
 
     @Column(name = "is_refigerated")
     private Boolean isRefigerated;
@@ -60,9 +57,8 @@ public class Product {
     @Column(name = "sold")
     private Boolean sold;
 
-    @Column(name = "picture", columnDefinition = "text")
+    @Column(name = "picture")
     private String picture;
-
 
     @OneToMany(mappedBy = "product")
     Set<Confection> confections;

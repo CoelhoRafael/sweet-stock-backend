@@ -10,11 +10,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Data
 public class CategoryResponse {
-    private String uuid;
+    private String id;
     private String name;
-    private Double storageTemperature;
-    private Boolean isRefrigerated;
-    private String unitMeasurement;
-    private LocalDateTime dateInsert;
-    private LocalDateTime dateUpdate;
 }

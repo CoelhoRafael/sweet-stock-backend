@@ -1,11 +1,9 @@
 package com.stock.sweet.sweetstockapi.service;
 
 import com.stock.sweet.sweetstockapi.model.Address;
-import com.stock.sweet.sweetstockapi.model.Category;
 import com.stock.sweet.sweetstockapi.repository.AddressRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;

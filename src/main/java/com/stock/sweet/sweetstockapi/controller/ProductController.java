@@ -1,7 +1,6 @@
 package com.stock.sweet.sweetstockapi.controller;
 
 import com.stock.sweet.sweetstockapi.dto.request.ProductRequest;
-import com.stock.sweet.sweetstockapi.dto.request.ProductRequestDashboard;
 import com.stock.sweet.sweetstockapi.dto.request.ProductRequestSell;
 import com.stock.sweet.sweetstockapi.dto.response.ProductResponse;
 import com.stock.sweet.sweetstockapi.mapper.IngredientMapper;
@@ -41,9 +40,9 @@ public class ProductController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<ProductResponse> createProduct(@RequestBody ProductRequestDashboard body) {
+    public ResponseEntity<ProductResponse> createProduct(@RequestBody ProductRequest body) {
         return ResponseEntity.status(201).body(productMapper.convertModelToResponse(
-                productService.createProduct(productMapper.convertRequestToModelDashboard(body))
+                productService.createProduct(productMapper.convertRequestToModel(body), body.getIngredients())
         ));
     }
 

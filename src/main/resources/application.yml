@@ -19,6 +19,17 @@ spring:
     pathmatch:
       matching-strategy: ant_path_matcher
 
+
+#  datasource:
+#    driverClassName: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/sweetstock
+#    username: sweetstock
+#    password: sweetstock
+#  jpa:
+#    hibernate.ddl-auto: update
+#    generate-ddl: true
+#    show-sql: false
+
   jpa:
     hibernate:
       ddl-auto: update

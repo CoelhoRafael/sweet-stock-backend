@@ -1,8 +1,11 @@
 package com.stock.sweet.sweetstockapi.service;
 
+import com.stock.sweet.sweetstockapi.dto.request.ProductIngredientRequest;
 import com.stock.sweet.sweetstockapi.dto.request.ProductRequest;
 import com.stock.sweet.sweetstockapi.dto.request.ProductRequestSell;
 import com.stock.sweet.sweetstockapi.exception.NotFoundException;
+import com.stock.sweet.sweetstockapi.model.Confection;
+import com.stock.sweet.sweetstockapi.model.Ingredient;
 import com.stock.sweet.sweetstockapi.model.Product;
 import com.stock.sweet.sweetstockapi.repository.ConfectionRepository;
 import com.stock.sweet.sweetstockapi.repository.IngredientRepository;
@@ -10,7 +13,10 @@ import com.stock.sweet.sweetstockapi.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductService {
@@ -27,7 +33,29 @@ public class ProductService {
     @Autowired
     private IngredientService ingredientService;
 
-    public Product createProduct(Product product) {
+    public Product createProduct(Product product, List<ProductIngredientRequest> ingredients) {
+        List<Ingredient> ingredientsModels = List.of();
+
+        ingredients.forEach(ingredient ->
+                ingredientsModels.add(ingredientRepository.findIngredientByUuid(ingredient.getUuidIngredient()))
+        );
+
+        ingredientsModels.forEach(ingredient -> {
+
+            var x = ingredients.stream().filter(i -> i.equals(ingredient.getUuid())).collect(Collectors.toList()).get(0);
+            product.getConfections().add(
+                    Confection.builder()
+                            .uuid(UUID.randomUUID().toString())
+                            .cost(0.0)
+                            .quantity(x.getQuantity())
+                            .product(product)
+                            .ingredient(ingredient)
+                            .date(LocalDate.now())
+                            .build()
+            );
+            ingredient.setTotal(ingredient.getTotal() - x.getQuantity());
+        });
+
         return productRepository.save(product);
     }
 
