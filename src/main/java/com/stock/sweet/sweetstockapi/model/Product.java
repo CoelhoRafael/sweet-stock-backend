@@ -1,7 +1,6 @@
 package com.stock.sweet.sweetstockapi.model;
 
 import com.stock.sweet.sweetstockapi.controller.enums.UnitMeasurement;
-import com.stock.sweet.sweetstockapi.model.enums.CategoryEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
