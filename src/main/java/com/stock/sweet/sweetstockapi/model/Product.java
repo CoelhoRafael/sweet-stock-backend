@@ -1,6 +1,7 @@
 package com.stock.sweet.sweetstockapi.model;
 
 import com.stock.sweet.sweetstockapi.controller.enums.UnitMeasurement;
+import com.stock.sweet.sweetstockapi.model.enums.CategoryEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,6 +10,7 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -60,6 +62,6 @@ public class Product {
     private String picture;
 
     @OneToMany(mappedBy = "product")
-    Set<Confection> confections;
+    List<Confection> confections;
 
 }

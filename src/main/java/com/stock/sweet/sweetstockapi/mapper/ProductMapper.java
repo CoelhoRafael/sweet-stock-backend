@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -20,8 +20,8 @@ public class ProductMapper {
     private IngredientMapper ingredientMapper;
 
     public Product convertRequestToModel(ProductRequest productRequest) {
-        Set<Confection> confections = Set.of();
-        
+        List<Confection> confections = new ArrayList<>();
+
         return new Product(
                 null,
                 UUID.randomUUID().toString(),

@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -34,7 +35,7 @@ public class ProductService {
     private IngredientService ingredientService;
 
     public Product createProduct(Product product, List<ProductIngredientRequest> ingredients) {
-        List<Ingredient> ingredientsModels = List.of();
+        List<Ingredient> ingredientsModels = new ArrayList<>();
 
         ingredients.forEach(ingredient ->
                 ingredientsModels.add(ingredientRepository.findIngredientByUuid(ingredient.getUuidIngredient()))
@@ -42,7 +43,7 @@ public class ProductService {
 
         ingredientsModels.forEach(ingredient -> {
 
-            var x = ingredients.stream().filter(i -> i.equals(ingredient.getUuid())).collect(Collectors.toList()).get(0);
+            var x = ingredients.stream().filter(i -> i.getUuidIngredient().equals(ingredient.getUuid())).collect(Collectors.toList()).get(0);
             product.getConfections().add(
                     Confection.builder()
                             .uuid(UUID.randomUUID().toString())

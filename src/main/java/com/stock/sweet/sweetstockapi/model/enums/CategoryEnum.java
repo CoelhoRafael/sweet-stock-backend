@@ -4,15 +4,15 @@ public enum CategoryEnum {
     CAKES("Bolos"),
     CUPCAKES("Cupcakes"),
     BROWNIES("Brownies"),
-    PUDDINGS("Pudims"),
+    PUDDINGS("Pudins"),
     ICE_CREAMS("Sorvetes"),
     TRUFFLES("Trufas"),
     PIES("Tortas"),
     MOUSSES("Mousses"),
     BRIGADEIROS("Brigadeiros"),
-    ZERO_SUGAR("Zero Açucar"),
-    COOKIESS("Biscoitos"),
-    FINE_SWEETSS("Doces refinados");
+    ZERO_SUGAR("Zero Açúcar"),
+    COOKIES("Biscoitos"),
+    FINE_SWEETS("Doces refinados");
 
     CategoryEnum(String name) {
     }
