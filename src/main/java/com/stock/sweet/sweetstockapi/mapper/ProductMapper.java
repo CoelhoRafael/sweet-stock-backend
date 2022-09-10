@@ -32,7 +32,7 @@ public class ProductMapper {
                 productRequest.getExpirationDate(),
                 LocalDate.now(),
                 LocalDate.now(),
-                productRequest.getCategory(),
+                productRequest.getCategory().toString(),
                 productRequest.getIsRefrigerated(),
                 false,
                 productRequest.getPicture(),

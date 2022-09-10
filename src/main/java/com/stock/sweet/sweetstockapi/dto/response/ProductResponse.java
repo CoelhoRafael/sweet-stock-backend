@@ -24,6 +24,6 @@ public class ProductResponse {
     private Boolean sold;
     private Double total;
     private UnitMeasurement unitMeasurement;
-    private CategoryEnum category;
+    private String category;
     private String picture;
 }

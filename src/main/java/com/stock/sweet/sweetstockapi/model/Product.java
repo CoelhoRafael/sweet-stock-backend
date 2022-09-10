@@ -50,7 +50,7 @@ public class Product {
     private LocalDate dateUpdate;
 
     @Column(name = "category")
-    private CategoryEnum category;
+    private String category;
 
     @Column(name = "is_refigerated")
     private Boolean isRefigerated;
