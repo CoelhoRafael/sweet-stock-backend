@@ -22,7 +22,7 @@ public class CategoryController {
         return Arrays.stream(CategoryEnum.values()).map(categoryEnum -> {
             return new CategoryResponse(
                     categoryEnum.toString(),
-                    categoryEnum.name()
+                    categoryEnum.value
             );
         }).collect(Collectors.toList());
     }

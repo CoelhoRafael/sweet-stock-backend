@@ -1,10 +1,7 @@
 package com.stock.sweet.sweetstockapi.model;
 
 import com.stock.sweet.sweetstockapi.controller.enums.UnitMeasurement;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -13,9 +10,10 @@ import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
 @Builder
 @Entity
+@Getter
+@Setter
 @Table(name = "tb_ingredient")
 public class Ingredient {
 
@@ -49,7 +47,7 @@ public class Ingredient {
     private Boolean isRefigerated;
 
     @Column(name = "buy_value")
-    private BigDecimal buyValue;
+    private Double buyValue;
 
     @Column(name = "provide_code")
     private Integer provideCode;
@@ -90,6 +88,4 @@ public class Ingredient {
     @OneToMany(mappedBy = "ingredient")
     Set<Confection> confections;
 
-    public Ingredient(Integer id, String name, Double quantityPerUnit, UnitMeasurement unitMeasurement, LocalDate expirationDate, Double storageTemperature, Boolean isRefigerated, BigDecimal buyValue, Integer quantityUsed, BigDecimal buyValue1, LocalDate dateInsert, Integer numberLot) {
-    }
 }

@@ -8,9 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Component
@@ -20,13 +18,13 @@ public class ProductMapper {
     private IngredientMapper ingredientMapper;
 
     public Product convertRequestToModel(ProductRequest productRequest) {
-        List<Confection> confections = new ArrayList<>();
+        Set<Confection> confections = new HashSet<>();
 
         return new Product(
                 null,
                 UUID.randomUUID().toString(),
                 productRequest.getName(),
-                productRequest.getUnitMeasurement(),
+                productRequest.getUnitMeasurement().toString(),
                 productRequest.getSaleValue(),
                 productRequest.getTotal(),
                 productRequest.getExpirationDate(),

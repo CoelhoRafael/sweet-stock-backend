@@ -17,7 +17,7 @@ public class IngredientToUpdateRequest {
         private LocalDate expirationDate;
         private Double storageTemperature;
         private Boolean isRefigerated;
-        private BigDecimal buyValue;
+        private Double buyValue;
         private Integer provideCode;
         private Integer quantityUsed;
         private Double quantityPerUnit;

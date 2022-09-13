@@ -1,6 +1,7 @@
 package com.stock.sweet.sweetstockapi.service;
 
 import com.stock.sweet.sweetstockapi.dto.request.IngredientToUpdateRequest;
+import com.stock.sweet.sweetstockapi.exception.NotFoundException;
 import com.stock.sweet.sweetstockapi.model.Ingredient;
 import com.stock.sweet.sweetstockapi.repository.IngredientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,10 +53,10 @@ public class IngredientService {
 
     public Ingredient updateIngredient(String uuid, IngredientToUpdateRequest ingredientRequest) throws Exception {
 
-        Ingredient ingredientToUpdate = ingredientRepository.findIngredientByUuid(uuid);
+        Ingredient ingredientToUpdate = ingredientRepository.findIngredientByUuid(uuid).get();
 
         if (ingredientToUpdate == null) {
-            return null;
+            throw new NotFoundException("Ingrediente não encontrado. Id: " + uuid);
         }
 
         ingredientToUpdate.setName(ingredientRequest.getName());
@@ -76,7 +77,7 @@ public class IngredientService {
     }
 
     public Ingredient deleteIngredient(String uuid) throws Exception {
-        Ingredient ingredientToDelete = (Ingredient) ingredientRepository.findIngredientByUuid(uuid);
+        Ingredient ingredientToDelete = (Ingredient) ingredientRepository.findIngredientByUuid(uuid).get();
 
         if (ingredientToDelete == null) {
             return null;
@@ -87,7 +88,7 @@ public class IngredientService {
     }
 
     public Ingredient getIngredientByUuid(String uuid) {
-        Ingredient ingredient = ingredientRepository.findIngredientByUuid(uuid);
+        Ingredient ingredient = ingredientRepository.findIngredientByUuid(uuid).get();
         if (ingredient != null) {
             return ingredient;
         }

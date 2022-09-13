@@ -21,7 +21,7 @@ public class IngredientResponse {
     private LocalDate expirationDate;
     private Double storageTemperature;
     private Boolean isRefigerated;
-    private BigDecimal buyValue;
+    private Double buyValue;
     private String provideCode;
     private Integer quantityUsed;
     private LocalDate dateInsert;

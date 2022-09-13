@@ -22,8 +22,8 @@ public class ProductResponse {
     private LocalDate dateUpdate;
     private Boolean isRefigerated;
     private Boolean sold;
-    private Double total;
-    private UnitMeasurement unitMeasurement;
+    private Integer total;
+    private String unitMeasurement;
     private String category;
     private String picture;
 }

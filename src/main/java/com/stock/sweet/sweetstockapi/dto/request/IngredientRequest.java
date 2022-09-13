@@ -19,7 +19,7 @@ public class IngredientRequest {
     private LocalDate expirationDate;
     private Double storageTemperature;
     private Boolean isRefigerated;
-    private BigDecimal buyValue;
+    private Double buyValue;
     private Integer provideCode;
     private Integer numberLot;
     private String brand;

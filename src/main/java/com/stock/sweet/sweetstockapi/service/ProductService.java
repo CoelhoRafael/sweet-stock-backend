@@ -3,6 +3,7 @@ package com.stock.sweet.sweetstockapi.service;
 import com.stock.sweet.sweetstockapi.dto.request.ProductIngredientRequest;
 import com.stock.sweet.sweetstockapi.dto.request.ProductRequest;
 import com.stock.sweet.sweetstockapi.dto.request.ProductRequestSell;
+import com.stock.sweet.sweetstockapi.exception.BadRequestException;
 import com.stock.sweet.sweetstockapi.exception.NotFoundException;
 import com.stock.sweet.sweetstockapi.model.Confection;
 import com.stock.sweet.sweetstockapi.model.Ingredient;
@@ -17,7 +18,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 public class ProductService {
@@ -34,30 +34,52 @@ public class ProductService {
     @Autowired
     private IngredientService ingredientService;
 
-    public Product createProduct(Product product, List<ProductIngredientRequest> ingredients) {
-        List<Ingredient> ingredientsModels = new ArrayList<>();
+    public Product createProduct(Product product, List<ProductIngredientRequest> ingredients) throws NotFoundException, BadRequestException {
+        List<Ingredient> ingredientsFound = new ArrayList<>();
 
-        ingredients.forEach(ingredient ->
-                ingredientsModels.add(ingredientRepository.findIngredientByUuid(ingredient.getUuidIngredient()))
-        );
+        for (ProductIngredientRequest i : ingredients) {
+            findIngredients(ingredientsFound, i);
+        }
 
-        ingredientsModels.forEach(ingredient -> {
+        for (Ingredient ingredientFound : ingredientsFound) {
+            var ingredientToConfection = ingredients
+                    .stream()
+                    .filter(i -> i.getUuidIngredient().equals(ingredientFound.getUuid()))
+                    .findFirst().get();
 
-            var x = ingredients.stream().filter(i -> i.getUuidIngredient().equals(ingredient.getUuid())).collect(Collectors.toList()).get(0);
-            product.getConfections().add(
-                    Confection.builder()
-                            .uuid(UUID.randomUUID().toString())
-                            .cost(0.0)
-                            .quantity(x.getQuantity())
-                            .product(product)
-                            .ingredient(ingredient)
-                            .date(LocalDate.now())
-                            .build()
-            );
-            ingredient.setTotal(ingredient.getTotal() - x.getQuantity());
-        });
+            var totalUsed = ingredientFound.getQuantityUsed() + ingredientToConfection.getQuantity();
+            if (totalUsed > ingredientFound.getTotal()) {
+                throw new BadRequestException(String.format("Erro ao criar produto. Ingrediente: %s. Quantidade maior do que a presente em estoque.", ingredientFound.getName()));
+            }
 
-        return productRepository.save(product);
+            var newConfection = Confection.builder()
+                    .uuid(UUID.randomUUID().toString())
+                    .cost(getConfectionCost(ingredientFound, ingredientToConfection))
+                    .quantity(ingredientToConfection.getQuantity())
+                    .product(product)
+                    .ingredient(ingredientFound)
+                    .date(LocalDate.now())
+                    .build();
+
+            product.getConfections().add(newConfection);
+            ingredientFound.setQuantityUsed(ingredientFound.getQuantityUsed() + ingredientToConfection.getQuantity());
+
+            ingredientRepository.save(ingredientFound);
+        }
+
+        productRepository.save(product);
+        confectionRepository.saveAll(product.getConfections());
+        return product;
+    }
+
+    private Double getConfectionCost(Ingredient ingredient, ProductIngredientRequest ingredientToConfection) {
+        return ingredient.getTotal() / ingredient.getBuyValue() * ingredientToConfection.getQuantity();
+    }
+
+    private void findIngredients(List<Ingredient> ingredientsModels, ProductIngredientRequest i) throws NotFoundException {
+        Ingredient findIngredient = ingredientRepository.findIngredientByUuid(i.getUuidIngredient()).orElseThrow(
+                () -> new NotFoundException("Falha ao buscar ingrediente. Id: " + i.getUuidIngredient()));
+        ingredientsModels.add(findIngredient);
     }
 
     public List<Product> getAllProducts() {

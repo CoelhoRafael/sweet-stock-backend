@@ -14,6 +14,9 @@ public enum CategoryEnum {
     COOKIES("Biscoitos"),
     FINE_SWEETS("Doces refinados");
 
-    CategoryEnum(String name) {
+    public final String value;
+
+    CategoryEnum(String value) {
+        this.value = value;
     }
 }

@@ -3,6 +3,7 @@ package com.stock.sweet.sweetstockapi.controller;
 import com.stock.sweet.sweetstockapi.dto.request.ProductRequest;
 import com.stock.sweet.sweetstockapi.dto.request.ProductRequestSell;
 import com.stock.sweet.sweetstockapi.dto.response.ProductResponse;
+import com.stock.sweet.sweetstockapi.exception.NotFoundException;
 import com.stock.sweet.sweetstockapi.mapper.IngredientMapper;
 import com.stock.sweet.sweetstockapi.mapper.ProductMapper;
 import com.stock.sweet.sweetstockapi.service.IngredientService;
@@ -40,7 +41,7 @@ public class ProductController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<ProductResponse> createProduct(@RequestBody ProductRequest body) {
+    public ResponseEntity<ProductResponse> createProduct(@RequestBody ProductRequest body) throws Exception {
         return ResponseEntity.status(201).body(productMapper.convertModelToResponse(
                 productService.createProduct(productMapper.convertRequestToModel(body), body.getIngredients())
         ));

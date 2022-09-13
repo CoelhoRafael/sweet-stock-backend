@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface IngredientRepository extends JpaRepository<Ingredient, Integer> {
@@ -27,7 +28,7 @@ public interface IngredientRepository extends JpaRepository<Ingredient, Integer>
     List<Ingredient> findAllByUuidCompany(String uuidCompany);
 
     @Query("select i from Ingredient i where i.uuid = :uuid")
-    Ingredient findIngredientByUuid(String uuid);
+    Optional<Ingredient> findIngredientByUuid(String uuid);
 
     @Query("select i from Ingredient i where i.uuidCompany = ?1 and i.expirationDate < ?2 and i.expirated = false")
     List<Ingredient> getAllIngredientsNearExpire(String uuid, LocalDate expirationDate);

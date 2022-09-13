@@ -21,7 +21,7 @@ public class ProductRequest {
     private Boolean isRefrigerated;
     private CategoryEnum category;
     private Boolean sold;
-    private Double total;
+    private Integer total;
     private UnitMeasurement unitMeasurement;
     private String picture;
     private List<ProductIngredientRequest> ingredients;

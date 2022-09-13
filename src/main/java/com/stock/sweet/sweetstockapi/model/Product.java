@@ -2,9 +2,7 @@ package com.stock.sweet.sweetstockapi.model;
 
 import com.stock.sweet.sweetstockapi.controller.enums.UnitMeasurement;
 import com.stock.sweet.sweetstockapi.model.enums.CategoryEnum;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -15,8 +13,10 @@ import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Builder
 @Entity
+@Getter
+@Setter
 @Table(name = "tb_product")
 public class Product {
 
@@ -32,13 +32,13 @@ public class Product {
     private String name;
 
     @Column(name = "unit_measurement")
-    private UnitMeasurement unitMeasurement;
+    private String unitMeasurement;
 
     @Column(name = "sale_value")
     private BigDecimal saleValue;
 
     @Column(name = "total")
-    private Double total;
+    private Integer total;
 
     @Column(name = "expiration_date")
     private Date expirationDate;
@@ -62,6 +62,5 @@ public class Product {
     private String picture;
 
     @OneToMany(mappedBy = "product")
-    List<Confection> confections;
-
+    Set<Confection> confections;
 }

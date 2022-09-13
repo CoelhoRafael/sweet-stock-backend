@@ -1,9 +1,6 @@
 package com.stock.sweet.sweetstockapi.controller.handler;
 
-import com.stock.sweet.sweetstockapi.exception.ConflictException;
-import com.stock.sweet.sweetstockapi.exception.ErrorObject;
-import com.stock.sweet.sweetstockapi.exception.InternalServerErrorException;
-import com.stock.sweet.sweetstockapi.exception.NotFoundException;
+import com.stock.sweet.sweetstockapi.exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -34,5 +31,12 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
         ErrorObject errorObject = new ErrorObject(LocalDateTime.now(), e.getMessage());
 
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorObject);
+    }
+
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity<ErrorObject> createError(BadRequestException e) {
+        ErrorObject errorObject = new ErrorObject(LocalDateTime.now(), e.getMessage());
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorObject);
     }
 }
