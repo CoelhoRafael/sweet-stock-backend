@@ -1,8 +1,14 @@
 server:
   servlet:
     context-path: /v1/sweet-stock/
+  port: 8080
 
 spring:
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/sweetstock?charSet=LATIN1
+    username: postgres
+    password: sweetstore
   mail:
     default-encodig: UTF-8
     host: smtp.gmail.com
@@ -15,25 +21,11 @@ spring:
           auth: true
           starttls:
             enable: true
+
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
 
-
-#  datasource:
-#    driverClassName: com.mysql.cj.jdbc.Driver
-#    url: jdbc:mysql://localhost:3306/sweetstock
-#    username: sweetstock
-#    password: sweetstock
-#  jpa:
-#    hibernate.ddl-auto: update
-#    generate-ddl: true
-#    show-sql: false
-
   jpa:
     hibernate:
-      ddl-auto: update
-  datasource:
-    url: jdbc:postgresql://localhost:5432/postgres
-    username: postgres
-    password: sweetstock
+      ddl-auto: create-drop

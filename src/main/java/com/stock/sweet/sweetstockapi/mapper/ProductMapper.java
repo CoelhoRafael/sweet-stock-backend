@@ -33,8 +33,10 @@ public class ProductMapper {
                 productRequest.getCategory().toString(),
                 productRequest.getIsRefrigerated(),
                 false,
+                null,
                 productRequest.getPicture(),
-                confections
+                confections,
+                productRequest.getCompany()
         );
     }
 

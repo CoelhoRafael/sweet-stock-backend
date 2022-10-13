@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -121,13 +122,29 @@ public class ProductService {
     }
 
     public ProductRequestSell sellProduct(String uuidProduct, Double soldQuantity) throws Exception {
-        Product p = productRepository.findByUuid(uuidProduct).get();
-        if (p.getTotal() < soldQuantity || p.getTotal() == 0) {
-            p.setSold(true);
-            throw new Exception("Produto esgotado");
+        Product product = productRepository.findByUuid(uuidProduct).get();
+
+        if(product == null){
+            throw new Exception("Produto nao encontrado!");
         }
-        double newValue = (p.getTotal() - soldQuantity);
-        productRepository.sellProduct(uuidProduct, newValue);
+
+        if(product.getTotal() < soldQuantity || product.getTotal() == 0){
+            throw new Exception("Produto esgotado!");
+        }
+
+        double newValue = (product.getTotal() - soldQuantity);
+//        productRepository.sellProduct(uuidProduct, newValue, LocalDateTime.now());
+
+        return new ProductRequestSell(soldQuantity);
+    }
+
+    public List<Product> getAllProductsNoSold(String uuidCompany) {
+//        return productRepository.findAllProductsNoSold(uuidCompany);
+        return null;
+    }
+
+    public List<Product> getAllProductsSold(String uuidCompany) {
+//        return productRepository.findAllProductsSold(uuidCompany);
         return null;
     }
 }

@@ -1,14 +1,12 @@
 package com.stock.sweet.sweetstockapi.model;
 
-import com.stock.sweet.sweetstockapi.controller.enums.UnitMeasurement;
-import com.stock.sweet.sweetstockapi.model.enums.CategoryEnum;
 import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -58,9 +56,16 @@ public class Product {
     @Column(name = "sold")
     private Boolean sold;
 
+    @Column(name = "date_of_sale")
+    private LocalDateTime dateOfSale;
+
     @Column(name = "picture")
     private String picture;
 
     @OneToMany(mappedBy = "product")
     Set<Confection> confections;
+
+    @JoinColumn(name = "fk_company")
+    @ManyToOne
+    private Company company;
 }

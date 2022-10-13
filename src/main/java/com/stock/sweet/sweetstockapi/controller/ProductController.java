@@ -1,5 +1,6 @@
 package com.stock.sweet.sweetstockapi.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.stock.sweet.sweetstockapi.dto.request.ProductRequest;
 import com.stock.sweet.sweetstockapi.dto.request.ProductRequestSell;
 import com.stock.sweet.sweetstockapi.dto.response.ProductResponse;
@@ -11,6 +12,7 @@ import com.stock.sweet.sweetstockapi.service.ProductService;
 import com.stock.sweet.sweetstockapi.utils.HeadersUtils;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -55,6 +57,22 @@ public class ProductController {
         ));
     }
 
+    @GetMapping("/products-no-sold")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<List<ProductResponse>> getAllProductsNoSold(@RequestHeader HttpHeaders headers) throws JsonProcessingException {
+        return ResponseEntity.status(200).body(productMapper.convertModelListToResponseList(
+                productService.getAllProductsNoSold(headersUtils.getCompanyIdFromToken(headers))
+        ));
+    }
+
+    @GetMapping("/products-sold")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<List<ProductResponse>> getAllProductsSold(@RequestHeader HttpHeaders headers) throws JsonProcessingException {
+        return ResponseEntity.status(200).body(productMapper.convertModelListToResponseList(
+                productService.getAllProductsSold(headersUtils.getCompanyIdFromToken(headers))
+        ));
+    }
+
     @GetMapping("/{uuid}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<ProductResponse> getProductByUuid(@PathVariable UUID uuid) throws Exception {
@@ -75,7 +93,6 @@ public class ProductController {
     @ResponseStatus(HttpStatus.OK)
     public ProductRequestSell sellProduct(@PathVariable String uuid, @PathVariable Double soldQuantity) throws Exception {
         return productService.sellProduct(uuid, soldQuantity);
-
     }
 
     @DeleteMapping("/{uuid}")
