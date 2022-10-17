@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
@@ -12,4 +13,5 @@ import java.time.LocalDateTime;
 public class CategoryResponse {
     private String id;
     private String name;
+    private String picture;
 }

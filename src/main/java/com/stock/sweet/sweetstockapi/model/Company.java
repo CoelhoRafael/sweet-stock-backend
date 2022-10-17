@@ -55,5 +55,8 @@ public class Company {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_address", referencedColumnName = "id")
     private Address address;
+
+    @Column(name= "rating")
+    private Double Rating;
 }
 

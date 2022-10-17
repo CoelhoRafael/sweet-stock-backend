@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -47,9 +48,6 @@ public class Product {
     @Column(name = "date_update")
     private LocalDate dateUpdate;
 
-    @Column(name = "category")
-    private String category;
-
     @Column(name = "is_refigerated")
     private Boolean isRefigerated;
 
@@ -68,4 +66,9 @@ public class Product {
     @JoinColumn(name = "fk_company")
     @ManyToOne
     private Company company;
+
+    @JoinColumn(name = "fk_category")
+    @ManyToOne
+    private Category category;
+
 }

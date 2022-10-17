@@ -35,7 +35,6 @@ public class CompanyService {
     }
 
     public List<Company> getAllCompanys() {
-
         return companyRepository.findAll();
     }
 
@@ -53,5 +52,9 @@ public class CompanyService {
 
     public List<Company> saveAllCompanies(List<Company> companies) {
         return companyRepository.saveAll(companies);
+    }
+
+    public List<Company> getAllActiveCompanies() {
+        return companyRepository.findAllActiveCompanies();
     }
 }

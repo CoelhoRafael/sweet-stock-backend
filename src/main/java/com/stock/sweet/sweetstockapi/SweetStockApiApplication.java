@@ -15,9 +15,14 @@ import org.springframework.scheduling.annotation.EnableScheduling;
         scheme = "bearer"
 )
 public class SweetStockApiApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(SweetStockApiApplication.class, args);
+
+        teste();
+    }
+
+    private static void teste() {
+
     }
 
 }

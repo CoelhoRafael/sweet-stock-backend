@@ -103,7 +103,6 @@ public class ProductService {
         productToUpdate.setName(productRequest.getName());
         productToUpdate.setSaleValue(productRequest.getSaleValue());
         productToUpdate.setExpirationDate(productRequest.getExpirationDate());
-        productToUpdate.setCategory(productRequest.getCategory().toString());
 
         productRepository.save(productToUpdate);
 

@@ -1,6 +1,7 @@
 package com.stock.sweet.sweetstockapi.dto.request;
 
 import com.stock.sweet.sweetstockapi.controller.enums.UnitMeasurement;
+import com.stock.sweet.sweetstockapi.model.Category;
 import com.stock.sweet.sweetstockapi.model.Company;
 import com.stock.sweet.sweetstockapi.model.enums.CategoryEnum;
 import lombok.AllArgsConstructor;
@@ -20,7 +21,7 @@ public class ProductRequest {
     private BigDecimal saleValue;
     private Date expirationDate;
     private Boolean isRefrigerated;
-    private CategoryEnum category;
+    private Category category;
     private Boolean sold;
     private Integer total;
     private UnitMeasurement unitMeasurement;

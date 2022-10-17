@@ -30,13 +30,13 @@ public class ProductMapper {
                 productRequest.getExpirationDate(),
                 LocalDate.now(),
                 LocalDate.now(),
-                productRequest.getCategory().toString(),
                 productRequest.getIsRefrigerated(),
                 false,
                 null,
                 productRequest.getPicture(),
                 confections,
-                productRequest.getCompany()
+                productRequest.getCompany(),
+                productRequest.getCategory()
         );
     }
 
@@ -54,7 +54,7 @@ public class ProductMapper {
                 product.getUnitMeasurement(),
                 product.getCategory(),
                 product.getPicture()
-        );
+                );
     }
 
     public List<ProductResponse> convertModelListToResponseList(List<Product> products) {
