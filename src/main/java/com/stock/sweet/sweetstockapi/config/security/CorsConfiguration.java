@@ -33,7 +33,19 @@ public class CorsConfiguration extends org.springframework.web.cors.CorsConfigur
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.setAllowedOrigins(Arrays.asList("http://localhost:3001", "https://sweet-stock.vercel.app", "http://23.21.73.231"));
+
+        config.setAllowedOrigins(
+                Arrays.asList(
+                        "http://localhost:3001",
+                        "https://sweet-stock.vercel.app",
+                        "http://23.21.73.231",
+                        "https://54.152.96.53",
+                        "http://54.152.96.53",
+                        "https://sweet-stock.servehttp.com/",
+                        "http://sweet-stock.servehttp.com/"
+                )
+        );
+
         config.setAllowedMethods(Collections.singletonList("*"));
         config.setAllowedHeaders(Collections.singletonList("*"));
         source.registerCorsConfiguration("/**", config);
