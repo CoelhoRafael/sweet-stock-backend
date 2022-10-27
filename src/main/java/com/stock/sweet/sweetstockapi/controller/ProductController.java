@@ -59,7 +59,9 @@ public class ProductController {
 
     @GetMapping("/products-no-sold")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<List<ProductResponse>> getAllProductsNoSold(@RequestHeader HttpHeaders headers) throws JsonProcessingException {
+    public ResponseEntity<List<ProductResponse>> getAllProductsNoSold(
+            @RequestHeader HttpHeaders headers
+    ) throws JsonProcessingException {
         return ResponseEntity.status(200).body(productMapper.convertModelListToResponseList(
                 productService.getAllProductsNoSold(headersUtils.getCompanyIdFromToken(headers))
         ));
@@ -67,11 +69,22 @@ public class ProductController {
 
     @GetMapping("/products-sold")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<List<ProductResponse>> getAllProductsSold(@RequestHeader HttpHeaders headers) throws JsonProcessingException {
+    public ResponseEntity<List<ProductResponse>> getAllProductsSold(
+            @RequestHeader HttpHeaders headers
+    ) throws JsonProcessingException {
         return ResponseEntity.status(200).body(productMapper.convertModelListToResponseList(
                 productService.getAllProductsSold(headersUtils.getCompanyIdFromToken(headers))
         ));
     }
+
+    @GetMapping("/all-products-no-sold-by-category/{category}")
+    public ResponseEntity<List<ProductResponse>> getAllProductsNoSoldByCategory(
+            @RequestHeader HttpHeaders headers,
+            @RequestParam String category
+    ) throws JsonProcessingException {
+        return productService.getAllProductsNoSoldByCategory(category);
+    }
+
 
     @GetMapping("/{uuid}")
     @ResponseStatus(HttpStatus.OK)

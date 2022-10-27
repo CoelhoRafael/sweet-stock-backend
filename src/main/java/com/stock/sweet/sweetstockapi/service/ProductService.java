@@ -3,8 +3,10 @@ package com.stock.sweet.sweetstockapi.service;
 import com.stock.sweet.sweetstockapi.dto.request.ProductIngredientRequest;
 import com.stock.sweet.sweetstockapi.dto.request.ProductRequest;
 import com.stock.sweet.sweetstockapi.dto.request.ProductRequestSell;
+import com.stock.sweet.sweetstockapi.dto.response.ProductResponse;
 import com.stock.sweet.sweetstockapi.exception.BadRequestException;
 import com.stock.sweet.sweetstockapi.exception.NotFoundException;
+import com.stock.sweet.sweetstockapi.mapper.ProductMapper;
 import com.stock.sweet.sweetstockapi.model.Confection;
 import com.stock.sweet.sweetstockapi.model.Ingredient;
 import com.stock.sweet.sweetstockapi.model.Product;
@@ -12,6 +14,7 @@ import com.stock.sweet.sweetstockapi.repository.ConfectionRepository;
 import com.stock.sweet.sweetstockapi.repository.IngredientRepository;
 import com.stock.sweet.sweetstockapi.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -34,6 +37,9 @@ public class ProductService {
 
     @Autowired
     private IngredientService ingredientService;
+
+    @Autowired
+    private ProductMapper productMapper;
 
     public Product createProduct(Product product, List<ProductIngredientRequest> ingredients) throws NotFoundException, BadRequestException {
         List<Ingredient> ingredientsFound = new ArrayList<>();
@@ -132,18 +138,27 @@ public class ProductService {
         }
 
         double newValue = (product.getTotal() - soldQuantity);
-//        productRepository.sellProduct(uuidProduct, newValue, LocalDateTime.now());
+        productRepository.sellProduct(uuidProduct, newValue, LocalDateTime.now());
 
         return new ProductRequestSell(soldQuantity);
     }
 
     public List<Product> getAllProductsNoSold(String uuidCompany) {
-//        return productRepository.findAllProductsNoSold(uuidCompany);
-        return null;
+        return productRepository.findAllProductsNoSold(uuidCompany);
     }
 
     public List<Product> getAllProductsSold(String uuidCompany) {
-//        return productRepository.findAllProductsSold(uuidCompany);
-        return null;
+        return productRepository.findAllProductsSold(uuidCompany);
+    }
+
+    public ResponseEntity<List<ProductResponse>> getAllProductsNoSoldByCategory(String category) {
+        List<Product> productList = productRepository.getAllProductsNoSoldByCategory(category);
+        List<ProductResponse> productListResponse = productMapper.convertModelListToResponseList(productList);
+
+        if(!productList.isEmpty()){
+            return ResponseEntity.status(200).body(productListResponse);
+        }
+
+        return ResponseEntity.status(404).build();
     }
 }

@@ -1,9 +1,11 @@
 package com.stock.sweet.sweetstockapi.repository;
 
+import com.stock.sweet.sweetstockapi.dto.response.ProductResponse;
 import com.stock.sweet.sweetstockapi.model.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
@@ -22,12 +24,12 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     @Query("update Product p set p.total = ?2, p.sold = true, p.saleValue = ?3 where p.uuid = ?1")
     void sellProduct(String uuid, Double total, LocalDateTime saleValue);
 
-//    @Query("select p from Product p where Company.uuid = ?1 and p.total > 0")
-//    List<Product> findAllProductsNoSold(String uuid);
+    @Query("select p from Product p where p.company.uuid = ?1 and p.total > 0")
+    List<Product> findAllProductsNoSold(String uuid);
 
-//    @Query("select p from Product p where p.total > 0 and Company )
-//    List<Product> findAllProductsNoSold2(BigDecimal saleValue);
+    @Query("select p from Product p where p.company.uuid = ?1 and p.sold = true and p.dateOfSale is not null")
+    List<Product> findAllProductsSold(String uuid);
 
-//    @Query("select p from Product p where Company.uuid = ?1 and p.sold = true and p.dateOfSale is not null")
-//    List<Product> findAllProductsSold(String uuid);
+    @Query("select p from Product p where p.sold = false and p.dateOfSale is null and p.category = ?1")
+    List<Product> getAllProductsNoSoldByCategory(String category);
 }
