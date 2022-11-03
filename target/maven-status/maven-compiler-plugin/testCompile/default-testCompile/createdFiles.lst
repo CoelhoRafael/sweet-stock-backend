@@ -1,0 +1,12 @@
+com\stock\sweet\sweetstockapi\controller\ProviderControllerTest.class
+com\stock\sweet\sweetstockapi\controller\CompanyControllerTest.class
+com\stock\sweet\sweetstockapi\service\IngredientReportServiceTest.class
+com\stock\sweet\sweetstockapi\service\CompanyServiceTest.class
+com\stock\sweet\sweetstockapi\service\AddressServiceTest.class
+com\stock\sweet\sweetstockapi\service\ProviderServiceTest.class
+com\stock\sweet\sweetstockapi\SweetStockApiApplicationTests.class
+com\stock\sweet\sweetstockapi\service\EmailServiceTest.class
+com\stock\sweet\sweetstockapi\service\ProductServiceTest.class
+com\stock\sweet\sweetstockapi\service\ConfectionServiceTest.class
+com\stock\sweet\sweetstockapi\service\EmployeeServiceTest.class
+com\stock\sweet\sweetstockapi\service\IngredientServiceTest.class

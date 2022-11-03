@@ -1,0 +1,31 @@
+server:
+  servlet:
+    context-path: /v1/sweet-stock/
+  port: 8080
+
+spring:
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/sweetstock?charSet=LATIN1
+    username: postgres
+    password: sweetstore
+  mail:
+    default-encodig: UTF-8
+    host: smtp.gmail.com
+    port: 587
+    username: sweet.stock.contato@gmail.com
+    password: uklnqcdopznacnmh
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+  jpa:
+    hibernate:
+      ddl-auto: update
