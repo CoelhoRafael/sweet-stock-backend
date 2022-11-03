@@ -152,7 +152,7 @@ public class ProductService {
     }
 
     public ResponseEntity<List<ProductResponse>> getAllProductsNoSoldByCategory(String category) {
-        List<Product> productList = productRepository.getAllProductsNoSoldByCategory(category);
+        List<Product> productList =  productRepository.getAllProductsNoSoldByCategory(category);
         List<ProductResponse> productListResponse = productMapper.convertModelListToResponseList(productList);
 
         if(!productList.isEmpty()){
