@@ -21,7 +21,7 @@ pipeline {
         }
         stage('Deliver') {
             steps {
-                sh '´sudo java -jar target/sweet-stock-api-0.0.1-SNAPSHOT.jar'
+                sh 'java -jar target/sweet-stock-api-0.0.1-SNAPSHOT.jar'
             }
         }
     }
