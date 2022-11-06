@@ -6,7 +6,6 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'kill -9 $(lsof -ti:8080)'
                 sh 'mvn -B -DskipTests clean package'
             }
         }
