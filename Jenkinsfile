@@ -21,7 +21,7 @@ pipeline {
         }
         stage('Deliver') {
             steps {
-                sh 'java -jar target/sweet-stock-api-0.0.1-SNAPSHOT.jar'
+                sh 'tmux new java -jar target/sweet-stock-api-0.0.1-SNAPSHOT.jar'
             }
         }
     }
