@@ -22,7 +22,7 @@ pipeline {
         }
         stage('Deliver') {
             steps {
-                timeout(1) {
+                timeout(40) {
                      
                         sh 'java -jar target/sweet-stock-api-0.0.1-SNAPSHOT.jar &'
                     
