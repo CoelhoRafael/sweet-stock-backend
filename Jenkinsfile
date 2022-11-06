@@ -6,6 +6,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
+                sh 'kill -9 $(lsof -ti:8080)'
                 sh 'mvn -B -DskipTests clean package'
             }
         }
@@ -21,8 +22,13 @@ pipeline {
         }
         stage('Deliver') {
             steps {
-                sh 'tmux new java -jar target/sweet-stock-api-0.0.1-SNAPSHOT.jar'
+                timeout(1) {
+                        node {
+                        sh 'java -jar target/sweet-stock-api-0.0.1-SNAPSHOT.jar &'
+                    }
+                }
             }
         }
+        
     }
 }
