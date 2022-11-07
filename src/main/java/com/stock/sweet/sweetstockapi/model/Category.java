@@ -19,6 +19,8 @@ public class Category {
     @Column(name = "id")
     private String  id;
 
+    private String name;
+
     @Column(name = "profile_picture", columnDefinition = "text")
     private String picture;
 }
