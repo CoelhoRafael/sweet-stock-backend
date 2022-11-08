@@ -22,9 +22,8 @@ pipeline {
         }
         stage('Deliver') {
             steps {
-                timeout(1){
                     sh 'java -jar target/*.jar'
-                }
+                
             }
         }
         
