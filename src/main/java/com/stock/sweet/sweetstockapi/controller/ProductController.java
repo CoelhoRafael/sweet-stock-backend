@@ -94,6 +94,11 @@ public class ProductController {
         ));
     }
 
+    @GetMapping("/get-products-by-uuid")
+    public ResponseEntity<ProductResponse> getProductsByUuid(@RequestBody List<String> uuids) throws Exception {
+        return productService.getProductsByUuid(uuids);
+    }
+
     @PutMapping("/{uuid}")
     @ResponseStatus(HttpStatus.OK)
     public ProductResponse updateProduct(@PathVariable String uuid, @RequestBody ProductRequest body) throws Exception {

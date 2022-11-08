@@ -32,4 +32,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     @Query("select p from Product p where p.sold = false and p.dateOfSale is null and p.category = ?1")
     List<Product> getAllProductsNoSoldByCategory(String category);
+
+    @Query("select p from Product p where p.uuid in ?1")
+    List<Product> findByUuids(List<String> uuids);
 }

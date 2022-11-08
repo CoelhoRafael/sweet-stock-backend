@@ -56,7 +56,8 @@ public class ProductService {
 
             var totalUsed = ingredientFound.getQuantityUsed() + ingredientToConfection.getQuantity();
             if (totalUsed > ingredientFound.getTotal()) {
-                throw new BadRequestException(String.format("Erro ao criar produto. Ingrediente: %s. Quantidade maior do que a presente em estoque.", ingredientFound.getName()));
+                throw new BadRequestException(String.format("Erro ao criar produto. Ingrediente: %s. Quantidade maior do" +
+                        " que a presente em estoque.", ingredientFound.getName()));
             }
 
             var newConfection = Confection.builder()
@@ -160,5 +161,11 @@ public class ProductService {
         }
 
         return ResponseEntity.status(404).build();
+    }
+
+    public ResponseEntity<ProductResponse> getProductsByUuid(List<String> uuids) {
+        productRepository.findByUuids(uuids);
+
+        return ResponseEntity.ok().build();
     }
 }
