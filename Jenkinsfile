@@ -22,7 +22,7 @@ pipeline {
         }
         stage('Deliver') {
             steps {
-               sh 'java -jar target/*.jar --server.port=8080'
+               sh 'java -jar target/*.jar --server.port=8080 &'
             }
         }
         
