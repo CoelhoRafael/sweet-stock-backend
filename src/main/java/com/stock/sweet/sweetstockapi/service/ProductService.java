@@ -61,7 +61,7 @@ public class ProductService {
             }
 
             var newConfection = Confection.builder()
-                    .uuid(UUID.randomUUID().toString())
+                .uuid(UUID.randomUUID().toString())
                     .cost(getConfectionCost(ingredientFound, ingredientToConfection))
                     .quantity(ingredientToConfection.getQuantity())
                     .product(product)
