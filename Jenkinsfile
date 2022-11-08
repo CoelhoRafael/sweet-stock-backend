@@ -6,7 +6,6 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'kill -9 $(lsof -ti:8080) || echo "nada na porta 8080"'
                 sh 'mvn -B -DskipTests clean package'
             }
         }
@@ -17,6 +16,7 @@ pipeline {
             post {
                 success {
                     junit 'target/surefire-reports/*.xml'
+                     sh 'kill -9 $(lsof -ti:8080) || echo "nada na porta 8080"'
                 }
             }
         }
