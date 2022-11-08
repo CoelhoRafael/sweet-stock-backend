@@ -16,7 +16,7 @@ pipeline {
             post {
                 success {
                     junit 'target/surefire-reports/*.xml'
-                    sh 'kill -9 `sudo lsof -t -i:8080` || echo "nada na porta 8080"'
+                    sh 'kill -9 `lsof -t -i:8080` || echo "nada na porta 8080"'
                 }
             }
         }
