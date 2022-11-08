@@ -24,7 +24,7 @@ pipeline {
             steps {
                 timeout(40) {
                      
-                        sh 'java -jar target/sweet-stock-api-0.0.1-SNAPSHOT.jar --server.port=8080 &'
+                        sh 'java -jar target/*.jar --server.port=8080 &'
                     
                 }
             }
