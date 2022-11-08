@@ -16,7 +16,7 @@ pipeline {
             post {
                 success {
                     junit 'target/surefire-reports/*.xml'
-                     sh 'kill -9 $(lsof -ti:8080) || echo "nada na porta 8080"'
+                    // sh 'kill -9 $(lsof -ti:8080) || echo "nada na porta 8080"'
                 }
             }
         }
@@ -24,7 +24,7 @@ pipeline {
             steps {
                 timeout(40) {
                      
-                        sh 'java -jar target/*.jar --server.port=8080 &'
+                        sh 'java -jar target/*.jar --server.port=8080'
                     
                 }
             }
