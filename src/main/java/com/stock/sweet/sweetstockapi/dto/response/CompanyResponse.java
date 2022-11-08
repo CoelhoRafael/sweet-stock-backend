@@ -1,5 +1,6 @@
 package com.stock.sweet.sweetstockapi.dto.response;
 
+import com.stock.sweet.sweetstockapi.dto.response.address.AddressAppResponse;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,5 +18,6 @@ public class CompanyResponse {
     private String email;
     private String telephoneNumber;
     private String picture;
+    private AddressAppResponse address;
     private boolean activated;
 }

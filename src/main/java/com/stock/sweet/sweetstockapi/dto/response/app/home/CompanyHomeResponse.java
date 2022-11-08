@@ -1,6 +1,6 @@
 package com.stock.sweet.sweetstockapi.dto.response.app.home;
 
-import com.stock.sweet.sweetstockapi.dto.response.AddressResponse;
+import com.stock.sweet.sweetstockapi.dto.response.address.AddressResponse;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

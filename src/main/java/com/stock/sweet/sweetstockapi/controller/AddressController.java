@@ -1,7 +1,7 @@
 package com.stock.sweet.sweetstockapi.controller;
 
 import com.stock.sweet.sweetstockapi.dto.request.AddressRequest;
-import com.stock.sweet.sweetstockapi.dto.response.AddressResponse;
+import com.stock.sweet.sweetstockapi.dto.response.address.AddressResponse;
 import com.stock.sweet.sweetstockapi.mapper.AddressMapper;
 import com.stock.sweet.sweetstockapi.service.AddressService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;

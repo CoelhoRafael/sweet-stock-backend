@@ -2,6 +2,7 @@ package com.stock.sweet.sweetstockapi.mapper;
 
 import com.stock.sweet.sweetstockapi.dto.request.CompanyRequest;
 import com.stock.sweet.sweetstockapi.dto.response.CompanyResponse;
+import com.stock.sweet.sweetstockapi.dto.response.address.AddressAppResponse;
 import com.stock.sweet.sweetstockapi.model.Address;
 import com.stock.sweet.sweetstockapi.model.Company;
 import com.stock.sweet.sweetstockapi.model.User;
@@ -72,6 +73,12 @@ public class CompanyMapper {
                 company.getEmail(),
                 company.getTelephoneNumber(),
                 company.getPicture(),
+                new AddressAppResponse(
+                        company.getAddress().getUuid(),
+                        company.getAddress().getStreet(),
+                        company.getAddress().getNeighborhood(),
+                        company.getAddress().getNumber()
+                ),
                 company.isActivated()
 
         );
@@ -89,6 +96,12 @@ public class CompanyMapper {
                     c.getEmail(),
                     c.getTelephoneNumber(),
                     c.getPicture(),
+                    new AddressAppResponse(
+                            c.getAddress().getUuid(),
+                            c.getAddress().getStreet(),
+                            c.getAddress().getNeighborhood(),
+                            c.getAddress().getNumber()
+                    ),
                     c.isActivated()
 
             );

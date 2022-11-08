@@ -1,6 +1,6 @@
 package com.stock.sweet.sweetstockapi.service.app;
 
-import com.stock.sweet.sweetstockapi.dto.response.AddressResponse;
+import com.stock.sweet.sweetstockapi.dto.response.address.AddressResponse;
 import com.stock.sweet.sweetstockapi.dto.response.CategoryResponse;
 import com.stock.sweet.sweetstockapi.dto.response.app.home.CompanyHomeResponse;
 import com.stock.sweet.sweetstockapi.dto.response.app.home.HomeResponse;

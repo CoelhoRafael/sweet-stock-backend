@@ -1,7 +1,7 @@
 package com.stock.sweet.sweetstockapi.mapper;
 
 import com.stock.sweet.sweetstockapi.dto.request.AddressRequest;
-import com.stock.sweet.sweetstockapi.dto.response.AddressResponse;
+import com.stock.sweet.sweetstockapi.dto.response.address.AddressResponse;
 import com.stock.sweet.sweetstockapi.model.Address;
 import org.springframework.stereotype.Component;
 
