@@ -22,11 +22,7 @@ pipeline {
         }
         stage('Deliver') {
             steps {
-                timeout(unit: 'SECONDS', time: 40) {
-                     
-                       sh 'java -jar target/*.jar --server.port=8080 &'
-                    
-                }
+                sh 'java -jar target/*.jar --server.port=8080'
             }
         }
         
