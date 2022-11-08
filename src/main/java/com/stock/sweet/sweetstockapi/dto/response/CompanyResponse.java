@@ -16,7 +16,7 @@ public class CompanyResponse {
     private String cpf;
     private String cnpj;
     private String email;
-    private String telephoneNumber;
+
     private String picture;
     private AddressAppResponse address;
     private boolean activated;
