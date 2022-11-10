@@ -163,7 +163,8 @@ public class ProductService {
         return ResponseEntity.status(404).build();
     }
 
-    public ResponseEntity<ProductResponse> getProductsByUuid(List<String> uuids) {
+    public ResponseEntity<ProductResponse> getProductsByUuids(List<String> uuids) {
+
         productRepository.findByUuids(uuids);
 
         return ResponseEntity.ok().build();

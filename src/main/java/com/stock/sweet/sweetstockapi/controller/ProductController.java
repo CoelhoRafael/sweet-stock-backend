@@ -94,9 +94,10 @@ public class ProductController {
         ));
     }
 
-    @GetMapping("/get-products-by-uuid")
-    public ResponseEntity<ProductResponse> getProductsByUuid(@RequestBody List<String> uuids) throws Exception {
-        return productService.getProductsByUuid(uuids);
+    @PostMapping("/get-products-by-uuids")
+    public ResponseEntity<ProductResponse> getProductsByUuids(@RequestBody List<String> uuids) throws Exception {
+        System.out.println(uuids);
+        return productService.getProductsByUuids(uuids);
     }
 
     @PutMapping("/{uuid}")
@@ -119,5 +120,13 @@ public class ProductController {
         return productMapper.convertModelToResponse(
                 productService.deleteProduct(uuid)
         );
+    }
+}
+
+class Items{
+    private List<String> items;
+
+    public List<String> getItems() {
+        return items;
     }
 }
