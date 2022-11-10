@@ -1,5 +1,10 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'maven:3-alpine'
+            args '-v /root/.m2:/root/.m2'
+        }
+    }
     options {
         skipStagesAfterUnstable()
     }
@@ -16,7 +21,6 @@ pipeline {
             post {
                 success {
                     junit 'target/surefire-reports/*.xml'
-                    sh 'kill -9 `lsof -t -i:8080` || echo "nada na porta 8080"'
                 }
             }
         }
