@@ -16,6 +16,7 @@ pipeline {
             post {
                 success {
                     junit 'target/surefire-reports/*.xml'
+                    sh 'docker stop << 'docker ps -a | grep -i 8080 | awk {'print $1'})''
                 }
             }
         }
