@@ -21,7 +21,7 @@ pipeline {
         }
         stage('Deliver') {
             steps {
-                    sh './scripts/deliver.sh'
+                    sh '/var/lib/jenkins/workspace/spring-java/scripts/deliver.sh'
                 
             }
         }
