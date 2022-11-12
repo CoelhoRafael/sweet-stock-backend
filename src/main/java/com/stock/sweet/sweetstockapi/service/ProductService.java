@@ -76,7 +76,7 @@ public class ProductService {
         }
 
         productRepository.save(product);
-//        confectionRepository.saveAll(product.getConfections());
+        confectionRepository.saveAll(product.getConfections());
         return product;
     }
 
