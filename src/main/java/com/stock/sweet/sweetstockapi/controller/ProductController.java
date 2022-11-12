@@ -95,8 +95,7 @@ public class ProductController {
     }
 
     @PostMapping("/get-products-by-uuids")
-    public ResponseEntity<ProductResponse> getProductsByUuids(@RequestBody List<String> uuids) throws Exception {
-        System.out.println(uuids);
+    public ResponseEntity<List<ProductResponse>> getProductsByUuids(@RequestBody List<String> uuids) throws Exception {
         return productService.getProductsByUuids(uuids);
     }
 

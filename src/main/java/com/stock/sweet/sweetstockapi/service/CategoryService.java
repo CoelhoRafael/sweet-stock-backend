@@ -31,7 +31,7 @@ public class CategoryService {
             listSaved.add(new CategoryResponse(
                     category.getId(),
                     category.getName(),
-                    category.getPicture()
+                    category.getCategory()
             ));
         });
 
@@ -55,7 +55,7 @@ public class CategoryService {
             listfounds.add(new CategoryResponse(
                     category.getId(),
                     category.getName(),
-                    category.getPicture()
+                    category.getCategory()
             ));
         });
 

@@ -22,5 +22,5 @@ public class Category {
     private String name;
 
     @Column(name = "profile_picture", columnDefinition = "text")
-    private String picture;
+    private String category;
 }

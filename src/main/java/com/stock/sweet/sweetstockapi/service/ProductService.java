@@ -61,7 +61,7 @@ public class ProductService {
             }
 
             var newConfection = Confection.builder()
-                .uuid(UUID.randomUUID().toString())
+                    .uuid(UUID.randomUUID().toString())
                     .cost(getConfectionCost(ingredientFound, ingredientToConfection))
                     .quantity(ingredientToConfection.getQuantity())
                     .product(product)
@@ -130,11 +130,11 @@ public class ProductService {
     public ProductRequestSell sellProduct(String uuidProduct, Double soldQuantity) throws Exception {
         Product product = productRepository.findByUuid(uuidProduct).get();
 
-        if(product == null){
+        if (product == null) {
             throw new Exception("Produto nao encontrado!");
         }
 
-        if(product.getTotal() < soldQuantity || product.getTotal() == 0){
+        if (product.getTotal() < soldQuantity || product.getTotal() == 0) {
             throw new Exception("Produto esgotado!");
         }
 
@@ -153,20 +153,28 @@ public class ProductService {
     }
 
     public ResponseEntity<List<ProductResponse>> getAllProductsNoSoldByCategory(String category) {
-        List<Product> productList =  productRepository.getAllProductsNoSoldByCategory(category);
+        List<Product> productList = productRepository.getAllProductsNoSoldByCategory(category);
         List<ProductResponse> productListResponse = productMapper.convertModelListToResponseList(productList);
 
-        if(!productList.isEmpty()){
+        if (!productList.isEmpty()) {
             return ResponseEntity.status(200).body(productListResponse);
         }
 
         return ResponseEntity.status(404).build();
     }
 
-    public ResponseEntity<ProductResponse> getProductsByUuids(List<String> uuids) {
+    public ResponseEntity<List<ProductResponse>> getProductsByUuids(List<String> uuids) throws Exception {
+        if(uuids.isEmpty()){
+            throw new Exception("É necessario enviar uuids para realizar a requisicao");
+        }
 
-        productRepository.findByUuids(uuids);
+        ArrayList<ProductResponse> productResponses = new ArrayList<>(
+                productMapper.convertModelListToResponseList(productRepository.findByUuids(uuids))
+        );
 
-        return ResponseEntity.ok().build();
+        if(productResponses.isEmpty()){
+            throw new Exception("Nao foram encontrados produtos com os seguintes uuids: " + uuids);
+        }
+        return ResponseEntity.ok().body(productResponses);
     }
 }
