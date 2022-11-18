@@ -36,7 +36,8 @@ public class ProductMapper {
                 productRequest.getPicture(),
                 confections,
                 productRequest.getCompany(),
-                productRequest.getCategory()
+                productRequest.getCategory(),
+                productRequest.getNutritionalFacts()
         );
     }
 
@@ -53,7 +54,8 @@ public class ProductMapper {
                 product.getTotal(),
                 product.getUnitMeasurement(),
                 product.getCategory(),
-                product.getPicture()
+                product.getPicture(),
+                product.getNutritionalFacts()
                 );
     }
 
@@ -71,7 +73,8 @@ public class ProductMapper {
                     p.getTotal(),
                     p.getUnitMeasurement(),
                     p.getCategory(),
-                    p.getPicture()
+                    p.getPicture(),
+                    p.getNutritionalFacts()
             );
         }).collect(Collectors.toList());
     }

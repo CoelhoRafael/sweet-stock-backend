@@ -2,6 +2,7 @@ package com.stock.sweet.sweetstockapi.dto.response;
 
 import com.stock.sweet.sweetstockapi.controller.enums.UnitMeasurement;
 import com.stock.sweet.sweetstockapi.model.Category;
+import com.stock.sweet.sweetstockapi.model.NutritionalFacts;
 import com.stock.sweet.sweetstockapi.model.enums.CategoryEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,4 +28,5 @@ public class ProductResponse {
     private String unitMeasurement;
     private Category category;
     private String picture;
+    private NutritionalFacts nutritionalFacts;
 }

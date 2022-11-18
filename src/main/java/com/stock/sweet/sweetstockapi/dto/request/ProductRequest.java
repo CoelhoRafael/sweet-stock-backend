@@ -3,6 +3,7 @@ package com.stock.sweet.sweetstockapi.dto.request;
 import com.stock.sweet.sweetstockapi.controller.enums.UnitMeasurement;
 import com.stock.sweet.sweetstockapi.model.Category;
 import com.stock.sweet.sweetstockapi.model.Company;
+import com.stock.sweet.sweetstockapi.model.NutritionalFacts;
 import com.stock.sweet.sweetstockapi.model.enums.CategoryEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -28,4 +29,5 @@ public class ProductRequest {
     private String picture;
     private List<ProductIngredientRequest> ingredients;
     private Company company;
+    private NutritionalFacts nutritionalFacts;
 }

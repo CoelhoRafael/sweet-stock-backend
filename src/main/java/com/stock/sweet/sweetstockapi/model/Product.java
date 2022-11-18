@@ -71,6 +71,7 @@ public class Product {
     @ManyToOne
     private Category category;
 
-
-
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_nutritional_facts", referencedColumnName = "id")
+    private NutritionalFacts nutritionalFacts;
 }

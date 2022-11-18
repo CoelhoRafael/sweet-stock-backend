@@ -121,11 +121,3 @@ public class ProductController {
         );
     }
 }
-
-class Items{
-    private List<String> items;
-
-    public List<String> getItems() {
-        return items;
-    }
-}
