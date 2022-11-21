@@ -6,6 +6,8 @@ import com.stock.sweet.sweetstockapi.repository.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalTime;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 @Service
@@ -23,6 +25,11 @@ public class CompanyService {
     public List<Company> getAllCompanys() {
 
         return companyRepository.findAll();
+    }
+    public List<Company> getAllComapnysOpen(LocalTime hour){
+        GregorianCalendar gc = new GregorianCalendar();
+        int diaDaSemana = gc.get(GregorianCalendar.DAY_OF_WEEK);
+        return companyRepository.findCompaniesByOpenHourAfterAndCloseHourBefore(hour, hour);
     }
 
     public Company findCompanyByUuid(String uuid) throws Exception {

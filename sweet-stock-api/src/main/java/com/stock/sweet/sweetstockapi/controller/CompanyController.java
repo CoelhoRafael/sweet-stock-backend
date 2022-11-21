@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalTime;
 import java.util.List;
 
 @RestController
@@ -37,6 +38,13 @@ public class CompanyController {
     public List<CompanyResponse> getAllCompanies() {
         return companyMapper.convertModelListToResponseList(
                 companyService.getAllCompanys()
+        );
+    }
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public List<CompanyResponse> getAllCompaniesOpen(LocalTime hour) {
+        return companyMapper.convertModelListToResponseList(
+                companyService.getAllComapnysOpen(hour)
         );
     }
 

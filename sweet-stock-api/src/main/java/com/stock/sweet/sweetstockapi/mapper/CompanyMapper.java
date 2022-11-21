@@ -25,6 +25,8 @@ public class CompanyMapper {
                 .cnpj(companyRequest.getCnpj())
                 .cpf(companyRequest.getCpf())
                 .email(companyRequest.getEmail())
+                .openHour(companyRequest.getOpenHour())
+                .closeHour(companyRequest.getCloseHour())
                 .telephoneNumber(companyRequest.getTelephoneNumber())
                 .address(
                         Address.builder()
@@ -61,7 +63,9 @@ public class CompanyMapper {
                 company.getCpf(),
                 company.getCnpj(),
                 company.getEmail(),
-                company.getTelephoneNumber()
+                company.getTelephoneNumber(),
+                company.getOpenHour(),
+                company.getCloseHour()
 
         );
     }
@@ -76,7 +80,9 @@ public class CompanyMapper {
                     c.getCpf(),
                     c.getCnpj(),
                     c.getEmail(),
-                    c.getTelephoneNumber()
+                    c.getTelephoneNumber(),
+                    c.getOpenHour(),
+                    c.getCloseHour()
 
             );
         }).collect(Collectors.toList());

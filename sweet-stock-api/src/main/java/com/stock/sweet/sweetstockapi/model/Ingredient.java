@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.Set;
 
@@ -57,6 +59,7 @@ public class Ingredient {
 
     @Column(name = "date_update")
     private LocalDate dateUpdate;
+
 
     @OneToMany(mappedBy = "ingredient")
     Set<Confection> confections;

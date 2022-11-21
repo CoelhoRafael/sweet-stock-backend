@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -39,6 +40,15 @@ public class Company {
 
     @Column(name = "email")
     private String email;
+
+    @Column(name="open_hour")
+    private String openHour;
+
+    @Column(name="close_hour")
+    private String closeHour;
+
+    @Column(name="days_open")
+    private Integer daysOpen;
 
     @Column(name = "telephone_number")
     private String telephoneNumber;
