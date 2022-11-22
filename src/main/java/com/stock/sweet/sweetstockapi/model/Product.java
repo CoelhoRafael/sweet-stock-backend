@@ -57,7 +57,7 @@ public class Product {
     @Column(name = "date_of_sale")
     private LocalDateTime dateOfSale;
 
-    @Column(name = "picture")
+    @Column(name = "picture", columnDefinition = "text")
     private String picture;
 
     @OneToMany(mappedBy = "product")
