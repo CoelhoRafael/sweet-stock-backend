@@ -80,4 +80,9 @@ public class CompanyController {
                 companyService.findCompanyByUuid(uuid)
         );
     }
+
+    @GetMapping("/get-name-company/{uuidProduct}")
+    public ResponseEntity<String> getNameCompany(@PathVariable String uuidProduct){
+        return companyService.getNameCompany(uuidProduct);
+    }
 }

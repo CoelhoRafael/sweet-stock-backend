@@ -3,8 +3,11 @@ package com.stock.sweet.sweetstockapi.service;
 import com.stock.sweet.sweetstockapi.exception.NotFoundException;
 import com.stock.sweet.sweetstockapi.mapper.AddressMapper;
 import com.stock.sweet.sweetstockapi.model.Company;
+import com.stock.sweet.sweetstockapi.model.Product;
 import com.stock.sweet.sweetstockapi.repository.CompanyRepository;
+import com.stock.sweet.sweetstockapi.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +19,8 @@ public class CompanyService {
 
     @Autowired
     private AddressMapper addressMapper;
+
+    private ProductRepository productRepository;
 
     public String getAssociateCode(String uuidCompany) throws NotFoundException {
         Company company = companyRepository.findByUuid(uuidCompany).orElse(null);
@@ -56,5 +61,10 @@ public class CompanyService {
 
     public List<Company> getAllActiveCompanies() {
         return companyRepository.findAllActiveCompanies();
+    }
+
+    public ResponseEntity<String> getNameCompany(String uuidProduct) {
+        Product product = productRepository.getByUuid(uuidProduct);
+        return ResponseEntity.ok().body(product.getCompany().getName());
     }
 }

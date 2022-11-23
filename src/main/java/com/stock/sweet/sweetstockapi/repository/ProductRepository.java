@@ -35,4 +35,6 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     @Query("select p from Product p where p.uuid in ?1")
     List<Product> findByUuids(List<String> uuids);
+
+    Product getByUuid(String uuidProduct);
 }
