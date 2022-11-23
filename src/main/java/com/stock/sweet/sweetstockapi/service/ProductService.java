@@ -138,8 +138,8 @@ public class ProductService {
             throw new Exception("Produto esgotado!");
         }
 
-        double newValue = (product.getTotal() - soldQuantity);
-        productRepository.sellProduct(uuidProduct, newValue, LocalDateTime.now());
+        Integer newValue = (product.getTotal().intValue() - soldQuantity.intValue());
+        productRepository.sellProduct(uuidProduct, newValue, LocalDate.now());
 
         return new ProductRequestSell(soldQuantity);
     }

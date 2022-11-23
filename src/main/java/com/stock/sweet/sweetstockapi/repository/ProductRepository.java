@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -21,8 +22,8 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     List<Product> findAllBySoldIsFalse();
     @Modifying
     @Transactional
-    @Query("update Product p set p.total = ?2, p.sold = true, p.saleValue = ?3 where p.uuid = ?1")
-    void sellProduct(String uuid, Double total, LocalDateTime saleValue);
+    @Query("update Product p set p.total = ?2, p.sold = true, p.dateUpdate = ?3 where p.uuid = ?1")
+    void sellProduct(String uuid, Integer total, LocalDate saleValue);
 
     @Query("select p from Product p where p.company.uuid = ?1 and p.total > 0")
     List<Product> findAllProductsNoSold(String uuid);

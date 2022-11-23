@@ -20,6 +20,7 @@ public class CompanyService {
     @Autowired
     private AddressMapper addressMapper;
 
+    @Autowired
     private ProductRepository productRepository;
 
     public String getAssociateCode(String uuidCompany) throws NotFoundException {
