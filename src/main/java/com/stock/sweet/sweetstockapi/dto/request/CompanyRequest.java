@@ -19,4 +19,6 @@ public class CompanyRequest {
     private String password;
     private String picture;
     private boolean activated;
+    private HoursCompanyRequest hoursCompany;
+
 }

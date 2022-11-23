@@ -1,10 +1,13 @@
 package com.stock.sweet.sweetstockapi.mapper;
 
 import com.stock.sweet.sweetstockapi.dto.request.CompanyRequest;
+import com.stock.sweet.sweetstockapi.dto.request.HoursCompanyRequest;
 import com.stock.sweet.sweetstockapi.dto.response.CompanyResponse;
+import com.stock.sweet.sweetstockapi.dto.response.HoursCompanyResponse;
 import com.stock.sweet.sweetstockapi.dto.response.address.AddressAppResponse;
 import com.stock.sweet.sweetstockapi.model.Address;
 import com.stock.sweet.sweetstockapi.model.Company;
+import com.stock.sweet.sweetstockapi.model.HoursCompany;
 import com.stock.sweet.sweetstockapi.model.User;
 import com.stock.sweet.sweetstockapi.model.enums.LevelAccess;
 import org.apache.commons.lang.RandomStringUtils;
@@ -42,6 +45,20 @@ public class CompanyMapper {
                 )
                 .picture(companyRequest.getPicture())
                 .activated(companyRequest.isActivated())
+                .hoursCompany(
+                        HoursCompany.builder()
+                                .horaAbertura(companyRequest.getHoursCompany().getHoraAbertura())
+                                .horaFechar(companyRequest.getHoursCompany().getHoraFechar())
+                                .sunday(companyRequest.getHoursCompany().getSunday())
+                                .monday(companyRequest.getHoursCompany().getMonday())
+                                .tuesday(companyRequest.getHoursCompany().getTuesday())
+                                .wednesday(companyRequest.getHoursCompany().getWednesday())
+                                .thursday(companyRequest.getHoursCompany().getThursday())
+                                .friday(companyRequest.getHoursCompany().getFriday())
+                                .saturday(companyRequest.getHoursCompany().getSaturday())
+                                .build()
+                )
+                .isOpen(null)
 
                 .build();
     }
@@ -79,7 +96,9 @@ public class CompanyMapper {
                         company.getAddress().getNeighborhood(),
                         company.getAddress().getNumber()
                 ),
-                company.isActivated()
+                company.isActivated(),
+                company.getIsOpen()
+
 
         );
     }
@@ -102,7 +121,8 @@ public class CompanyMapper {
                             c.getAddress().getNeighborhood(),
                             c.getAddress().getNumber()
                     ),
-                    c.isActivated()
+                    c.isActivated(),
+                    c.getIsOpen()
 
             );
         }).collect(Collectors.toList());

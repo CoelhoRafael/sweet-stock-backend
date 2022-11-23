@@ -58,5 +58,12 @@ public class Company {
 
     @Column(name= "rating")
     private Double Rating;
+
+    @Column(name = "is_open")
+    private Boolean isOpen;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_hours_company", referencedColumnName = "id")
+    private HoursCompany hoursCompany;
 }
 

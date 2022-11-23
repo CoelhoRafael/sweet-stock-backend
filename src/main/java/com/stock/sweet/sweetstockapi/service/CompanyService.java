@@ -10,6 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
@@ -48,6 +53,26 @@ public class CompanyService {
         return companyRepository.findByUuid(uuid).orElseThrow(() -> new Exception("UUID não encontrado!"));
     }
 
+    public Boolean isOpen(Company c){
+        LocalTime horas = LocalTime.now();
+        String timeColonPattern = "HH:mm";
+        DateTimeFormatter timeColonFormatter = DateTimeFormatter.ofPattern(timeColonPattern);
+        timeColonFormatter.format(horas);
+        DayOfWeek dia = LocalDate.now().getDayOfWeek();
+
+        if (horas.isAfter(c.getHoursCompany().getHoraAbertura())){
+         if (horas.isBefore(c.getHoursCompany().getHoraFechar())){
+             return true;
+         }
+        }
+     return false;
+    }
+    public List<Company>findCompanyIsOpen()throws Exception{
+        List<Company> company =  companyRepository.findAll();
+
+     return null;
+
+    }
     public Company findCompanyById(Integer id) throws Exception {
         return companyRepository.findById(id).orElseThrow(() -> new Exception("id não encontrado!"));
     }

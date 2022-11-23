@@ -20,4 +20,5 @@ public class CompanyResponse {
     private String picture;
     private AddressAppResponse address;
     private boolean activated;
+    private Boolean isOpen;
 }
