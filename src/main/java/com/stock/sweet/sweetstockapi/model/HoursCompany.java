@@ -19,10 +19,10 @@ public class HoursCompany {
     private Integer id;
 
     @Column(name = "openHour")
-    private LocalTime horaAbertura;
+    private String horaAbertura;
 
     @Column(name = "closeHour")
-    private LocalTime horaFechar;
+    private String horaFechar;
 
     @Column(name = "sunday")
     private Boolean sunday;
