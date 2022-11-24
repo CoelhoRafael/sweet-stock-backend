@@ -21,12 +21,8 @@ import java.time.format.FormatStyle;
         bearerFormat = "JWT",
         scheme = "bearer"
 )
-//SpringApplication.run(SweetStockApiApplication.class, args);
 public class SweetStockApiApplication {
     public static void main(String[] args) {
-        ZonedDateTime horas = ZonedDateTime.now();
-        String timeColonPattern = "HH:mm";
-        DateTimeFormatter timeColonFormatter = DateTimeFormatter.ofPattern(timeColonPattern);
-        System.out.println(timeColonFormatter.format(horas));
+        SpringApplication.run(SweetStockApiApplication.class, args);
     }
 }
