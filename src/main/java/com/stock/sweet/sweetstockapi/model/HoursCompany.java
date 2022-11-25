@@ -18,10 +18,10 @@ public class HoursCompany {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "openHour")
+    @Column(name = "open_hour")
     private String horaAbertura;
 
-    @Column(name = "closeHour")
+    @Column(name = "close_hour")
     private String horaFechar;
 
     @Column(name = "sunday")
