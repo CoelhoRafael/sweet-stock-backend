@@ -10,12 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CompanyService {
@@ -65,55 +64,70 @@ public class CompanyService {
         if (numeroDiaSemana == 0) {
             var isOpenSunday = c.getHoursCompany().getSunday();
             if(isOpenSunday && (horas.isAfter(LocalTime.parse(c.getHoursCompany().getHoraAbertura())) && (horas.isBefore(LocalTime.parse(c.getHoursCompany().getHoraFechar()))))){
+                c.setIsOpen(true);
                 return true;
+
             }else {
+                c.setIsOpen(false);
                 return false;
             }
         } else if (numeroDiaSemana == 1) {
             var isOpen = c.getHoursCompany().getMonday();
             if(isOpen && (horas.isAfter(LocalTime.parse(c.getHoursCompany().getHoraAbertura())) && (horas.isBefore(LocalTime.parse(c.getHoursCompany().getHoraFechar()))))){
+                c.setIsOpen(true);
                 return true;
             }else {
+                c.setIsOpen(false);
                 return false;
             }
 
         } else if (numeroDiaSemana == 2) {
             var isOpen = c.getHoursCompany().getTuesday();
             if(isOpen && (horas.isAfter(LocalTime.parse(c.getHoursCompany().getHoraAbertura())) && (horas.isBefore(LocalTime.parse(c.getHoursCompany().getHoraFechar()))))){
+                c.setIsOpen(true);
                 return true;
             }else {
+                c.setIsOpen(false);
                 return false;
             }
 
         } else if (numeroDiaSemana == 3) {
             var isOpen = c.getHoursCompany().getWednesday();
             if(isOpen && (horas.isAfter(LocalTime.parse(c.getHoursCompany().getHoraAbertura())) && (horas.isBefore(LocalTime.parse(c.getHoursCompany().getHoraFechar()))))){
+                c.setIsOpen(true);
                 return true;
             }else {
+                c.setIsOpen(false);
                 return false;
             }
 
         } else if (numeroDiaSemana == 4) {
             var isOpen = c.getHoursCompany().getThursday();
             if(isOpen && (horas.isAfter(LocalTime.parse(c.getHoursCompany().getHoraAbertura())) && (horas.isBefore(LocalTime.parse(c.getHoursCompany().getHoraFechar()))))){
+                c.setIsOpen(true);
                 return true;
             }else {
+                c.setIsOpen(false);
                 return false;
             }
 
         } else if (numeroDiaSemana == 5) {
             var isOpen = c.getHoursCompany().getFriday();
             if(isOpen && (horas.isAfter(LocalTime.parse(c.getHoursCompany().getHoraAbertura())) && (horas.isBefore(LocalTime.parse(c.getHoursCompany().getHoraFechar()))))){
+                c.setIsOpen(true);
                 return true;
             }else {
+                c.setIsOpen(false);
                 return false;
             }
 
         } else if (numeroDiaSemana == 6) {
             var isOpen = c.getHoursCompany().getSaturday();
             if(isOpen && (horas.isAfter(LocalTime.parse(c.getHoursCompany().getHoraAbertura())) && (horas.isBefore(LocalTime.parse(c.getHoursCompany().getHoraFechar()))))){
+                c.setIsOpen(true);
                 return true;
             }else {
+                c.setIsOpen(false);
                 return false;
             }
 
@@ -121,10 +135,14 @@ public class CompanyService {
 
         return false;
     }
-    public List<Company>findCompanyIsOpen()throws Exception{
-        List<Company> company =  companyRepository.findAll();
+    public Company findCompanyIsOpen(String uuid)throws Exception{
+       Company company = companyRepository.findCompanyByUuid(uuid);
 
-     return null;
+       if (isOpen(company)){
+           return company;
+       }
+      return null;
+
 
     }
     public Company findCompanyById(Integer id) throws Exception {
