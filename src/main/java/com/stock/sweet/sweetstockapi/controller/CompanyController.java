@@ -100,7 +100,7 @@ public class CompanyController {
         return companyService.getNameCompany(uuidProduct);
     }
 
-    @GetMapping("/get-name-company-jwt/{uuidProduct}")
+    @GetMapping("/get-name-company-jwt")
     public ResponseEntity<String> getNameCompanyJwt(@RequestHeader HttpHeaders headers) throws JsonProcessingException {
         String uuidCompany = headersUtils.getCompanyIdFromToken(headers);
         return companyService.getNameCompanyJwt(uuidCompany);
