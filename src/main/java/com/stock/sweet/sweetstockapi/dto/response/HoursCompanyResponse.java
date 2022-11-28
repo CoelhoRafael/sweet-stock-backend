@@ -11,8 +11,8 @@ import java.time.LocalTime;
 @Data
 public class HoursCompanyResponse {
 
-    private LocalTime horaAbertura;
-    private LocalTime horaFechar;
+    private String horaAbertura;
+    private String horaFechar;
     private Boolean sunday;
     private Boolean monday;
     private Boolean tuesday;

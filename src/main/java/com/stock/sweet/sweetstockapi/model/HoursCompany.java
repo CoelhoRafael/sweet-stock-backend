@@ -18,11 +18,11 @@ public class HoursCompany {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "openHour")
-    private LocalTime horaAbertura;
+    @Column(name = "open_hour", columnDefinition = "text")
+    private String horaAbertura;
 
-    @Column(name = "closeHour")
-    private LocalTime horaFechar;
+    @Column(name = "close_hour", columnDefinition = "text")
+    private String horaFechar;
 
     @Column(name = "sunday")
     private Boolean sunday;

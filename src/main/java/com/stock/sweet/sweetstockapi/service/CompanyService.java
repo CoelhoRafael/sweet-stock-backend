@@ -12,12 +12,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestHeader;
 
-import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CompanyService {
@@ -55,24 +54,97 @@ public class CompanyService {
         return companyRepository.findByUuid(uuid).orElseThrow(() -> new Exception("UUID não encontrado!"));
     }
 
-    public Boolean isOpen(Company c){
+    public Boolean isOpen(Company c) {
         LocalTime horas = LocalTime.now();
         String timeColonPattern = "HH:mm";
         DateTimeFormatter timeColonFormatter = DateTimeFormatter.ofPattern(timeColonPattern);
         timeColonFormatter.format(horas);
-        DayOfWeek dia = LocalDate.now().getDayOfWeek();
 
-        if (horas.isAfter(c.getHoursCompany().getHoraAbertura())){
-         if (horas.isBefore(c.getHoursCompany().getHoraFechar())){
-             return true;
-         }
+        var numeroDiaSemana = LocalDate.now().getDayOfWeek().getValue();
+        c.getHoursCompany();
+
+        if (numeroDiaSemana == 0) {
+            var isOpenSunday = c.getHoursCompany().getSunday();
+            if(isOpenSunday && (horas.isAfter(LocalTime.parse(c.getHoursCompany().getHoraAbertura())) && (horas.isBefore(LocalTime.parse(c.getHoursCompany().getHoraFechar()))))){
+                c.setIsOpen(true);
+                return true;
+
+            }else {
+                c.setIsOpen(false);
+                return false;
+            }
+        } else if (numeroDiaSemana == 1) {
+            var isOpen = c.getHoursCompany().getMonday();
+            if(isOpen && (horas.isAfter(LocalTime.parse(c.getHoursCompany().getHoraAbertura())) && (horas.isBefore(LocalTime.parse(c.getHoursCompany().getHoraFechar()))))){
+                c.setIsOpen(true);
+                return true;
+            }else {
+                c.setIsOpen(false);
+                return false;
+            }
+
+        } else if (numeroDiaSemana == 2) {
+            var isOpen = c.getHoursCompany().getTuesday();
+            if(isOpen && (horas.isAfter(LocalTime.parse(c.getHoursCompany().getHoraAbertura())) && (horas.isBefore(LocalTime.parse(c.getHoursCompany().getHoraFechar()))))){
+                c.setIsOpen(true);
+                return true;
+            }else {
+                c.setIsOpen(false);
+                return false;
+            }
+
+        } else if (numeroDiaSemana == 3) {
+            var isOpen = c.getHoursCompany().getWednesday();
+            if(isOpen && (horas.isAfter(LocalTime.parse(c.getHoursCompany().getHoraAbertura())) && (horas.isBefore(LocalTime.parse(c.getHoursCompany().getHoraFechar()))))){
+                c.setIsOpen(true);
+                return true;
+            }else {
+                c.setIsOpen(false);
+                return false;
+            }
+
+        } else if (numeroDiaSemana == 4) {
+            var isOpen = c.getHoursCompany().getThursday();
+            if(isOpen && (horas.isAfter(LocalTime.parse(c.getHoursCompany().getHoraAbertura())) && (horas.isBefore(LocalTime.parse(c.getHoursCompany().getHoraFechar()))))){
+                c.setIsOpen(true);
+                return true;
+            }else {
+                c.setIsOpen(false);
+                return false;
+            }
+
+        } else if (numeroDiaSemana == 5) {
+            var isOpen = c.getHoursCompany().getFriday();
+            if(isOpen && (horas.isAfter(LocalTime.parse(c.getHoursCompany().getHoraAbertura())) && (horas.isBefore(LocalTime.parse(c.getHoursCompany().getHoraFechar()))))){
+                c.setIsOpen(true);
+                return true;
+            }else {
+                c.setIsOpen(false);
+                return false;
+            }
+
+        } else if (numeroDiaSemana == 6) {
+            var isOpen = c.getHoursCompany().getSaturday();
+            if(isOpen && (horas.isAfter(LocalTime.parse(c.getHoursCompany().getHoraAbertura())) && (horas.isBefore(LocalTime.parse(c.getHoursCompany().getHoraFechar()))))){
+                c.setIsOpen(true);
+                return true;
+            }else {
+                c.setIsOpen(false);
+                return false;
+            }
+
         }
-     return false;
-    }
-    public List<Company>findCompanyIsOpen()throws Exception{
-        List<Company> company =  companyRepository.findAll();
 
-     return null;
+        return false;
+    }
+    public Company findCompanyIsOpen(String uuid)throws Exception{
+       Company company = companyRepository.findCompanyByUuid(uuid);
+
+       if (isOpen(company)){
+           return company;
+       }
+      return null;
+
 
     }
     public Company findCompanyById(Integer id) throws Exception {
