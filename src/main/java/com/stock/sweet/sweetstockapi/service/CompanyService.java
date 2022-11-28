@@ -7,8 +7,10 @@ import com.stock.sweet.sweetstockapi.model.Product;
 import com.stock.sweet.sweetstockapi.repository.CompanyRepository;
 import com.stock.sweet.sweetstockapi.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -92,5 +94,10 @@ public class CompanyService {
     public ResponseEntity<String> getNameCompany(String uuidProduct) {
         Product product = productRepository.getByUuid(uuidProduct);
         return ResponseEntity.ok().body(product.getCompany().getName());
+    }
+
+    public ResponseEntity<String> getNameCompanyJwt(String uuidCompany){
+        Company company = companyRepository.findByUuid(uuidCompany).get();
+        return ResponseEntity.ok().body(company.getName());
     }
 }

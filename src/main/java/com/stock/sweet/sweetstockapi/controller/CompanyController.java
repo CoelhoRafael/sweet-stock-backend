@@ -2,6 +2,7 @@ package com.stock.sweet.sweetstockapi.controller;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.stock.sweet.sweetstockapi.dto.request.CompanyRequest;
 import com.stock.sweet.sweetstockapi.dto.response.CompanyResponse;
 import com.stock.sweet.sweetstockapi.dto.response.LoginResponse;
@@ -9,8 +10,10 @@ import com.stock.sweet.sweetstockapi.mapper.CompanyMapper;
 import com.stock.sweet.sweetstockapi.service.CompanyService;
 import com.stock.sweet.sweetstockapi.service.EmailService;
 import com.stock.sweet.sweetstockapi.service.UserService;
+import com.stock.sweet.sweetstockapi.utils.HeadersUtils;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -40,6 +43,9 @@ public class CompanyController {
 
     @Autowired
     private EmailService emailService;
+
+    @Autowired
+    private HeadersUtils headersUtils;
 
     @PostMapping
     public ResponseEntity createCompany(@RequestBody CompanyRequest body) throws MessagingException {
@@ -84,5 +90,11 @@ public class CompanyController {
     @GetMapping("/get-name-company/{uuidProduct}")
     public ResponseEntity<String> getNameCompany(@PathVariable String uuidProduct){
         return companyService.getNameCompany(uuidProduct);
+    }
+
+    @GetMapping("/get-name-company-jwt/{uuidProduct}")
+    public ResponseEntity<String> getNameCompanyJwt(@RequestHeader HttpHeaders headers) throws JsonProcessingException {
+        String uuidCompany = headersUtils.getCompanyIdFromToken(headers);
+        return companyService.getNameCompanyJwt(uuidCompany);
     }
 }
