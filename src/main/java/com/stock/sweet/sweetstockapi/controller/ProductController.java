@@ -10,6 +10,7 @@ import com.stock.sweet.sweetstockapi.service.IngredientService;
 import com.stock.sweet.sweetstockapi.service.ProductService;
 import com.stock.sweet.sweetstockapi.utils.HeadersUtils;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
+@Slf4j
 @RestController
 @RequestMapping("/products")
 @CrossOrigin(origins = "*")
@@ -69,6 +71,8 @@ public class ProductController {
     @GetMapping("/products-no-sold-by-uuid-company/{uuidCompany}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<ProductResponse>> getAllProductsNoSoldByUuidCompany(@PathVariable String uuidCompany){
+        log.info("Chamando /products-no-sold-by-uuid-company/{uuidCompany}");
+
         return ResponseEntity.status(200).body(productMapper.convertModelListToResponseList(
                 productService.getAllProductsNoSold(uuidCompany)
         ));
@@ -117,6 +121,8 @@ public class ProductController {
     @PutMapping("/{soldQuantity}/{uuid}")
     @ResponseStatus(HttpStatus.OK)
     public ProductRequestSell sellProduct(@PathVariable String uuid, @PathVariable Double soldQuantity) throws Exception {
+        log.info("Chamando /{soldQuantity}/{uuid}");
+
         return productService.sellProduct(uuid, soldQuantity);
     }
 
