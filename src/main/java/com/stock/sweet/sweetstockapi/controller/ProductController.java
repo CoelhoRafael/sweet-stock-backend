@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.stock.sweet.sweetstockapi.dto.request.ProductRequest;
 import com.stock.sweet.sweetstockapi.dto.request.ProductRequestSell;
 import com.stock.sweet.sweetstockapi.dto.response.ProductResponse;
-import com.stock.sweet.sweetstockapi.exception.NotFoundException;
 import com.stock.sweet.sweetstockapi.mapper.IngredientMapper;
 import com.stock.sweet.sweetstockapi.mapper.ProductMapper;
 import com.stock.sweet.sweetstockapi.service.IngredientService;
@@ -64,6 +63,14 @@ public class ProductController {
     ) throws JsonProcessingException {
         return ResponseEntity.status(200).body(productMapper.convertModelListToResponseList(
                 productService.getAllProductsNoSold(headersUtils.getCompanyIdFromToken(headers))
+        ));
+    }
+
+    @GetMapping("/products-no-sold-by-uuid-company/{uuidCompany}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<List<ProductResponse>> getAllProductsNoSoldByUuidCompany(@PathVariable String uuidCompany){
+        return ResponseEntity.status(200).body(productMapper.convertModelListToResponseList(
+                productService.getAllProductsNoSold(uuidCompany)
         ));
     }
 
