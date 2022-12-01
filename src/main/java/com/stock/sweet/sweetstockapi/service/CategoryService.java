@@ -1,6 +1,7 @@
 package com.stock.sweet.sweetstockapi.service;
 
 import com.stock.sweet.sweetstockapi.dto.response.CategoryResponse;
+import com.stock.sweet.sweetstockapi.exception.ConflictException;
 import com.stock.sweet.sweetstockapi.model.Category;
 import com.stock.sweet.sweetstockapi.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,11 @@ public class CategoryService {
 
 
     public ResponseEntity<List<CategoryResponse>> addCategories(List<Category> categoryList) {
+        categoryList.forEach(category -> {
+            if (categoryRepository.countById(category.getId()) == 1L) {
+                throw new IllegalArgumentException("A categoria " + category.getId() + " já existe na base de dados");
+            }
+        });
 
         List<Category> saved = categoryRepository.saveAll(categoryList);
 
@@ -63,9 +69,9 @@ public class CategoryService {
     }
 
     public ResponseEntity deleteCategories(List<String> categoriesList) {
-        categoriesList.forEach(c ->{
+        categoriesList.forEach(c -> {
             var exist = categoryRepository.findById(c);
-            if(!exist.isEmpty()){
+            if (!exist.isEmpty()) {
                 categoryRepository.deleteById(c);
             }
         });
