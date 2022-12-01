@@ -19,13 +19,15 @@ public class CategoryService {
 
 
     public ResponseEntity<List<CategoryResponse>> addCategories(List<Category> categoryList) {
+        List<Category> saved = new ArrayList<>();
+
         categoryList.forEach(category -> {
             if (categoryRepository.countById(category.getId()) == 1L) {
                 throw new IllegalArgumentException("A categoria " + category.getId() + " já existe na base de dados");
+            }else {
+                saved.add(categoryRepository.save(category));
             }
         });
-
-        List<Category> saved = categoryRepository.saveAll(categoryList);
 
         if (saved.size() == 0) {
             return ResponseEntity.status(400).build();
