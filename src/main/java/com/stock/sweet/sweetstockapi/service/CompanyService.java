@@ -13,7 +13,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestHeader;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
@@ -55,7 +57,7 @@ public class CompanyService {
     }
 
     public Boolean isOpen(Company c) {
-        LocalTime horas = LocalTime.now();
+        LocalTime horas = LocalTime.now(ZoneId.of("America/Sao_Paulo"));
         String timeColonPattern = "HH:mm";
         DateTimeFormatter timeColonFormatter = DateTimeFormatter.ofPattern(timeColonPattern);
         timeColonFormatter.format(horas);
