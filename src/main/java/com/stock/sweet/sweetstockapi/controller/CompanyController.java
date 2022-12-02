@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
@@ -78,7 +79,7 @@ public class CompanyController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<CompanyResponse> getAllCompanies() {
-        LocalTime horas = LocalTime.now();
+        LocalTime horas = LocalTime.now(ZoneId.of("America/Sao_Paulo"));
         String timeColonPattern = "HH:mm";
         DateTimeFormatter timeColonFormatter = DateTimeFormatter.ofPattern(timeColonPattern);
         timeColonFormatter.format(horas);
