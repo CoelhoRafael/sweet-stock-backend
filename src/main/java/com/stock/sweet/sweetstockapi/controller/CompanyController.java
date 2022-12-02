@@ -87,13 +87,13 @@ public class CompanyController {
         );
     }
 
-    @GetMapping("/is-open/{uuid}")
-    @ResponseStatus(HttpStatus.OK)
-    public CompanyResponse getCompanyIsOpenByUuid(@PathVariable String uuid) throws Exception {
-        return companyMapper.convertModelToResponse(
-                companyService.findCompanyIsOpen(uuid)
-        );
-    }
+//    @GetMapping("/is-open/{uuid}")
+//    @ResponseStatus(HttpStatus.OK)
+//    public CompanyResponse getCompanyIsOpenByUuid(@PathVariable String uuid) throws Exception {
+//        return companyMapper.convertModelToResponse(
+//                companyService.findCompanyIsOpen(uuid)
+//        );
+//    }
 
     @GetMapping("/get-name-company/{uuidProduct}")
     public ResponseEntity<String> getNameCompany(@PathVariable String uuidProduct){

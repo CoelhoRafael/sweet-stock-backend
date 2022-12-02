@@ -137,13 +137,13 @@ public class CompanyService {
 
         return false;
     }
-    public Company findCompanyIsOpen(String uuid)throws Exception{
+    public Boolean findCompanyIsOpen(String uuid)throws Exception{
        Company company = companyRepository.findCompanyByUuid(uuid);
 
-       if (isOpen(company)){
-           return company;
-       }
-      return null;
+        return isOpen(company);
+
+
+
 
 
     }

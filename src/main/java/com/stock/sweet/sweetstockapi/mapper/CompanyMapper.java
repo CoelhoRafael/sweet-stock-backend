@@ -10,7 +10,9 @@ import com.stock.sweet.sweetstockapi.model.Company;
 import com.stock.sweet.sweetstockapi.model.HoursCompany;
 import com.stock.sweet.sweetstockapi.model.User;
 import com.stock.sweet.sweetstockapi.model.enums.LevelAccess;
+import com.stock.sweet.sweetstockapi.service.CompanyService;
 import org.apache.commons.lang.RandomStringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -19,6 +21,8 @@ import java.util.stream.Collectors;
 
 @Component
 public class CompanyMapper {
+    @Autowired
+   private CompanyService companyService;
 
     public Company convertRequestToModel(CompanyRequest companyRequest) {
         return Company
@@ -79,7 +83,7 @@ public class CompanyMapper {
                 .build();
     }
 
-    public CompanyResponse convertModelToResponse(Company company) {
+    public CompanyResponse convertModelToResponse(Company company) throws Exception {
         return new CompanyResponse(
                 company.getUuid(),
                 company.getName(),
@@ -97,7 +101,7 @@ public class CompanyMapper {
                         company.getAddress().getNumber()
                 ),
                 company.isActivated(),
-                company.getIsOpen()
+                companyService.findCompanyIsOpen(company.getUuid())
 
 
         );
@@ -105,26 +109,30 @@ public class CompanyMapper {
 
     public List<CompanyResponse> convertModelListToResponseList(List<Company> company) {
         return company.stream().map(c -> {
-            return new CompanyResponse(
-                    c.getUuid(),
-                    c.getName(),
-                    c.getFantansyName(),
-                    c.getCeo(),
-                    c.getCpf(),
-                    c.getCnpj(),
-                    c.getEmail(),
-                    c.getTelephoneNumber(),
-                    c.getPicture(),
-                    new AddressAppResponse(
-                            c.getAddress().getUuid(),
-                            c.getAddress().getStreet(),
-                            c.getAddress().getNeighborhood(),
-                            c.getAddress().getNumber()
-                    ),
-                    c.isActivated(),
-                    c.getIsOpen()
+            try {
+                return new CompanyResponse(
+                        c.getUuid(),
+                        c.getName(),
+                        c.getFantansyName(),
+                        c.getCeo(),
+                        c.getCpf(),
+                        c.getCnpj(),
+                        c.getEmail(),
+                        c.getTelephoneNumber(),
+                        c.getPicture(),
+                        new AddressAppResponse(
+                                c.getAddress().getUuid(),
+                                c.getAddress().getStreet(),
+                                c.getAddress().getNeighborhood(),
+                                c.getAddress().getNumber()
+                        ),
+                        c.isActivated(),
+                        companyService.findCompanyIsOpen(c.getUuid())
 
-            );
+                );
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         }).collect(Collectors.toList());
     }
 
