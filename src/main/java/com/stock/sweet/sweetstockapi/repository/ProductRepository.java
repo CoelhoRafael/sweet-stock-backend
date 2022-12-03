@@ -31,6 +31,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     @Query("select p from Product p where p.company.uuid = ?1 and p.sold = true and p.dateOfSale is not null")
     List<Product> findAllProductsSold(String uuid);
 
+
     @Query("select p from Product p where p.sold = false and p.dateOfSale is null and p.category = ?1")
     List<Product> getAllProductsNoSoldByCategory(String category);
 

@@ -14,6 +14,7 @@ import com.stock.sweet.sweetstockapi.service.EmailService;
 import com.stock.sweet.sweetstockapi.service.UserService;
 import com.stock.sweet.sweetstockapi.utils.HeadersUtils;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -21,6 +22,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -32,6 +36,7 @@ import static com.stock.sweet.sweetstockapi.config.security.JwtAuthenticationFil
 @RequestMapping("/companies")
 @CrossOrigin(origins = "*", allowedHeaders = "*", methods = RequestMethod.POST)
 @SecurityRequirement(name = "bearerAuth")
+@Slf4j
 public class CompanyController {
 
     @Autowired

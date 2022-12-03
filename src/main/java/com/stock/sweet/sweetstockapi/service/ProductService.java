@@ -1,17 +1,21 @@
 package com.stock.sweet.sweetstockapi.service;
 
+import com.stock.sweet.sweetstockapi.dto.request.OutStockRequest;
 import com.stock.sweet.sweetstockapi.dto.request.ProductIngredientRequest;
 import com.stock.sweet.sweetstockapi.dto.request.ProductRequest;
 import com.stock.sweet.sweetstockapi.dto.request.ProductRequestSell;
 import com.stock.sweet.sweetstockapi.dto.response.ProductResponse;
 import com.stock.sweet.sweetstockapi.exception.BadRequestException;
 import com.stock.sweet.sweetstockapi.exception.NotFoundException;
+import com.stock.sweet.sweetstockapi.mapper.OutStockMapper;
 import com.stock.sweet.sweetstockapi.mapper.ProductMapper;
 import com.stock.sweet.sweetstockapi.model.Confection;
 import com.stock.sweet.sweetstockapi.model.Ingredient;
+import com.stock.sweet.sweetstockapi.model.OutStock;
 import com.stock.sweet.sweetstockapi.model.Product;
 import com.stock.sweet.sweetstockapi.repository.ConfectionRepository;
 import com.stock.sweet.sweetstockapi.repository.IngredientRepository;
+import com.stock.sweet.sweetstockapi.repository.OutStockRepository;
 import com.stock.sweet.sweetstockapi.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +23,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -36,10 +41,16 @@ public class ProductService {
     private ConfectionRepository confectionRepository;
 
     @Autowired
+    private OutStockRepository outStockRepository;
+
+    @Autowired
     private IngredientService ingredientService;
 
     @Autowired
     private ProductMapper productMapper;
+
+    @Autowired
+    private OutStockMapper outStockMapper;
 
     public Product createProduct(Product product, List<ProductIngredientRequest> ingredients) throws NotFoundException, BadRequestException {
         List<Ingredient> ingredientsFound = new ArrayList<>();
@@ -129,7 +140,7 @@ public class ProductService {
 
     public ProductRequestSell sellProduct(String uuidProduct, Double soldQuantity) throws Exception {
         Product product = productRepository.findByUuid(uuidProduct).get();
-
+        LocalDate data = LocalDate.parse(LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         if (product == null) {
             throw new Exception("Produto nao encontrado!");
         }
@@ -137,10 +148,10 @@ public class ProductService {
         if (product.getTotal() < soldQuantity || product.getTotal() == 0) {
             throw new Exception("Produto esgotado!");
         }
-
+        OutStockRequest outStockRequest = new OutStockRequest(data,product.getCompany().getUuid(),product);
         Integer newValue = (product.getTotal().intValue() - soldQuantity.intValue());
         productRepository.sellProduct(uuidProduct, newValue, LocalDate.now());
-
+        outStockRepository.save(outStockMapper.convertRequestToModel(outStockRequest));
         return new ProductRequestSell(soldQuantity);
     }
 

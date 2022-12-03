@@ -11,4 +11,7 @@ import java.util.List;
 @Repository
 public interface OutStockRepository extends JpaRepository<OutStock, Integer> {
     List<OutStock> findAllByIdCompany(String idCompany);
+
+    @Query("select o from OutStock o where o.idCompany = ?1 and o.date between ?2 and ?3")
+    Integer allItensSold (String uuid, LocalDate date1, LocalDate date2);
 }
