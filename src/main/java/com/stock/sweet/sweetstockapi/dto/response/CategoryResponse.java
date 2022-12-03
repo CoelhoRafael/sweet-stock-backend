@@ -13,5 +13,4 @@ import java.time.LocalDateTime;
 public class CategoryResponse {
     private String id;
     private String name;
-    private String picture;
 }

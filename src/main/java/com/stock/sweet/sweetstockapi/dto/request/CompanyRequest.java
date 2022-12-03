@@ -4,6 +4,8 @@ import com.stock.sweet.sweetstockapi.controller.enums.PeopleType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 public class CompanyRequest {
@@ -20,5 +22,5 @@ public class CompanyRequest {
     private String picture;
     private boolean activated;
     private HoursCompanyRequest hoursCompany;
-
+    private List<String> categories;
 }

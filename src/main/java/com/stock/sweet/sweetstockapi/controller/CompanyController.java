@@ -7,6 +7,8 @@ import com.stock.sweet.sweetstockapi.dto.request.CompanyRequest;
 import com.stock.sweet.sweetstockapi.dto.response.CompanyResponse;
 import com.stock.sweet.sweetstockapi.dto.response.LoginResponse;
 import com.stock.sweet.sweetstockapi.mapper.CompanyMapper;
+import com.stock.sweet.sweetstockapi.model.ListCategories;
+import com.stock.sweet.sweetstockapi.repository.ListCategoriesRepository;
 import com.stock.sweet.sweetstockapi.service.CompanyService;
 import com.stock.sweet.sweetstockapi.service.EmailService;
 import com.stock.sweet.sweetstockapi.service.UserService;
@@ -45,10 +47,13 @@ public class CompanyController {
     private EmailService emailService;
 
     @Autowired
+    private ListCategoriesRepository listCategoriesRepository;
+
+    @Autowired
     private HeadersUtils headersUtils;
 
     @PostMapping
-    public ResponseEntity createCompany(@RequestBody CompanyRequest body) throws MessagingException {
+    public ResponseEntity createCompany(@RequestBody CompanyRequest body) {
         var company = companyService.createCompany(companyMapper.convertRequestToModel(body));
         var user = userService.createUser(companyMapper.convertRequestToUserModel(body, company.getId()));
 
@@ -61,6 +66,13 @@ public class CompanyController {
                 .withExpiresAt(new Date(System.currentTimeMillis() + TOKEN_EXPIRATION))
                 .sign(Algorithm.HMAC512(TOKEN_PASSWORD));
 
+        body.getCategories().forEach(category -> {
+            listCategoriesRepository.save(new ListCategories(
+                    null,
+                    company.getUuid(),
+                    category
+            ));
+        });
 
         return ResponseEntity.status(201).body(LoginResponse.builder()
                 .token(token)
@@ -88,9 +100,8 @@ public class CompanyController {
     }
 
 
-
     @GetMapping("/get-name-company/{uuidProduct}")
-    public ResponseEntity<String> getNameCompany(@PathVariable String uuidProduct){
+    public ResponseEntity<String> getNameCompany(@PathVariable String uuidProduct) {
         return companyService.getNameCompany(uuidProduct);
     }
 
@@ -98,5 +109,12 @@ public class CompanyController {
     public ResponseEntity<String> getNameCompanyJwt(@RequestHeader HttpHeaders headers) throws JsonProcessingException {
         String uuidCompany = headersUtils.getCompanyIdFromToken(headers);
         return companyService.getNameCompanyJwt(uuidCompany);
+    }
+
+    @GetMapping("/get-companies-by-category/{nameCategory}")
+    public ResponseEntity<List<CompanyResponse>> getCompaniesByCategory(@PathVariable String nameCategory) {
+        return ResponseEntity.ok().body(
+                companyMapper.convertModelListToResponseList(companyService.getCompaniesByCategory(nameCategory))
+        );
     }
 }

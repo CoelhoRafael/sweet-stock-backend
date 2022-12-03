@@ -1,10 +1,14 @@
 package com.stock.sweet.sweetstockapi.service;
 
+import com.stock.sweet.sweetstockapi.dto.response.CompanyResponse;
 import com.stock.sweet.sweetstockapi.exception.NotFoundException;
 import com.stock.sweet.sweetstockapi.mapper.AddressMapper;
+import com.stock.sweet.sweetstockapi.mapper.CompanyMapper;
 import com.stock.sweet.sweetstockapi.model.Company;
+import com.stock.sweet.sweetstockapi.model.ListCategories;
 import com.stock.sweet.sweetstockapi.model.Product;
 import com.stock.sweet.sweetstockapi.repository.CompanyRepository;
+import com.stock.sweet.sweetstockapi.repository.ListCategoriesRepository;
 import com.stock.sweet.sweetstockapi.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -15,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,6 +34,9 @@ public class CompanyService {
     @Autowired
     private ProductRepository productRepository;
 
+    @Autowired
+    private ListCategoriesRepository listCategoriesRepository;
+
     public String getAssociateCode(String uuidCompany) throws NotFoundException {
         Company company = companyRepository.findByUuid(uuidCompany).orElse(null);
 
@@ -40,7 +48,7 @@ public class CompanyService {
     }
 
     public Company createCompany(Company company) {
-        if (company == null){
+        if (company == null) {
             throw new IllegalArgumentException("tem que passar dados");
         }
         return companyRepository.save(company);
@@ -65,70 +73,70 @@ public class CompanyService {
 
         if (numeroDiaSemana == 0) {
             var isOpenSunday = c.getHoursCompany().getSunday();
-            if(isOpenSunday && (horas.isAfter(LocalTime.parse(c.getHoursCompany().getHoraAbertura())) && (horas.isBefore(LocalTime.parse(c.getHoursCompany().getHoraFechar()))))){
+            if (isOpenSunday && (horas.isAfter(LocalTime.parse(c.getHoursCompany().getHoraAbertura())) && (horas.isBefore(LocalTime.parse(c.getHoursCompany().getHoraFechar()))))) {
                 c.setIsOpen(true);
                 return true;
 
-            }else {
+            } else {
                 c.setIsOpen(false);
                 return false;
             }
         } else if (numeroDiaSemana == 1) {
             var isOpen = c.getHoursCompany().getMonday();
-            if(isOpen && (horas.isAfter(LocalTime.parse(c.getHoursCompany().getHoraAbertura())) && (horas.isBefore(LocalTime.parse(c.getHoursCompany().getHoraFechar()))))){
+            if (isOpen && (horas.isAfter(LocalTime.parse(c.getHoursCompany().getHoraAbertura())) && (horas.isBefore(LocalTime.parse(c.getHoursCompany().getHoraFechar()))))) {
                 c.setIsOpen(true);
                 return true;
-            }else {
+            } else {
                 c.setIsOpen(false);
                 return false;
             }
 
         } else if (numeroDiaSemana == 2) {
             var isOpen = c.getHoursCompany().getTuesday();
-            if(isOpen && (horas.isAfter(LocalTime.parse(c.getHoursCompany().getHoraAbertura())) && (horas.isBefore(LocalTime.parse(c.getHoursCompany().getHoraFechar()))))){
+            if (isOpen && (horas.isAfter(LocalTime.parse(c.getHoursCompany().getHoraAbertura())) && (horas.isBefore(LocalTime.parse(c.getHoursCompany().getHoraFechar()))))) {
                 c.setIsOpen(true);
                 return true;
-            }else {
+            } else {
                 c.setIsOpen(false);
                 return false;
             }
 
         } else if (numeroDiaSemana == 3) {
             var isOpen = c.getHoursCompany().getWednesday();
-            if(isOpen && (horas.isAfter(LocalTime.parse(c.getHoursCompany().getHoraAbertura())) && (horas.isBefore(LocalTime.parse(c.getHoursCompany().getHoraFechar()))))){
+            if (isOpen && (horas.isAfter(LocalTime.parse(c.getHoursCompany().getHoraAbertura())) && (horas.isBefore(LocalTime.parse(c.getHoursCompany().getHoraFechar()))))) {
                 c.setIsOpen(true);
                 return true;
-            }else {
+            } else {
                 c.setIsOpen(false);
                 return false;
             }
 
         } else if (numeroDiaSemana == 4) {
             var isOpen = c.getHoursCompany().getThursday();
-            if(isOpen && (horas.isAfter(LocalTime.parse(c.getHoursCompany().getHoraAbertura())) && (horas.isBefore(LocalTime.parse(c.getHoursCompany().getHoraFechar()))))){
+            if (isOpen && (horas.isAfter(LocalTime.parse(c.getHoursCompany().getHoraAbertura())) && (horas.isBefore(LocalTime.parse(c.getHoursCompany().getHoraFechar()))))) {
                 c.setIsOpen(true);
                 return true;
-            }else {
+            } else {
                 c.setIsOpen(false);
                 return false;
             }
 
         } else if (numeroDiaSemana == 5) {
             var isOpen = c.getHoursCompany().getFriday();
-            if(isOpen && (horas.isAfter(LocalTime.parse(c.getHoursCompany().getHoraAbertura())) && (horas.isBefore(LocalTime.parse(c.getHoursCompany().getHoraFechar()))))){
+            if (isOpen && (horas.isAfter(LocalTime.parse(c.getHoursCompany().getHoraAbertura())) && (horas.isBefore(LocalTime.parse(c.getHoursCompany().getHoraFechar()))))) {
                 c.setIsOpen(true);
                 return true;
-            }else {
+            } else {
                 c.setIsOpen(false);
                 return false;
             }
 
         } else if (numeroDiaSemana == 6) {
             var isOpen = c.getHoursCompany().getSaturday();
-            if(isOpen && (horas.isAfter(LocalTime.parse(c.getHoursCompany().getHoraAbertura())) && (horas.isBefore(LocalTime.parse(c.getHoursCompany().getHoraFechar()))))){
+            if (isOpen && (horas.isAfter(LocalTime.parse(c.getHoursCompany().getHoraAbertura())) && (horas.isBefore(LocalTime.parse(c.getHoursCompany().getHoraFechar()))))) {
                 c.setIsOpen(true);
                 return true;
-            }else {
+            } else {
                 c.setIsOpen(false);
                 return false;
             }
@@ -137,16 +145,13 @@ public class CompanyService {
 
         return false;
     }
-    public Boolean findCompanyIsOpen(String uuid)throws Exception{
-       Company company = companyRepository.findCompanyByUuid(uuid);
+
+    public Boolean findCompanyIsOpen(String uuid) throws Exception {
+        Company company = companyRepository.findCompanyByUuid(uuid);
 
         return isOpen(company);
-
-
-
-
-
     }
+
     public Company findCompanyById(Integer id) throws Exception {
         return companyRepository.findById(id).orElseThrow(() -> new Exception("id não encontrado!"));
     }
@@ -168,8 +173,26 @@ public class CompanyService {
         return ResponseEntity.ok().body(product.getCompany().getName());
     }
 
-    public ResponseEntity<String> getNameCompanyJwt(String uuidCompany){
+    public ResponseEntity<String> getNameCompanyJwt(String uuidCompany) {
         Company company = companyRepository.findByUuid(uuidCompany).get();
         return ResponseEntity.ok().body(company.getName());
+    }
+
+    public List<Company> getCompaniesByCategory(String nameCategory) {
+        List<Company> companies = companyRepository.findAll();
+
+        List<Company> companiesToReturn = new ArrayList<>();
+
+        companies.forEach(company -> {
+            var listCategories = listCategoriesRepository.findByUuidCompany(company.getUuid());
+
+            listCategories.forEach(categoria -> {
+                if (categoria.getNameCategory().equals(nameCategory)) {
+                    companiesToReturn.add(company);
+                }
+            });
+        });
+
+        return companiesToReturn;
     }
 }

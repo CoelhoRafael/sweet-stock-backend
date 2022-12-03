@@ -38,8 +38,7 @@ public class CategoryService {
         saved.forEach(category -> {
             listSaved.add(new CategoryResponse(
                     category.getId(),
-                    category.getName(),
-                    category.getCategory()
+                    category.getName()
             ));
         });
 
@@ -62,8 +61,7 @@ public class CategoryService {
         categories.forEach(category -> {
             listfounds.add(new CategoryResponse(
                     category.getId(),
-                    category.getName(),
-                    category.getCategory()
+                    category.getName()
             ));
         });
 

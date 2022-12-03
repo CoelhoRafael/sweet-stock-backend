@@ -12,13 +12,17 @@ import javax.persistence.*;
 @Data
 @Builder
 @Entity
-@Table(name = "tb_category")
-public class Category {
+@Table(name = "tb_list_categories")
+public class ListCategories {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private String  id;
+    private Integer id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "uuid_company")
+    private String uuidCompany;
+
+    @Column(name = "name_category")
+    private String nameCategory;
 }

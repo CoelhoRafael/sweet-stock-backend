@@ -38,4 +38,6 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     List<Product> findByUuids(List<String> uuids);
 
     Product getByUuid(String uuidProduct);
+
+
 }
