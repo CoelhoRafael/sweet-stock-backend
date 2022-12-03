@@ -79,12 +79,6 @@ public class CompanyController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<CompanyResponse> getAllCompanies() {
-        LocalTime horas = LocalTime.now(ZoneId.of("America/Sao_Paulo"));
-        String timeColonPattern = "HH:mm";
-        DateTimeFormatter timeColonFormatter = DateTimeFormatter.ofPattern(timeColonPattern);
-        timeColonFormatter.format(horas);
-        log.info("Log info horas ----->>>>>>>>");
-        log.info(String.valueOf(horas));
         return companyMapper.convertModelListToResponseList(
                 companyService.getAllCompanys()
         );

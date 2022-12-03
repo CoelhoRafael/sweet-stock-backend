@@ -1,6 +1,7 @@
 package com.stock.sweet.sweetstockapi.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +12,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Data
 @Entity
+@Builder
 @Table(name = "tb_out_stock")
 public class OutStock {
 
@@ -24,9 +26,6 @@ public class OutStock {
 
     @Column(name = "date")
     private LocalDate date;
-
-    @Column(name = "user_id")
-    private String userId;
 
     @Column(name = "is_expired_product")
     private Boolean isExpiredProduct;
