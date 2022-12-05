@@ -50,9 +50,9 @@ public class ProductService {
     @Autowired
     private CompanyRepository companyRepository;
 
-    public Product createProduct(Product product, List<ProductIngredientRequest> ingredients, String uuiidCompany) throws NotFoundException, BadRequestException {
-        var idCompany = companyRepository.findByUuid(uuiidCompany).get().getId();
-        product.setId(idCompany);
+    public Product createProduct(Product product, List<ProductIngredientRequest> ingredients, String uuidCompany) throws NotFoundException, BadRequestException {
+        var company = companyRepository.findByUuid(uuidCompany).get();
+        product.setCompany(company);
 
         List<Ingredient> ingredientsFound = new ArrayList<>();
     
