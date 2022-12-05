@@ -11,18 +11,13 @@ import com.stock.sweet.sweetstockapi.mapper.OutStockMapper;
 import com.stock.sweet.sweetstockapi.mapper.ProductMapper;
 import com.stock.sweet.sweetstockapi.model.Confection;
 import com.stock.sweet.sweetstockapi.model.Ingredient;
-import com.stock.sweet.sweetstockapi.model.OutStock;
 import com.stock.sweet.sweetstockapi.model.Product;
-import com.stock.sweet.sweetstockapi.repository.ConfectionRepository;
-import com.stock.sweet.sweetstockapi.repository.IngredientRepository;
-import com.stock.sweet.sweetstockapi.repository.OutStockRepository;
-import com.stock.sweet.sweetstockapi.repository.ProductRepository;
+import com.stock.sweet.sweetstockapi.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,9 +47,15 @@ public class ProductService {
     @Autowired
     private OutStockMapper outStockMapper;
 
-    public Product createProduct(Product product, List<ProductIngredientRequest> ingredients) throws NotFoundException, BadRequestException {
-        List<Ingredient> ingredientsFound = new ArrayList<>();
+    @Autowired
+    private CompanyRepository companyRepository;
 
+    public Product createProduct(Product product, List<ProductIngredientRequest> ingredients, String uuiidCompany) throws NotFoundException, BadRequestException {
+        var idCompany = companyRepository.findByUuid(uuiidCompany).get().getId();
+        product.setId(idCompany);
+
+        List<Ingredient> ingredientsFound = new ArrayList<>();
+    
         for (ProductIngredientRequest i : ingredients) {
             findIngredients(ingredientsFound, i);
         }

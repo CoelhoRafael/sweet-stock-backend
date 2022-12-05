@@ -44,9 +44,14 @@ public class ProductController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<ProductResponse> createProduct(@RequestBody ProductRequest body) throws Exception {
+    public ResponseEntity<ProductResponse> createProduct(
+            @RequestHeader HttpHeaders headers,
+            @RequestBody ProductRequest body
+    ) throws Exception {
+        var uuidCompany = headersUtils.getCompanyIdFromToken(headers);
+
         return ResponseEntity.status(201).body(productMapper.convertModelToResponse(
-                productService.createProduct(productMapper.convertRequestToModel(body), body.getIngredients())
+                productService.createProduct(productMapper.convertRequestToModel(body), body.getIngredients(), uuidCompany)
         ));
     }
 
@@ -70,7 +75,7 @@ public class ProductController {
 
     @GetMapping("/products-no-sold-by-uuid-company/{uuidCompany}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<List<ProductResponse>> getAllProductsNoSoldByUuidCompany(@PathVariable String uuidCompany){
+    public ResponseEntity<List<ProductResponse>> getAllProductsNoSoldByUuidCompany(@PathVariable String uuidCompany) {
         log.info("Chamando /products-no-sold-by-uuid-company/{uuidCompany}");
 
         return ResponseEntity.status(200).body(productMapper.convertModelListToResponseList(
