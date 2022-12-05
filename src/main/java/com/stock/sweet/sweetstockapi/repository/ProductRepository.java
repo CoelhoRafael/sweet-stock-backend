@@ -40,5 +40,10 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     Product getByUuid(String uuidProduct);
 
+    @Query("select p from Product p where p.company.uuid = ?1")
+    List<Product> getAllProductsByUuidCompany(String uuid);
+
+
+
 
 }

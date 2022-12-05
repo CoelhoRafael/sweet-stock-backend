@@ -102,8 +102,8 @@ public class ProductService {
         ingredientsModels.add(findIngredient);
     }
 
-    public List<Product> getAllProducts() {
-        return productRepository.findAll();
+    public List<Product> getAllProducts(String uuidCompany) {
+        return productRepository.getAllProductsByUuidCompany(uuidCompany);
     }
 
     public Product findProductByUuid(String uuid) throws NotFoundException {

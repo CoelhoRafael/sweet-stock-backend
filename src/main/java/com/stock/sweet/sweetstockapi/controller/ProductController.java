@@ -57,9 +57,13 @@ public class ProductController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<List<ProductResponse>> getAllProducts() {
+    public ResponseEntity<List<ProductResponse>> getAllProducts(
+            @RequestHeader HttpHeaders headers
+    ) throws JsonProcessingException {
+        var uuidCompany = headersUtils.getCompanyIdFromToken(headers);
+
         return ResponseEntity.status(200).body(productMapper.convertModelListToResponseList(
-                productService.getAllProducts()
+                productService.getAllProducts(uuidCompany)
         ));
     }
 
