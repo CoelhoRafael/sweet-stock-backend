@@ -151,7 +151,7 @@ public class ProductService {
         }
         OutStockRequest outStockRequest = new OutStockRequest(data,product.getCompany().getUuid(),product);
         Integer newValue = (product.getTotal().intValue() - soldQuantity.intValue());
-        productRepository.sellProduct(uuidProduct, newValue, LocalDate.now());
+        productRepository.sellProduct(uuidProduct, newValue);
         outStockRepository.save(outStockMapper.convertRequestToModel(outStockRequest));
         return new ProductRequestSell(soldQuantity);
     }

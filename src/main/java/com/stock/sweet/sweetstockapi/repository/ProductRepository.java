@@ -22,8 +22,8 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     List<Product> findAllBySoldIsFalse();
     @Modifying
     @Transactional
-    @Query("update Product p set p.total = ?2, p.sold = true, p.dateUpdate = ?3 where p.uuid = ?1")
-    void sellProduct(String uuid, Integer total, LocalDate saleValue);
+    @Query("update Product p set p.total = ?2, p.sold = true where p.uuid = ?1")
+    void sellProduct(String uuid, Integer total);
 
     @Query("select p from Product p where p.company.uuid = ?1 and p.total > 0")
     List<Product> findAllProductsNoSold(String uuid);
