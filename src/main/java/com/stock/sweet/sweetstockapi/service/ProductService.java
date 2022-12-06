@@ -40,6 +40,8 @@ public class ProductService {
 
     @Autowired
     private IngredientService ingredientService;
+    @Autowired
+    private OutStockService outStockService;
 
     @Autowired
     private ProductMapper productMapper;
@@ -162,6 +164,9 @@ public class ProductService {
 
     public List<Product> getAllProductsSold(String uuidCompany) {
         return productRepository.findAllProductsSold(uuidCompany);
+    }
+    public Integer getAllProductsSoldOnMonth(String uuidCompany) {
+        return outStockService.allItemsSold(uuidCompany);
     }
 
     public ResponseEntity<List<ProductResponse>> getAllProductsNoSoldByCategory(String category) {
