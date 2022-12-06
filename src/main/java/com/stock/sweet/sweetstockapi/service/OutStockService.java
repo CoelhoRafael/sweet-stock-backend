@@ -27,7 +27,6 @@ public class OutStockService {
     public List<OutStock> getAllOutStockNonExpiredProduct(String idCompany) {
         return outStockRepository.findAllByIdCompany(idCompany)
                 .stream()
-                .filter(outStock -> !outStock.getIsExpiredProduct())
                 .collect(Collectors.toList());
     }
 

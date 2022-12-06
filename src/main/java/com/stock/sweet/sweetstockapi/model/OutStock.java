@@ -27,9 +27,6 @@ public class OutStock {
     @Column(name = "date")
     private LocalDate date;
 
-    @Column(name = "is_expired_product")
-    private Boolean isExpiredProduct;
-
     @Column(name = "id_company")
     private String idCompany;
 
