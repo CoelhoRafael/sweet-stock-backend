@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-//@Slf4j
-//@ControllerAdvice
-//public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler {
-//
+@Slf4j
+@ControllerAdvice
+public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler {
+
 //    @ExceptionHandler(Exception.class)
 //    public ResponseEntity handleException(Exception exception){
 //        log.info("Recebendo tratativa de exception no metodo handleException -> Exception");
@@ -28,4 +28,4 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 //
 //        return ResponseEntity.status(422).body(defaultError);
 //    }
-//}
+}
