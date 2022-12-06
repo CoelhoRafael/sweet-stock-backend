@@ -114,11 +114,11 @@ public class ProductController {
         ));
     }
 //    test
-    @GetMapping("sold-month/{uuid}")
-    @ResponseStatus(HttpStatus.OK)
-    public Integer getProductsSoldMonth(@PathVariable UUID uuid) throws Exception {
-               return productService.getAllProductsSoldOnMonth(String.valueOf(uuid));
-    }
+//    @GetMapping("sold-month/{uuid}")
+//    @ResponseStatus(HttpStatus.OK)
+//    public Integer getProductsSoldMonth(@PathVariable UUID uuid) throws Exception {
+//               return productService.getAllProductsSoldOnMonth(String.valueOf(uuid));
+//    }
 
     @PostMapping("/get-products-by-uuids")
     public ResponseEntity<List<ProductResponse>> getProductsByUuids(@RequestBody List<String> uuids) throws Exception {

@@ -143,7 +143,7 @@ public class ProductService {
 
     public ProductRequestSell sellProduct(String uuidProduct, Double soldQuantity) throws Exception {
         Product product = productRepository.findByUuid(uuidProduct).get();
-        LocalDate data = LocalDate.parse(LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+//        LocalDate data = LocalDate.parse(LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         if (product == null) {
             throw new Exception("Produto nao encontrado!");
         }
@@ -151,10 +151,10 @@ public class ProductService {
         if (product.getTotal() < soldQuantity || product.getTotal() == 0) {
             throw new Exception("Produto esgotado!");
         }
-        OutStockRequest outStockRequest = new OutStockRequest(data,product.getCompany().getUuid(),product);
+//        OutStockRequest outStockRequest = new OutStockRequest(data,product.getCompany().getUuid(),product);
         Integer newValue = (product.getTotal().intValue() - soldQuantity.intValue());
         productRepository.sellProduct(uuidProduct, newValue);
-        outStockRepository.save(outStockMapper.convertRequestToModel(outStockRequest));
+//        outStockRepository.save(outStockMapper.convertRequestToModel(outStockRequest));
         return new ProductRequestSell(soldQuantity);
     }
 
