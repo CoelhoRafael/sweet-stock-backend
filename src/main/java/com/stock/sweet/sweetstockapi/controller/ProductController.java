@@ -113,6 +113,7 @@ public class ProductController {
                 productService.findProductByUuid(uuid.toString())
         ));
     }
+//    test
     @GetMapping("sold-month/{uuid}")
     @ResponseStatus(HttpStatus.OK)
     public Integer getProductsSoldMonth(@PathVariable UUID uuid) throws Exception {
