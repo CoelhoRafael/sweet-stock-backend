@@ -6,9 +6,9 @@ server:
 spring:
   datasource:
     driverClassName: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/sweetstock?charSet=LATIN1
+    url: jdbc:postgresql://sweet-stock.ce6tfsyepdjw.us-east-1.rds.amazonaws.com:5432/postgres?charSet=LATIN1
     username: postgres
-    password: sweetstore
+    password: sweetstock
   mail:
     default-encodig: UTF-8
     host: smtp.gmail.com
@@ -28,4 +28,4 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
