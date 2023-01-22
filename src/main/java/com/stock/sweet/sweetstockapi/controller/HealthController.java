@@ -16,6 +16,6 @@ public class HealthController {
 
     @GetMapping
     public ResponseEntity<String> health(){
-        return ResponseEntity.ok("Api sweet store funcionando corretamente!");
+        return ResponseEntity.ok("Api sweet stock funcionando corretamente!");
     }
 }
