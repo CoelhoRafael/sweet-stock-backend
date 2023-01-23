@@ -42,7 +42,10 @@ public class CorsConfiguration extends org.springframework.web.cors.CorsConfigur
                         "https://54.152.96.53",
                         "http://54.152.96.53",
                         "https://sweet-stock.servehttp.com/",
-                        "http://sweet-stock.servehttp.com/"
+                        "http://sweet-stock.servehttp.com/",
+                        "http://23.21.150.35",
+                        "http://52.3.125.206",
+                        "http://52.44.88.34"
                 )
         );
 
