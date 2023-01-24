@@ -1,12 +1,12 @@
 FROM openjdk:11
 
+WORKDIR /app
+
 COPY pom.xml .
 COPY src ./src
 
-COPY . /app
+RUN mvn -f pom.xml clean package
 
 EXPOSE 8080
 
-WORKDIR /app
-RUN mvn -f pom.xml clean package
-ENTRYPOINT ["java", "-jar", "target/sweet-stock-api-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "target/sweet-stock-api-0.0.1-SNAPSHOT.jar"]
