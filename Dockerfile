@@ -1,4 +1,6 @@
-FROM openjdk:8-jre-alpine
-VOLUME /tmp
-ADD /target/cicdproject.jar app.jar
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+FROM openjdk:11
+COPY . /app
+WORKDIR /app
+RUN mvn clean install
+RUN mvn package
+ENTRYPOINT ["java", "-jar", "target/sweet-stock-api-0.0.1-SNAPSHOT.jar"]
