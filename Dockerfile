@@ -1,11 +1,13 @@
-FROM openjdk:11
+FROM openjdk:14-alpine
 
 WORKDIR /app
+
+RUN apk add --no-cache maven
+ENV PATH /usr/bin/mvn:$PATH
 
 COPY pom.xml .
 COPY src ./src
 
-EXPOSE 8080
+RUN mvn -f pom.xml clean package
 
-RUN mvn clean
-RUN mvn spring-boot:run
+CMD ["java", "-jar", "target/sweet-stock-api-0.0.1-SNAPSHOT.jar"]
